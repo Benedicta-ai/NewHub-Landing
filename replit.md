@@ -4,6 +4,16 @@
 
 pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
 
+## Artifacts
+
+### MatchGlee Landing Page (`artifacts/matchglee-landing`)
+- **Type:** React + Vite (static, no backend)
+- **Preview Path:** `/` (root)
+- **Description:** Full landing page for MatchGlee networking app
+- **Features:** Hero section, brand story, mission, 5-feature grid, UI showcase, working "Get Updates" form (email/phone validation), footer
+- **Assets:** `public/images/matchglee-logo.jpeg`, `public/images/matchglee-app-ui.png`
+- **Design:** Dark theme, purple→pink→blue gradients, glassmorphism cards, scroll animations
+
 ## Stack
 
 - **Monorepo tool**: pnpm workspaces
