@@ -286,17 +286,9 @@ function Chapter3({ onVisible }: { onVisible: (id: string) => void }) {
           <h3 className={`text-3xl md:text-5xl font-bold leading-[1.1] tracking-tight mb-4 ${pearlHeading}`}>
             Where Personal Meets <span className={pearlGradientText}>Professional</span> — Seamlessly
           </h3>
-          <p className={`text-lg md:text-xl mb-10 leading-relaxed max-w-xl ${pearlBody}`}>
+          <p className={`text-lg md:text-xl leading-relaxed max-w-xl ${pearlBody}`}>
             MatchGlee helps you connect, express, and grow — all in one space. No more choosing between your work persona and your true passions.
           </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <span className={`flex items-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold bg-gradient-to-r from-purple-500 via-pink-400 to-blue-400 text-white shadow-[0_4px_14px_rgba(196,181,253,0.4)]`}>
-              Get Started <ArrowRight className="w-4 h-4" />
-            </span>
-            <span className={`px-7 py-3.5 rounded-full text-base font-semibold bg-white border border-[#C4B5FD] ${pearlBody} shadow-sm`}>
-              Learn More
-            </span>
-          </div>
         </div>
 
         <div className={`relative flex justify-center items-center transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"}`} style={{ transitionDelay: "900ms" }}>
@@ -332,53 +324,45 @@ function Chapter4({ onVisible }: { onVisible: (id: string) => void }) {
   const ref = useChapterObserver(onVisible, "ch-4");
   const [vRef, isVisible] = useVisible();
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} id="ch-4" className="relative w-full h-screen overflow-hidden flex flex-col justify-center items-center p-6 bg-gradient-to-b from-[#FAFAFF] to-white" style={{ scrollSnapAlign: "start" }}>
-      <div className="max-w-4xl mx-auto w-full">
-        <div ref={vRef} className={`p-8 md:p-14 ${pearlCard} relative overflow-hidden transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#F3F0FF] rounded-full blur-[40px] opacity-60" />
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#FFF0F2] rounded-full blur-[40px] opacity-60" />
-          <h2 className={`text-3xl md:text-4xl font-bold mb-10 relative z-10 ${pearlHeading}`}>
-            The Story of <span className={pearlGradientText}>MatchGlee</span>
-          </h2>
-          <div className={`space-y-6 text-lg md:text-xl leading-relaxed relative z-10 border-l-2 border-[#FDA4AF] pl-6 md:pl-10 py-2 ${pearlBody}`}>
-            <p className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-6"}`} style={{ transitionDelay: "200ms" }}>
-              In a world where networking feels forced and social platforms feel overwhelming, MatchGlee was born to bridge the gap.
-            </p>
-            <p className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-6"}`} style={{ transitionDelay: "500ms" }}>
-              We realized people aren't just professionals or just individuals — they are both. Your passions, your work, your vibe — everything deserves a space that feels natural.
-            </p>
-            <p className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-6"}`} style={{ transitionDelay: "800ms" }}>
-              MatchGlee isn't just about connecting profiles. It's about connecting people — authentically. Whether you're sharing your story, showcasing your work, or finding your tribe — <span className={`font-semibold ${pearlHeading}`}>MatchGlee lets you do it your way.</span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+    <section ref={ref as React.RefObject<HTMLElement>} id="ch-4" className="relative w-full h-screen overflow-hidden flex flex-col justify-center items-center p-6 bg-[#F8F5FF]" style={{ scrollSnapAlign: "start" }}>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent opacity-40" />
+      <div ref={vRef} className="max-w-5xl mx-auto w-full relative z-10 flex flex-col gap-12">
 
-function Chapter5({ onVisible }: { onVisible: (id: string) => void }) {
-  const ref = useChapterObserver(onVisible, "ch-5");
-  const [vRef, isVisible] = useVisible();
-  return (
-    <section ref={ref as React.RefObject<HTMLElement>} id="ch-5" className="relative w-full h-screen overflow-hidden flex flex-col justify-center items-center p-6 bg-[#F8F5FF]" style={{ scrollSnapAlign: "start" }}>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent opacity-50" />
-      <div ref={vRef} className="max-w-5xl mx-auto text-center relative z-10">
-        <div className={`transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <div className={`inline-block mb-8 px-5 py-2 rounded-full border border-[#E9E5FF] bg-white shadow-sm text-sm font-semibold tracking-[0.2em] uppercase text-[#C4B5FD]`}>
+        {/* Vision */}
+        <div className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+          <div className={`inline-block mb-5 px-5 py-2 rounded-full border border-[#E9E5FF] bg-white shadow-sm text-sm font-semibold tracking-[0.2em] uppercase text-[#C4B5FD]`}>
+            Our Vision
+          </div>
+          <h2 className={`text-2xl md:text-4xl font-bold leading-snug ${pearlHeading}`}>
+            A world where you never have to choose between{" "}
+            <span className={pearlGradientText}>who you are at work</span>{" "}
+            and{" "}
+            <span className={pearlGradientText}>who you are at heart.</span>
+          </h2>
+        </div>
+
+        {/* Divider */}
+        <div className={`h-px bg-gradient-to-r from-transparent via-[#C4B5FD] to-transparent transition-all duration-1000 ease-out ${isVisible ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}`} style={{ transitionDelay: "400ms" }} />
+
+        {/* Mission */}
+        <div className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: "500ms" }}>
+          <div className={`inline-block mb-5 px-5 py-2 rounded-full border border-[#E9E5FF] bg-white shadow-sm text-sm font-semibold tracking-[0.2em] uppercase text-[#C4B5FD]`}>
             Our Mission
           </div>
+          <h2 className={`text-2xl md:text-4xl font-bold leading-snug ${pearlHeading}`}>
+            To create a platform where{" "}
+            <span className={pearlGradientText}>personal expression</span>{" "}
+            and{" "}
+            <span className={pearlGradientText}>professional identity</span>{" "}
+            coexist effortlessly — empowering meaningful connections without boundaries.
+          </h2>
         </div>
-        <h2 className={`text-3xl md:text-5xl lg:text-6xl font-bold leading-tight ${pearlHeading} transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: "200ms" }}>
-          To create a platform where{" "}
-          <span className={pearlGradientText}>personal expression</span>{" "}
-          and{" "}
-          <span className={pearlGradientText}>professional identity</span>{" "}
-          coexist effortlessly — empowering meaningful connections without boundaries.
-        </h2>
-        <div className={`mt-12 flex justify-center transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDelay: "600ms" }}>
-          <div className="h-1 w-32 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400" />
+
+        {/* Bottom accent */}
+        <div className={`flex justify-start transition-all duration-1000 ease-out ${isVisible ? "opacity-100" : "opacity-0"}`} style={{ transitionDelay: "900ms" }}>
+          <div className="h-1 w-20 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400" />
         </div>
+
       </div>
     </section>
   );
@@ -526,7 +510,7 @@ function Chapter8({ onVisible }: { onVisible: (id: string) => void }) {
 
 function CinematicPhase() {
   const [activeChapter, setActiveChapter] = useState("ch-1");
-  const chapterIds = ["ch-1", "ch-2", "ch-3", "ch-4", "ch-5", "ch-6", "ch-7", "ch-8"];
+  const chapterIds = ["ch-1", "ch-2", "ch-3", "ch-4", "ch-6", "ch-7", "ch-8"];
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -554,7 +538,6 @@ function CinematicPhase() {
       <Chapter2 onVisible={setActiveChapter} />
       <Chapter3 onVisible={setActiveChapter} />
       <Chapter4 onVisible={setActiveChapter} />
-      <Chapter5 onVisible={setActiveChapter} />
       <Chapter6 onVisible={setActiveChapter} />
       <Chapter7 onVisible={setActiveChapter} />
       <Chapter8 onVisible={setActiveChapter} />
