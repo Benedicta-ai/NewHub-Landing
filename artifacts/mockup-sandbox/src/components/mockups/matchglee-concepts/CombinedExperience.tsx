@@ -264,18 +264,28 @@ function Chapter3({ onVisible }: { onVisible: (id: string) => void }) {
         <div className="absolute top-[20%] -right-10 w-[35rem] h-[35rem] bg-[#FDA4AF] rounded-full blur-[100px] mix-blend-multiply opacity-[0.06]" />
       </div>
 
-      <div ref={vRef} className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
-        <div className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-          <div className={`transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`} style={{ transitionDelay: "200ms" }}>
-            <img src="/__mockup/images/matchglee-logo.jpeg" alt="MatchGlee" className="w-16 h-16 rounded-2xl object-cover mb-8 shadow-[0_4px_20px_rgba(196,181,253,0.3)]" />
+      <div ref={vRef} className="max-w-7xl mx-auto w-full flex flex-col gap-8">
+
+        {/* Cinematic "Meet MatchGlee" reveal — intentional storytelling */}
+        <div className="text-center flex flex-col items-center gap-4">
+          <div className={`transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}`}>
+            <img src="/__mockup/images/matchglee-logo.jpeg" alt="MatchGlee" className="w-14 h-14 rounded-2xl object-cover mx-auto shadow-[0_0_40px_rgba(196,181,253,0.5)]" />
           </div>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#E9E5FF] shadow-sm mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#6EE7B7] animate-pulse" />
-            <span className={`text-xs font-medium ${pearlBody}`}>Meet MatchGlee</span>
-          </div>
-          <h2 className={`text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6 ${pearlHeading}`}>
-            Where Personal Meets <span className={pearlGradientText}>Professional</span> — Seamlessly
+          <h2 className={`text-4xl md:text-6xl font-black tracking-tight ${pearlGradientText} transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} style={{ transitionDelay: "200ms" }}>
+            Meet MatchGlee.
           </h2>
+          <p className={`text-lg font-medium ${pearlBody} transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDelay: "450ms" }}>
+            One profile. Every version of you. Authentically.
+          </p>
+          <div className={`h-px w-24 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 transition-all duration-1000 ease-out ${isVisible ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}`} style={{ transitionDelay: "650ms" }} />
+        </div>
+
+        {/* Pearl hero — two columns */}
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: "700ms" }}>
+          <h3 className={`text-3xl md:text-5xl font-bold leading-[1.1] tracking-tight mb-4 ${pearlHeading}`}>
+            Where Personal Meets <span className={pearlGradientText}>Professional</span> — Seamlessly
+          </h3>
           <p className={`text-lg md:text-xl mb-10 leading-relaxed max-w-xl ${pearlBody}`}>
             MatchGlee helps you connect, express, and grow — all in one space. No more choosing between your work persona and your true passions.
           </p>
@@ -289,7 +299,7 @@ function Chapter3({ onVisible }: { onVisible: (id: string) => void }) {
           </div>
         </div>
 
-        <div className={`relative flex justify-center items-center transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"}`} style={{ transitionDelay: "300ms" }}>
+        <div className={`relative flex justify-center items-center transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"}`} style={{ transitionDelay: "900ms" }}>
           <div className="relative z-10 w-[270px] md:w-[320px] rounded-[3rem] p-3 bg-white border border-[#E9E5FF] shadow-[0_20px_60px_-15px_rgba(196,181,253,0.4)] md:-rotate-3 hover:rotate-0 transition-transform duration-700 ease-out">
             <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-5 bg-[#FAFAFF] border border-[#E9E5FF] rounded-full z-20" />
             <div className="rounded-[2.25rem] overflow-hidden bg-white border border-[#E9E5FF]">
@@ -310,7 +320,8 @@ function Chapter3({ onVisible }: { onVisible: (id: string) => void }) {
             <div className={`text-[10px] ${pearlBody}`}>Let's collaborate on that design project! ✨</div>
           </div>
         </div>
-      </div>
+        </div>{/* end grid */}
+      </div>{/* end flex col */}
 
       <style>{`@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }`}</style>
     </section>
@@ -434,6 +445,18 @@ function Chapter7({ onVisible }: { onVisible: (id: string) => void }) {
         <p className={`text-2xl md:text-4xl text-pink-400 font-medium relative z-10 transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: "300ms" }}>
           10,000+ people already waiting.
         </p>
+        {/* 3D tilted phone mockup — from original cinematic design */}
+        <div className={`mt-10 flex justify-center relative z-10 transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}`} style={{ transitionDelay: "600ms" }}>
+          <div className="w-[180px] md:w-[240px] rounded-[2rem] p-2 bg-gradient-to-tr from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rotate-[-5deg] shadow-[0_30px_80px_-10px_rgba(139,92,246,0.4)] hover:rotate-0 transition-transform duration-700 ease-out">
+            <div className="rounded-[1.5rem] overflow-hidden bg-black">
+              <img
+                src="/__mockup/images/matchglee-app-ui.png"
+                alt="MatchGlee App"
+                className="w-full h-auto opacity-75"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <style>{`@keyframes gentleFloat { from{transform:translate(0,0)} to{transform:translate(10px,-15px)} }`}</style>
     </section>
