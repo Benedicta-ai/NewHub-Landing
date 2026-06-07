@@ -1,0 +1,39 @@
+Act as an expert React and Tailwind CSS developer. We are refactoring the current multi-chapter cinematic layout into a clean, continuous, single long-page website for "Matchglee". 
+
+Please execute the following structural changes and feature additions, starting from Chapter 3 onwards:
+
+### 1. Structural Cleanup & Refactoring
+- Stop the discrete, separate scrollable chapter behavior starting at Chapter 3. Convert the rest of the application into a single, seamless, continuous-scrolling long page.
+- Remove all subsequent chapters, EXCEPT for Chapter 6 ("Your people are already here"). We will preserve and adapt Chapter 6's community vibe into this new layout.
+
+### 2. Global Branding & Navigation Update
+- Navbar: Replace the old logo with the Matchglee branding—featuring a custom Image Logo + Wordmark. 
+- Color Palette: Implement a global gradient design system flowing from Purple → Pink → Soft Blue. Use white, light lavender, and backdrop-blur glassmorphism for accents.
+
+### 3. Section-by-Section Blueprint for the Long Page:
+
+#### Section A: The Animated Hero
+- Visuals: Center an App UI mockup with a smooth, continuous CSS/Framer Motion bobbing (floating) animation.
+- Surrounding Elements: Position floating glassmorphism micro-cards (showing personality tags) and vibrant chat badges that drift subtly around the mockup.
+- Copy: Headline: "Where Personal Meets Professional — Seamlessly". Subtext: "MatchGlee helps you connect, express, and grow — all in one space designed for real people."
+
+#### Section B: The Vibe Check (Mission & Vision)
+- Layout: A two-column presentation displaying Matchglee's Core Philosophy.
+  - Left Column: The Vision ("No More Corporate Robots" — redefining professional networking for real human personalities).
+  - Right Column: The Mission ("Bridging the Gap" — creating a fluid, authentic space to network without losing your personal joy/glee).
+- Interactive Element: An interactive Flip Card. On Click, this card smoothly rotates 180 degrees to switch between a clean, LinkedIn-style professional view and a vibrant, Instagram-style personal view.
+
+#### Section C: Core Features Grid
+- Layout: A responsive 3-column grid featuring high-fidelity glassmorphism cards with smooth scale/glow hover animations.
+- Card 1: "Dual Profiles" (Seamlessly toggle your work identity and personal interests).
+- Card 2: "Authentic Networking" (Connect over mutual side-hustles, creative projects, or career ambitions).
+- Card 3: "Glee Spaces" (Vibrant micro-communities for casual, low-pressure professional mentorship).
+
+#### Section D: "Your People Are Already Here" (Adapted Chapter 6)
+- Integrate the community/social element from the old Chapter 6 here. Reskin it to fit the Matchglee color palette, showcasing user avatars, testimonials, or an interactive network map of people already vibing on the platform.
+
+#### Section E: Footer CTA
+- Layout: A full-width rich gradient background banner.
+- Components: A minimalist, high-converting email input box for the "MatchGlee-list" newsletter signup.
+
+Please implement these changes step-by-step, ensuring all scroll-driven layout regressions are avoided and animations remain buttery smooth.
