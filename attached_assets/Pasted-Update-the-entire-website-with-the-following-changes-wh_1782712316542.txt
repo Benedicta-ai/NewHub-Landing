@@ -1,0 +1,53 @@
+Update the entire website with the following changes while maintaining a clean, modern, and minimal design.
+
+### 1. Rebrand the Website
+
+* Replace every occurrence of **"MatchGlee"** with **"NewHub"** throughout the entire project.
+* Update all titles, headings, metadata, navigation labels, logos (where text is used), footer content, and any references in the code.
+
+### 2. Landing Page & Navigation
+
+* Remove the **"Skip Intro"** button completely.
+* The website should open directly to the landing page with the hero section that says:
+  **"Where Professional Meets Personal, Seamlessly."**
+* This hero section should serve as both the homepage and the About page.
+
+### 3. Navigation Bar
+
+Replace the current navigation with the following menu items:
+
+* About
+* Feedback
+* Login / Sign In
+
+Requirements:
+
+* **About:** Scroll or navigate to the hero/about section on the same page.
+* **Feedback:** Open the existing feedback/introduction flow (the one containing the quizzes followed by the two chapters). Reuse the existing functionality without changing its behavior.
+* **Login / Sign In:** Keep the existing UI only. Do not implement authentication or modify its functionality, as it will be developed later.
+
+### 4. Simplify the Landing Page
+
+The homepage should be extremely minimal.
+
+* Keep only the essential content.
+* Reduce long paragraphs to one or two concise lines.
+* Remove unnecessary descriptions and repetitive marketing text.
+* Maintain plenty of whitespace and a premium, modern look.
+* Focus on clarity rather than quantity of content.
+
+### 5. Preserve Existing Features
+
+Do not remove or break any existing functionality.
+The quizzes, chapters, and feedback workflow should continue to work exactly as they do now. Only change how users access them through the new **Feedback** navigation option.
+
+### 6. Design Guidelines
+
+* Clean and premium aesthetic.
+* Minimal text.
+* Consistent spacing and typography.
+* Smooth scrolling/navigation.
+* Responsive on desktop and mobile.
+* Ensure there are no broken links or references after the rebranding.
+
+Finally, verify that all references to MatchGlee have been replaced with NewHub and that the navigation behaves exactly as specified.
