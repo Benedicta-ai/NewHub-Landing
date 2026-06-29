@@ -703,7 +703,7 @@ function CTASection() {
   const [status, setStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("idle"); setErrorMsg("");
     if (!input.trim()) { setStatus("error"); setErrorMsg("This field is required"); return; }
@@ -711,7 +711,26 @@ function CTASection() {
     const isPhone = /^[+]?[0-9]{10,15}$/.test(input);
     if (!isEmail && !isPhone) { setStatus("error"); setErrorMsg("Please enter a valid email or phone number"); return; }
     setStatus("loading");
-    setTimeout(() => { setStatus("success"); setInput(""); }, 1500);
+    try {
+      const response = await fetch("https://matchglee-landing.onrender.com/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: input }),
+      });
+      if (response.ok) {
+        setStatus("success");
+        setInput("");
+      } else if (response.status === 409) {
+        setStatus("error");
+        setErrorMsg("You're already on the waitlist!");
+      } else {
+        setStatus("error");
+        setErrorMsg("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg("Network error. Please try again.");
+    }
   };
 
   return (
