@@ -3,13 +3,17 @@ import {
   ArrowRight, ChevronDown, CheckCircle2, Loader2, X,
   Users, Briefcase, Globe, MessageCircle, HelpCircle,
   BookOpen, Star, Shield, LayoutGrid, Twitter,
-  Linkedin, Instagram, Circle
+  Linkedin, Instagram
 } from "lucide-react";
 
 const BASE = import.meta.env.BASE_URL;
 
-const PG = "bg-gradient-to-r from-[#F0199A] to-[#7132C8]";
+// brand: pink→purple (logo, accents)
+const PG  = "bg-gradient-to-r from-[#F0199A] to-[#7132C8]";
 const PGT = `text-transparent bg-clip-text ${PG}`;
+// orange: primary CTAs, "Seamlessly.", stats, arrows
+const OG  = "bg-gradient-to-r from-[#FF6B35] to-[#FF4D8D]";
+const OGT = `text-transparent bg-clip-text ${OG}`;
 
 // ===================== SHARED =====================
 
@@ -463,16 +467,16 @@ function HeroSection({ onJoin }: { onJoin: () => void }) {
           {/* left copy */}
           <div className="max-w-2xl">
             <h1 className={`text-5xl md:text-6xl lg:text-[72px] font-black leading-[1.0] text-white mb-4 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
-              Where Professional<br />Meets Personal,<br /><span className={PGT}>Seamlessly.</span>
+              Where Professional<br />Meets Personal,<br /><span className={OGT}>Seamlessly.</span>
             </h1>
             <p className={`text-white/50 text-base leading-relaxed max-w-sm mb-8 transition-all duration-1000 ${vis?"opacity-100":"opacity-0"}`} style={{transitionDelay:"300ms"}}>
               NewHub is a modern social platform that helps you build meaningful professional and personal connections in one place.
             </p>
             <div className={`flex flex-wrap items-center gap-4 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-6"}`} style={{transitionDelay:"450ms"}}>
-              <a href="#cta" onClick={e=>{e.preventDefault();document.getElementById("cta")?.scrollIntoView({behavior:"smooth"});}} className={`px-7 py-3.5 rounded-full font-bold text-white text-sm ${PG} hover:scale-105 hover:shadow-[0_0_24px_rgba(240,25,154,0.4)] transition-all`}>
+              <a href="#cta" onClick={e=>{e.preventDefault();document.getElementById("cta")?.scrollIntoView({behavior:"smooth"});}} className={`px-7 py-3.5 rounded-full font-bold text-white text-sm ${OG} hover:scale-105 hover:shadow-[0_0_24px_rgba(255,107,53,0.45)] transition-all`}>
                 Join NewHub
               </a>
-              <a href="#what" onClick={e=>{e.preventDefault();document.getElementById("what")?.scrollIntoView({behavior:"smooth"});}} className="flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors">
+              <a href="#what" onClick={e=>{e.preventDefault();document.getElementById("what")?.scrollIntoView({behavior:"smooth"});}} className="flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium border border-white/20 hover:border-white/40 rounded-full px-5 py-3 transition-all">
                 Learn More <ArrowRight className="w-4 h-4" />
               </a>
             </div>
@@ -483,7 +487,7 @@ function HeroSection({ onJoin }: { onJoin: () => void }) {
               <div key={i} className="flex items-start gap-3">
                 <span className="text-white/30 text-lg leading-none mt-1">+</span>
                 <div>
-                  <div className={`text-3xl font-black ${PGT}`}>{s.val.replace("+","")}</div>
+                  <div className={`text-3xl font-black ${OGT}`}>{s.val.replace("+","")}</div>
                   <div className="text-white/40 text-sm whitespace-pre-line leading-snug">{s.label}</div>
                 </div>
               </div>
@@ -519,7 +523,7 @@ function WhatSection() {
         <div className="grid md:grid-cols-3 gap-4">
           {items.map((item, i)=>(
             <div key={i} className={`p-7 rounded-2xl bg-[#0E0E14] border border-white/8 hover:border-white/15 hover:-translate-y-1 transition-all duration-500 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`} style={{transitionDelay:`${i*120}ms`}}>
-              <div className={`w-11 h-11 rounded-xl ${PG} flex items-center justify-center text-white mb-5`}>{item.icon}</div>
+              <div className={`w-11 h-11 rounded-xl ${OG} flex items-center justify-center text-white mb-5`}>{item.icon}</div>
               <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
               <p className="text-white/40 text-sm leading-relaxed">{item.desc}</p>
             </div>
@@ -555,11 +559,11 @@ function HowSection({ onFeedback }: { onFeedback: () => void }) {
                 className={`group relative p-5 rounded-2xl bg-[#0E0E14] border border-white/8 ${i<4?"hover:border-white/20 cursor-pointer":"cursor-default"} text-left transition-all duration-500 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`}
                 style={{transitionDelay:`${i*100}ms`}}
               >
-                <div className={`w-9 h-9 rounded-xl ${PG} flex items-center justify-center text-white mb-4`}>{s.icon}</div>
+                <div className={`w-9 h-9 rounded-xl ${OG} flex items-center justify-center text-white mb-4`}>{s.icon}</div>
                 <h3 className="text-white font-bold text-sm mb-1.5">{s.title}</h3>
                 <p className="text-white/35 text-xs leading-relaxed">{s.desc}</p>
                 {i < 4 && (
-                  <div className={`absolute -right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full ${PG} flex items-center justify-center z-10 shadow-md`}>
+                  <div className={`absolute -right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full ${OG} flex items-center justify-center z-10 shadow-md shadow-orange-500/30`}>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </div>
                 )}
@@ -590,10 +594,10 @@ function WhySection() {
         <div className="grid md:grid-cols-3 gap-4">
           {items.map((item,i)=>(
             <div key={i} className={`p-7 rounded-2xl bg-[#0E0E14] border border-white/8 hover:border-white/15 transition-all duration-500 flex flex-col ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`} style={{transitionDelay:`${i*120}ms`}}>
-              <div className={`w-11 h-11 rounded-xl ${PG} flex items-center justify-center text-white mb-5`}>{item.icon}</div>
+              <div className={`w-11 h-11 rounded-xl ${OG} flex items-center justify-center text-white mb-5`}>{item.icon}</div>
               <h3 className="text-white font-bold text-base mb-2">{item.title}</h3>
               <p className="text-white/40 text-sm leading-relaxed flex-1">{item.desc}</p>
-              <button className={`mt-6 w-9 h-9 rounded-full border border-white/15 hover:${PG} hover:border-transparent flex items-center justify-center text-white/40 hover:text-white transition-all duration-300`}>
+              <button className={`mt-6 w-9 h-9 rounded-full ${OG} flex items-center justify-center text-white hover:scale-105 hover:shadow-[0_0_12px_rgba(255,107,53,0.5)] transition-all duration-300`}>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -616,12 +620,12 @@ function SocialBanner({ onJoin }: { onJoin: () => void }) {
           <div className="flex -space-x-2">
             {colors.map((c,i)=><div key={i} className={`w-9 h-9 rounded-full bg-gradient-to-br ${c} border-2 border-[#0E0E14]`} />)}
           </div>
-          <span className={`text-lg font-black ${PGT}`}>+65k</span>
+          <span className={`text-lg font-black ${OGT}`}>+65k</span>
         </div>
         <p className="text-white font-semibold text-lg text-center md:text-left max-w-md">
           Join thousands of professionals and individuals building real connections.
         </p>
-        <a href="#cta" onClick={e=>{e.preventDefault();document.getElementById("cta")?.scrollIntoView({behavior:"smooth"});}} className={`px-7 py-3 rounded-full font-bold text-white text-sm ${PG} hover:scale-105 hover:shadow-[0_0_20px_rgba(240,25,154,0.35)] transition-all whitespace-nowrap flex-shrink-0`}>
+        <a href="#cta" onClick={e=>{e.preventDefault();document.getElementById("cta")?.scrollIntoView({behavior:"smooth"});}} className={`px-7 py-3 rounded-full font-bold text-white text-sm ${OG} hover:scale-105 hover:shadow-[0_0_20px_rgba(255,107,53,0.4)] transition-all whitespace-nowrap flex-shrink-0`}>
           Join NewHub
         </a>
       </div>
@@ -658,7 +662,12 @@ function Footer() {
           <div>
             <h4 className="text-white/60 text-xs font-bold uppercase tracking-widest mb-4">Connect</h4>
             <div className="flex gap-3">
-              {[<Twitter className="w-4 h-4" />, <Linkedin className="w-4 h-4" />, <Instagram className="w-4 h-4" />, <Circle className="w-4 h-4" />].map((icon,i)=>(
+              {[
+                <Twitter className="w-4 h-4" />,
+                <Linkedin className="w-4 h-4" />,
+                <Instagram className="w-4 h-4" />,
+                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+              ].map((icon,i)=>(
                 <a key={i} href="#" className="w-8 h-8 rounded-full bg-white/5 border border-white/10 hover:border-white/25 flex items-center justify-center text-white/40 hover:text-white transition-all">{icon}</a>
               ))}
             </div>
@@ -672,7 +681,7 @@ function Footer() {
             ) : (
               <form onSubmit={submit} className="flex gap-2">
                 <input value={email} onChange={e=>setEmail(e.target.value)} type="email" placeholder="Enter your email" className="flex-1 min-w-0 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/20 text-xs focus:outline-none focus:border-white/25 transition-colors" />
-                <button type="submit" className={`px-3 py-2 rounded-lg font-bold text-white text-xs ${PG} hover:opacity-90 transition-all whitespace-nowrap`}>Get Early Access</button>
+                <button type="submit" className={`px-3 py-2 rounded-lg font-bold text-white text-xs ${OG} hover:opacity-90 transition-all whitespace-nowrap`}>Get Early Access</button>
               </form>
             )}
           </div>
@@ -719,7 +728,7 @@ function CTASection() {
           <form onSubmit={submit}>
             <div className="flex flex-col sm:flex-row gap-2 p-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
               <input value={input} onChange={e=>setInput(e.target.value)} type="text" placeholder="Email or phone number" disabled={status==="loading"} className={`flex-1 px-5 py-3.5 text-sm rounded-full bg-transparent border-none ${status==="error"?"text-red-300":"text-white"} placeholder:text-white/25 focus:outline-none`} />
-              <button type="submit" disabled={status==="loading"} className={`px-6 py-3.5 text-sm font-bold rounded-full text-white ${PG} transition-all disabled:opacity-50 flex items-center justify-center gap-2 min-w-[150px] hover:opacity-90`}>
+              <button type="submit" disabled={status==="loading"} className={`px-6 py-3.5 text-sm font-bold rounded-full text-white ${OG} transition-all disabled:opacity-50 flex items-center justify-center gap-2 min-w-[150px] hover:opacity-90 hover:shadow-[0_0_20px_rgba(255,107,53,0.4)]`}>
                 {status==="loading" ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Get Early Access <ArrowRight className="w-4 h-4" /></>}
               </button>
             </div>
