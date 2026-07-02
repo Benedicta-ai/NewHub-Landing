@@ -254,7 +254,8 @@ function Navbar({ onFeedback, onLogin }: { onFeedback: () => void; onLogin: () =
 // ===================== HERO =====================
 
 function HeroSection({ onJoin }: { onJoin: () => void }) {
-  const [ref, vis] = useVisible(0.05);
+  const ref = useRef<HTMLDivElement>(null);
+  const vis = true; // hero is above the fold — always visible
   const stats = [
     { val: "+65k", label: "active users" },
     { val: "+1.5b", label: "connections made" },
@@ -270,16 +271,17 @@ function HeroSection({ onJoin }: { onJoin: () => void }) {
         <div className="absolute bottom-[0%] right-[10%] w-[28%] h-[45%] rounded-full opacity-15" style={{background:"radial-gradient(ellipse,#F0199A 0%,#7132C8 50%,transparent 70%)",filter:"blur(80px)"}} />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-24">
-        <div ref={ref} className="grid lg:grid-cols-[1fr_auto] gap-12 items-center">
-          {/* left copy */}
-          <div className="max-w-2xl">
-            <h1 className={`text-5xl md:text-6xl lg:text-[72px] font-black leading-[1.0] text-white mb-4 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
+        <div ref={ref} className="grid lg:grid-cols-[1fr_1fr] gap-8 items-center min-h-[80vh]">
+
+          {/* LEFT — copy */}
+          <div className="max-w-xl">
+            <h1 className={`text-5xl md:text-6xl lg:text-[68px] font-black leading-[1.02] text-white mb-5 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
               Where Professional<br />Meets Personal,<br /><span className={PGT}>Seamlessly.</span>
             </h1>
             <p className={`text-white/50 text-base leading-relaxed max-w-sm mb-8 transition-all duration-1000 ${vis?"opacity-100":"opacity-0"}`} style={{transitionDelay:"300ms"}}>
               NewHub is a modern social platform that helps you build meaningful professional and personal connections in one place.
             </p>
-            <div className={`flex flex-wrap items-center gap-4 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-6"}`} style={{transitionDelay:"450ms"}}>
+            <div className={`flex flex-wrap items-center gap-4 mb-12 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-6"}`} style={{transitionDelay:"450ms"}}>
               <a href="#cta" onClick={e=>{e.preventDefault();document.getElementById("cta")?.scrollIntoView({behavior:"smooth"});}} className={`px-7 py-3.5 rounded-full font-bold text-white text-sm ${PG} hover:scale-105 hover:shadow-[0_0_24px_rgba(240,25,154,0.45)] transition-all`}>
                 Join NewHub
               </a>
@@ -287,26 +289,59 @@ function HeroSection({ onJoin }: { onJoin: () => void }) {
                 Learn More <ArrowRight className="w-4 h-4" />
               </a>
             </div>
-          </div>
-          {/* right: stats */}
-          <div className={`flex flex-col gap-6 transition-all duration-1000 ${vis?"opacity-100 translate-x-0":"opacity-0 translate-x-8"}`} style={{transitionDelay:"500ms"}}>
-            {stats.map((s,i)=>(
-              <div key={i} className="flex items-start gap-3">
-                <span className="text-white/30 text-lg leading-none mt-1">+</span>
-                <div>
-                  <div className={`text-3xl font-black ${PGT}`}>{s.val.replace("+","")}</div>
-                  <div className="text-white/40 text-sm whitespace-pre-line leading-snug">{s.label}</div>
+            {/* stats row */}
+            <div className={`flex flex-wrap gap-8 transition-all duration-1000 ${vis?"opacity-100":"opacity-0"}`} style={{transitionDelay:"600ms"}}>
+              {stats.map((s,i)=>(
+                <div key={i} className="flex items-start gap-2">
+                  <span className="text-white/30 text-base leading-none mt-1">+</span>
+                  <div>
+                    <div className={`text-2xl font-black ${PGT}`}>{s.val.replace("+","")}</div>
+                    <div className="text-white/40 text-xs whitespace-pre-line leading-snug">{s.label}</div>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT — floating app screenshot */}
+          <div className={`relative flex items-center justify-center transition-all duration-1200 ${vis?"opacity-100 translate-x-0":"opacity-0 translate-x-12"}`} style={{transitionDelay:"300ms"}}>
+            {/* glow behind screenshot */}
+            <div className="absolute inset-0 rounded-3xl opacity-60 blur-3xl scale-90"
+              style={{background:"radial-gradient(ellipse at 60% 40%,#7132C8,#F0199A 60%,transparent)"}} />
+            {/* floating card */}
+            <div
+              className="relative w-full max-w-lg rounded-2xl overflow-hidden border border-white/15 shadow-[0_32px_80px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.05)]"
+              style={{transform:"perspective(1200px) rotateY(-6deg) rotateX(3deg)",animation:"float 6s ease-in-out infinite"}}
+            >
+              {/* browser chrome */}
+              <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[#0A0118]/90 border-b border-white/8">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#F0199A]/60" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#7132C8]/60" />
+                <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+                <div className="ml-3 flex-1 h-4 rounded-md bg-white/5 max-w-[160px]" />
               </div>
-            ))}
+              <img
+                src={`${BASE}images/matchglee-app-ui.png`}
+                alt="NewHub app interface"
+                className="w-full block"
+                loading="eager"
+              />
+            </div>
           </div>
         </div>
 
         {/* scroll cue */}
-        <div className={`mt-20 flex justify-center transition-all duration-1000 ${vis?"opacity-30":"opacity-0"}`} style={{transitionDelay:"800ms"}}>
+        <div className={`mt-10 flex justify-center transition-all duration-1000 ${vis?"opacity-30":"opacity-0"}`} style={{transitionDelay:"900ms"}}>
           <ChevronDown className="w-6 h-6 text-white animate-bounce" />
         </div>
       </div>
+
+      <style>{`
+        @keyframes float {
+          0%,100% { transform: perspective(1200px) rotateY(-6deg) rotateX(3deg) translateY(0px); }
+          50%      { transform: perspective(1200px) rotateY(-6deg) rotateX(3deg) translateY(-12px); }
+        }
+      `}</style>
     </section>
   );
 }
@@ -592,7 +627,6 @@ function MainPage({ onFeedback, onLogin }: { onFeedback: () => void; onLogin: ()
     <div className="min-h-screen font-sans bg-[#0A0118]">
       <Navbar onFeedback={onFeedback} onLogin={onLogin} />
       <HeroSection onJoin={()=>document.getElementById("cta")?.scrollIntoView({behavior:"smooth"})} />
-      <AppShowcase />
       <WhatSection />
       <HowSection onFeedback={onFeedback} />
       <WhySection />
