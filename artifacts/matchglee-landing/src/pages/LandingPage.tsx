@@ -8,12 +8,8 @@ import {
 
 const BASE = import.meta.env.BASE_URL;
 
-// brand: pink→purple (logo, accents)
 const PG  = "bg-gradient-to-r from-[#F0199A] to-[#7132C8]";
 const PGT = `text-transparent bg-clip-text ${PG}`;
-// orange: primary CTAs, "Seamlessly.", stats, arrows
-const OG  = "bg-gradient-to-r from-[#FF6B35] to-[#FF4D8D]";
-const OGT = `text-transparent bg-clip-text ${OG}`;
 
 // ===================== SHARED =====================
 
@@ -63,7 +59,7 @@ function LoginModal({ onClose }: { onClose: () => void }) {
         <Logo size="sm" />
         <h2 className="text-2xl font-black text-white mt-5 mb-1">{tab === "signin" ? "Welcome back" : "Join NewHub"}</h2>
         <p className="text-white/40 text-sm mb-7">{tab === "signin" ? "Sign in to continue." : "Create your account."}</p>
-        <div className="flex gap-1 p-1 rounded-xl bg-white/5 border border-white/8 mb-6">
+        <div className="flex gap-1 p-1 rounded-xl bg-white/5 border border-white/10 mb-6">
           {(["signin", "signup"] as const).map(t => (
             <button key={t} onClick={() => setTab(t)} className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${tab === t ? `${PG} text-white` : "text-white/40 hover:text-white/70"}`}>
               {t === "signin" ? "Sign In" : "Sign Up"}
@@ -114,7 +110,7 @@ function QuizPhase({ onComplete }: { onComplete: () => void }) {
   );
 
   return (
-    <div className="min-h-screen bg-[#050508] text-white font-sans flex flex-col">
+    <div className="min-h-screen bg-[#0A0118] text-white font-sans flex flex-col">
       <div className={`fixed inset-0 z-50 ${PG} transition-transform duration-600 ease-in-out ${transitioning?"translate-x-0":"translate-x-full"}`} />
       <header className="p-6"><Logo /></header>
       <main className="flex-1 flex flex-col max-w-4xl mx-auto px-6 pb-12 w-full">
@@ -181,7 +177,7 @@ function CinematicIntro({ onComplete }: { onComplete: () => void }) {
     const ref = useChapterObserver(handle, "ch-1");
     const [vr, vis] = useVisible(0.2);
     return (
-      <section ref={ref as React.RefObject<HTMLElement>} id="ch-1" className="relative w-full h-screen flex flex-col justify-center items-center p-6 bg-black" style={{scrollSnapAlign:"start"}}>
+      <section ref={ref as React.RefObject<HTMLElement>} id="ch-1" className="relative w-full h-screen flex flex-col justify-center items-center p-6 bg-[#0A0118]" style={{scrollSnapAlign:"start"}}>
         <div className={`absolute inset-0 flex items-center justify-center gap-2 transition-opacity duration-1000 ${vis?"opacity-10":"opacity-0"}`}>
           {[...Array(18)].map((_,i)=><div key={i} className="w-1 bg-white rounded-full" style={{height:`${(i*17+23)%60+10}vh`,animation:`pulse ${(i%3)+1}s infinite`,animationDelay:`${(i*0.1)%1}s`}} />)}
         </div>
@@ -200,7 +196,7 @@ function CinematicIntro({ onComplete }: { onComplete: () => void }) {
     const [vr, vis] = useVisible(0.2);
     const profiles = [{label:"Professional only",color:"from-blue-600/30 to-blue-900/30"},{label:"Personal only",color:"from-pink-600/30 to-pink-900/30"},{label:"Side hustle only",color:"from-purple-600/30 to-purple-900/30"},{label:"Weekend only",color:"from-emerald-600/30 to-emerald-900/30"}];
     return (
-      <section ref={ref as React.RefObject<HTMLElement>} id="ch-2" className="relative w-full h-screen flex flex-col justify-center items-center p-6 bg-[#050508]" style={{scrollSnapAlign:"start"}}>
+      <section ref={ref as React.RefObject<HTMLElement>} id="ch-2" className="relative w-full h-screen flex flex-col justify-center items-center p-6 bg-[#0A0118]" style={{scrollSnapAlign:"start"}}>
         <div ref={vr} className="w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
           {profiles.map((p,i)=><div key={i} className={`aspect-[3/4] rounded-2xl border border-white/10 bg-gradient-to-b ${p.color} p-4 flex flex-col justify-end transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-16"}`} style={{transitionDelay:`${i*200}ms`}}><div className="w-10 h-10 rounded-full bg-white/20 mb-2 animate-pulse" /><div className="h-3 w-3/4 bg-white/20 rounded mb-2" /><div className="h-2 w-1/2 bg-white/10 rounded mb-5" /><div className="text-xs font-bold text-white uppercase tracking-wide">{p.label}</div></div>)}
         </div>
@@ -214,7 +210,7 @@ function CinematicIntro({ onComplete }: { onComplete: () => void }) {
   };
 
   return (
-    <div className="w-full h-screen overflow-y-scroll font-sans bg-black" style={{scrollSnapType:"y mandatory"}}>
+    <div className="w-full h-screen overflow-y-scroll font-sans bg-[#0A0118]" style={{scrollSnapType:"y mandatory"}}>
       <div className="fixed right-5 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
         {["ch-1","ch-2"].map((id,i)=>(
           <button key={id} onClick={()=>document.getElementById(id)?.scrollIntoView({behavior:"smooth"})} className="group flex items-center justify-end gap-2">
@@ -239,11 +235,11 @@ function Navbar({ onFeedback, onLogin }: { onFeedback: () => void; onLogin: () =
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled?"bg-black/80 backdrop-blur-xl border-b border-white/5":"bg-transparent"}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled?"bg-[#0A0118]/90 backdrop-blur-xl border-b border-white/5":"bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Logo />
         {/* center pill nav */}
-        <div className="hidden md:flex items-center gap-0 bg-[#111111] border border-white/10 rounded-full px-2 py-1.5">
+        <div className="hidden md:flex items-center gap-0 bg-white/5 border border-white/10 rounded-full px-2 py-1.5">
           <a href="#about" onClick={e=>{e.preventDefault();document.getElementById("about")?.scrollIntoView({behavior:"smooth"});}} className="px-5 py-1.5 rounded-full text-sm text-white/70 hover:text-white hover:bg-white/8 transition-all font-medium">About</a>
           <button onClick={onFeedback} className="px-5 py-1.5 rounded-full text-sm text-white/70 hover:text-white hover:bg-white/8 transition-all font-medium">Feedback</button>
           <button onClick={onLogin} className="px-5 py-1.5 rounded-full text-sm text-white/70 hover:text-white hover:bg-white/8 transition-all font-medium">Login / Sign In</button>
@@ -266,25 +262,25 @@ function HeroSection({ onJoin }: { onJoin: () => void }) {
   ];
 
   return (
-    <section id="about" className="relative min-h-screen flex items-center bg-black overflow-hidden pt-20">
+    <section id="about" className="relative min-h-screen flex items-center bg-[#0A0118] overflow-hidden pt-20">
       {/* static ambient glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] right-[-5%] w-[55%] h-[80%] rounded-full opacity-40" style={{background:"radial-gradient(ellipse,#7132C8 0%,#F0199A 35%,transparent 70%)",filter:"blur(80px)"}} />
-        <div className="absolute top-[20%] right-[15%] w-[30%] h-[50%] rounded-full opacity-25" style={{background:"radial-gradient(ellipse,#06B6D4 0%,#2563EB 40%,transparent 70%)",filter:"blur(60px)"}} />
-        <div className="absolute bottom-[-5%] right-[5%] w-[25%] h-[40%] rounded-full opacity-20" style={{background:"radial-gradient(ellipse,#FF6B35 0%,#F0199A 50%,transparent 70%)",filter:"blur(70px)"}} />
+        <div className="absolute top-[-15%] right-[-8%] w-[60%] h-[85%] rounded-full opacity-30" style={{background:"radial-gradient(ellipse,#7132C8 0%,#F0199A 40%,transparent 70%)",filter:"blur(90px)"}} />
+        <div className="absolute top-[30%] right-[20%] w-[35%] h-[55%] rounded-full opacity-12" style={{background:"radial-gradient(ellipse,#7132C8 0%,transparent 70%)",filter:"blur(70px)"}} />
+        <div className="absolute bottom-[0%] right-[10%] w-[28%] h-[45%] rounded-full opacity-15" style={{background:"radial-gradient(ellipse,#F0199A 0%,#7132C8 50%,transparent 70%)",filter:"blur(80px)"}} />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-24">
         <div ref={ref} className="grid lg:grid-cols-[1fr_auto] gap-12 items-center">
           {/* left copy */}
           <div className="max-w-2xl">
             <h1 className={`text-5xl md:text-6xl lg:text-[72px] font-black leading-[1.0] text-white mb-4 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
-              Where Professional<br />Meets Personal,<br /><span className={OGT}>Seamlessly.</span>
+              Where Professional<br />Meets Personal,<br /><span className={PGT}>Seamlessly.</span>
             </h1>
             <p className={`text-white/50 text-base leading-relaxed max-w-sm mb-8 transition-all duration-1000 ${vis?"opacity-100":"opacity-0"}`} style={{transitionDelay:"300ms"}}>
               NewHub is a modern social platform that helps you build meaningful professional and personal connections in one place.
             </p>
             <div className={`flex flex-wrap items-center gap-4 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-6"}`} style={{transitionDelay:"450ms"}}>
-              <a href="#cta" onClick={e=>{e.preventDefault();document.getElementById("cta")?.scrollIntoView({behavior:"smooth"});}} className={`px-7 py-3.5 rounded-full font-bold text-white text-sm ${OG} hover:scale-105 hover:shadow-[0_0_24px_rgba(255,107,53,0.45)] transition-all`}>
+              <a href="#cta" onClick={e=>{e.preventDefault();document.getElementById("cta")?.scrollIntoView({behavior:"smooth"});}} className={`px-7 py-3.5 rounded-full font-bold text-white text-sm ${PG} hover:scale-105 hover:shadow-[0_0_24px_rgba(240,25,154,0.45)] transition-all`}>
                 Join NewHub
               </a>
               <a href="#what" onClick={e=>{e.preventDefault();document.getElementById("what")?.scrollIntoView({behavior:"smooth"});}} className="flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium border border-white/20 hover:border-white/40 rounded-full px-5 py-3 transition-all">
@@ -298,7 +294,7 @@ function HeroSection({ onJoin }: { onJoin: () => void }) {
               <div key={i} className="flex items-start gap-3">
                 <span className="text-white/30 text-lg leading-none mt-1">+</span>
                 <div>
-                  <div className={`text-3xl font-black ${OGT}`}>{s.val.replace("+","")}</div>
+                  <div className={`text-3xl font-black ${PGT}`}>{s.val.replace("+","")}</div>
                   <div className="text-white/40 text-sm whitespace-pre-line leading-snug">{s.label}</div>
                 </div>
               </div>
@@ -325,7 +321,7 @@ function WhatSection() {
     { icon: <Globe className="w-6 h-6" />, title: "Communities", desc: "Find your people and share what you love." },
   ];
   return (
-    <section id="what" className="relative py-24 px-6 bg-[#050508]">
+    <section id="what" className="relative py-24 px-6 bg-[#0A0118]">
       <div className="max-w-4xl mx-auto">
         <div ref={ref} className={`text-center mb-14 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`}>
           <h2 className="text-3xl md:text-4xl font-black text-white mb-3">What is NewHub?</h2>
@@ -333,8 +329,8 @@ function WhatSection() {
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {items.map((item, i)=>(
-            <div key={i} className={`p-7 rounded-2xl bg-[#0E0E14] border border-white/8 hover:border-white/15 hover:-translate-y-1 transition-all duration-500 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`} style={{transitionDelay:`${i*120}ms`}}>
-              <div className={`w-11 h-11 rounded-xl ${OG} flex items-center justify-center text-white mb-5`}>{item.icon}</div>
+            <div key={i} className={`p-7 rounded-2xl bg-white/5 border border-white/10 hover:border-white/15 hover:-translate-y-1 transition-all duration-500 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`} style={{transitionDelay:`${i*120}ms`}}>
+              <div className={`w-11 h-11 rounded-xl ${PG} flex items-center justify-center text-white mb-5`}>{item.icon}</div>
               <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
               <p className="text-white/40 text-sm leading-relaxed">{item.desc}</p>
             </div>
@@ -357,7 +353,7 @@ function HowSection({ onFeedback }: { onFeedback: () => void }) {
     { icon: <Star className="w-5 h-5" />, title: "Get Early Access", desc: "You're all set! Be the first to experience NewHub." },
   ];
   return (
-    <section className="py-24 px-6 bg-[#050508]">
+    <section className="py-24 px-6 bg-[#0A0118]">
       <div className="max-w-6xl mx-auto">
         <div ref={ref} className={`text-center mb-14 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`}>
           <h2 className="text-3xl md:text-4xl font-black text-white">How NewHub Works</h2>
@@ -367,14 +363,14 @@ function HowSection({ onFeedback }: { onFeedback: () => void }) {
             <React.Fragment key={i}>
               <button
                 onClick={i < 4 ? onFeedback : undefined}
-                className={`group relative p-5 rounded-2xl bg-[#0E0E14] border border-white/8 ${i<4?"hover:border-white/20 cursor-pointer":"cursor-default"} text-left transition-all duration-500 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`}
+                className={`group relative p-5 rounded-2xl bg-white/5 border border-white/10 ${i<4?"hover:border-white/20 cursor-pointer":"cursor-default"} text-left transition-all duration-500 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`}
                 style={{transitionDelay:`${i*100}ms`}}
               >
-                <div className={`w-9 h-9 rounded-xl ${OG} flex items-center justify-center text-white mb-4`}>{s.icon}</div>
+                <div className={`w-9 h-9 rounded-xl ${PG} flex items-center justify-center text-white mb-4`}>{s.icon}</div>
                 <h3 className="text-white font-bold text-sm mb-1.5">{s.title}</h3>
                 <p className="text-white/35 text-xs leading-relaxed">{s.desc}</p>
                 {i < 4 && (
-                  <div className={`absolute -right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full ${OG} flex items-center justify-center z-10 shadow-md shadow-orange-500/30`}>
+                  <div className={`absolute -right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full ${PG} flex items-center justify-center z-10 shadow-md shadow-pink-500/30`}>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </div>
                 )}
@@ -397,18 +393,18 @@ function WhySection() {
     { icon: <LayoutGrid className="w-6 h-6" />, title: "All in One Place", desc: "Everything you need to connect, collaborate, and grow — in one seamless platform." },
   ];
   return (
-    <section className="py-24 px-6 bg-[#050508]">
+    <section className="py-24 px-6 bg-[#0A0118]">
       <div className="max-w-4xl mx-auto">
         <div ref={ref} className={`text-center mb-14 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`}>
           <h2 className="text-3xl md:text-4xl font-black text-white">Why NewHub?</h2>
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {items.map((item,i)=>(
-            <div key={i} className={`p-7 rounded-2xl bg-[#0E0E14] border border-white/8 hover:border-white/15 transition-all duration-500 flex flex-col ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`} style={{transitionDelay:`${i*120}ms`}}>
-              <div className={`w-11 h-11 rounded-xl ${OG} flex items-center justify-center text-white mb-5`}>{item.icon}</div>
+            <div key={i} className={`p-7 rounded-2xl bg-white/5 border border-white/10 hover:border-white/15 transition-all duration-500 flex flex-col ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`} style={{transitionDelay:`${i*120}ms`}}>
+              <div className={`w-11 h-11 rounded-xl ${PG} flex items-center justify-center text-white mb-5`}>{item.icon}</div>
               <h3 className="text-white font-bold text-base mb-2">{item.title}</h3>
               <p className="text-white/40 text-sm leading-relaxed flex-1">{item.desc}</p>
-              <button className={`mt-6 w-9 h-9 rounded-full ${OG} flex items-center justify-center text-white hover:scale-105 hover:shadow-[0_0_12px_rgba(255,107,53,0.5)] transition-all duration-300`}>
+              <button className={`mt-6 w-9 h-9 rounded-full ${PG} flex items-center justify-center text-white hover:scale-105 hover:shadow-[0_0_12px_rgba(240,25,154,0.5)] transition-all duration-300`}>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -425,18 +421,18 @@ function SocialBanner({ onJoin }: { onJoin: () => void }) {
   const [ref, vis] = useVisible();
   const colors = ["from-[#F0199A] to-[#7132C8]","from-blue-400 to-purple-500","from-emerald-400 to-blue-400","from-orange-400 to-pink-500","from-indigo-400 to-cyan-400"];
   return (
-    <section className="py-8 px-6 bg-[#050508]">
-      <div ref={ref} className={`max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 p-7 rounded-2xl bg-[#0E0E14] border border-white/8 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-6"}`}>
+    <section className="py-8 px-6 bg-[#0A0118]">
+      <div ref={ref} className={`max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 p-7 rounded-2xl bg-white/5 border border-white/10 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-6"}`}>
         <div className="flex items-center gap-5">
           <div className="flex -space-x-2">
-            {colors.map((c,i)=><div key={i} className={`w-9 h-9 rounded-full bg-gradient-to-br ${c} border-2 border-[#0E0E14]`} />)}
+            {colors.map((c,i)=><div key={i} className={`w-9 h-9 rounded-full bg-gradient-to-br ${c} border-2 border-[#0A0118]`} />)}
           </div>
-          <span className={`text-lg font-black ${OGT}`}>+65k</span>
+          <span className={`text-lg font-black ${PGT}`}>+65k</span>
         </div>
         <p className="text-white font-semibold text-lg text-center md:text-left max-w-md">
           Join thousands of professionals and individuals building real connections.
         </p>
-        <a href="#cta" onClick={e=>{e.preventDefault();document.getElementById("cta")?.scrollIntoView({behavior:"smooth"});}} className={`px-7 py-3 rounded-full font-bold text-white text-sm ${OG} hover:scale-105 hover:shadow-[0_0_20px_rgba(255,107,53,0.4)] transition-all whitespace-nowrap flex-shrink-0`}>
+        <a href="#cta" onClick={e=>{e.preventDefault();document.getElementById("cta")?.scrollIntoView({behavior:"smooth"});}} className={`px-7 py-3 rounded-full font-bold text-white text-sm ${PG} hover:scale-105 hover:shadow-[0_0_20px_rgba(240,25,154,0.4)] transition-all whitespace-nowrap flex-shrink-0`}>
           Join NewHub
         </a>
       </div>
@@ -452,7 +448,7 @@ function Footer() {
   const submit = (e: React.FormEvent) => { e.preventDefault(); if (email.includes("@")) { setSent(true); setEmail(""); } };
 
   return (
-    <footer className="bg-[#050508] border-t border-white/5 px-6 pt-14 pb-8">
+    <footer className="bg-[#0A0118] border-t border-white/5 px-6 pt-14 pb-8">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           {/* brand */}
@@ -492,7 +488,7 @@ function Footer() {
             ) : (
               <form onSubmit={submit} className="flex gap-2">
                 <input value={email} onChange={e=>setEmail(e.target.value)} type="email" placeholder="Enter your email" className="flex-1 min-w-0 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/20 text-xs focus:outline-none focus:border-white/25 transition-colors" />
-                <button type="submit" className={`px-3 py-2 rounded-lg font-bold text-white text-xs ${OG} hover:opacity-90 transition-all whitespace-nowrap`}>Get Early Access</button>
+                <button type="submit" className={`px-3 py-2 rounded-lg font-bold text-white text-xs ${PG} hover:opacity-90 transition-all whitespace-nowrap`}>Get Early Access</button>
               </form>
             )}
           </div>
@@ -526,7 +522,7 @@ function CTASection() {
   };
 
   return (
-    <section id="cta" className="py-28 px-6 bg-[#050508] relative overflow-hidden">
+    <section id="cta" className="py-28 px-6 bg-[#0A0118] relative overflow-hidden">
       <div className={`absolute inset-0 ${PG} opacity-[0.07]`} />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,rgba(113,50,200,0.12),transparent)]" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F0199A]/30 to-transparent" />
@@ -539,7 +535,7 @@ function CTASection() {
           <form onSubmit={submit}>
             <div className="flex flex-col sm:flex-row gap-2 p-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
               <input value={input} onChange={e=>setInput(e.target.value)} type="text" placeholder="Email or phone number" disabled={status==="loading"} className={`flex-1 px-5 py-3.5 text-sm rounded-full bg-transparent border-none ${status==="error"?"text-red-300":"text-white"} placeholder:text-white/25 focus:outline-none`} />
-              <button type="submit" disabled={status==="loading"} className={`px-6 py-3.5 text-sm font-bold rounded-full text-white ${OG} transition-all disabled:opacity-50 flex items-center justify-center gap-2 min-w-[150px] hover:opacity-90 hover:shadow-[0_0_20px_rgba(255,107,53,0.4)]`}>
+              <button type="submit" disabled={status==="loading"} className={`px-6 py-3.5 text-sm font-bold rounded-full text-white ${PG} transition-all disabled:opacity-50 flex items-center justify-center gap-2 min-w-[150px] hover:opacity-90 hover:shadow-[0_0_20px_rgba(240,25,154,0.4)]`}>
                 {status==="loading" ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Get Early Access <ArrowRight className="w-4 h-4" /></>}
               </button>
             </div>
@@ -556,7 +552,7 @@ function CTASection() {
 
 function MainPage({ onFeedback, onLogin }: { onFeedback: () => void; onLogin: () => void }) {
   return (
-    <div className="min-h-screen font-sans bg-black">
+    <div className="min-h-screen font-sans bg-[#0A0118]">
       <Navbar onFeedback={onFeedback} onLogin={onLogin} />
       <HeroSection onJoin={()=>document.getElementById("cta")?.scrollIntoView({behavior:"smooth"})} />
       <WhatSection />
