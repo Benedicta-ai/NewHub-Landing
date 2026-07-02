@@ -311,6 +311,43 @@ function HeroSection({ onJoin }: { onJoin: () => void }) {
   );
 }
 
+// ===================== APP SHOWCASE =====================
+
+function AppShowcase() {
+  const [ref, vis] = useVisible(0.1);
+  return (
+    <section className="relative py-16 px-6 bg-[#0A0118] overflow-hidden">
+      {/* subtle glow behind the mockup */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[80%] rounded-full opacity-20"
+          style={{background:"radial-gradient(ellipse,#7132C8 0%,#F0199A 40%,transparent 70%)",filter:"blur(80px)"}} />
+      </div>
+      <div ref={ref} className={`relative max-w-5xl mx-auto transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
+        {/* device frame */}
+        <div className="relative mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(113,50,200,0.25)] bg-[#0A0118]"
+          style={{maxWidth:"860px"}}>
+          {/* top bar chrome */}
+          <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/8 bg-white/3">
+            <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+            <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+            <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+            <div className="ml-3 flex-1 h-5 rounded-md bg-white/5 max-w-xs" />
+          </div>
+          {/* screenshot */}
+          <img
+            src={`${BASE}images/matchglee-app-ui.png`}
+            alt="NewHub app interface"
+            className="w-full block"
+            loading="lazy"
+          />
+        </div>
+        {/* label below */}
+        <p className="text-center text-white/30 text-sm mt-6 tracking-wide">NewHub — in action</p>
+      </div>
+    </section>
+  );
+}
+
 // ===================== WHAT IS NEWHUB =====================
 
 function WhatSection() {
@@ -555,6 +592,7 @@ function MainPage({ onFeedback, onLogin }: { onFeedback: () => void; onLogin: ()
     <div className="min-h-screen font-sans bg-[#0A0118]">
       <Navbar onFeedback={onFeedback} onLogin={onLogin} />
       <HeroSection onJoin={()=>document.getElementById("cta")?.scrollIntoView({behavior:"smooth"})} />
+      <AppShowcase />
       <WhatSection />
       <HowSection onFeedback={onFeedback} />
       <WhySection />
