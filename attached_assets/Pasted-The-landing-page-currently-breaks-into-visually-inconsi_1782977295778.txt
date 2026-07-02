@@ -1,0 +1,50 @@
+The landing page currently breaks into visually inconsistent sections — the hero is dark purple/black, the Vibe Check section suddenly becomes light/white, the Features section goes dark again, and the Community section shifts to a different purple tone. This makes the page feel like multiple different websites stitched together. Please fix this so the entire page is one cohesive dark-themed design using these exact rules:
+1. Background — Apply this to EVERY section without exception:
+
+Base background: #0A0118 (dark near-black purple)
+NO section should use white, light grey, or light purple backgrounds
+The Vibe Check section MUST be dark — not white/light. Change it to #0A0118 with white text
+Subtle section variation is allowed ONLY via very low opacity radial gradient glows (max 15% opacity pink or purple) — never by changing the base background color
+
+2. Text colors — consistent throughout:
+
+Section labels (like "THE VIBE CHECK", "FEATURES", "COMMUNITY"): small uppercase, rgba(255,255,255,0.4)
+Main headings: white #FFFFFF
+Gradient accent words (like "Personal", "all of you", "already here"): use background: linear-gradient(to right, #F0199A, #7132C8) with background-clip: text
+Body text: rgba(255,255,255,0.4)
+
+3. Cards — consistent across all sections:
+
+Background: rgba(255,255,255,0.05) or #110225
+Border: 1px solid rgba(255,255,255,0.08)
+Rounded corners: border-radius: 16px
+No card should be white or light colored
+The Vibe Check flip cards MUST also be dark — dark background with white text, not white background with dark text
+
+4. Buttons — consistent throughout:
+
+Primary button ("Get Early Access", "Join NewHub"): gradient from-[#F0199A] to-[#7132C8], white text, rounded pill shape
+Secondary button ("Learn More"): transparent background, white border, white text
+The Sign In button in the navbar: gradient from-[#F0199A] to-[#7132C8]
+
+5. Icons and accents:
+
+All icon backgrounds: use the pink-to-purple gradient or a dark card with gradient icon color
+Interest/tag pills (Designer, Jazz Fan, etc.): dark background rgba(255,255,255,0.08) with white text
+Avatar circles and profile elements: keep colorful but on dark backgrounds only
+
+6. Section transitions:
+
+No hard color breaks between sections
+Each section flows into the next with the same dark background
+You may add a very subtle horizontal divider line rgba(255,255,255,0.05) between sections if needed
+
+7. The phone mockup in the hero:
+
+Keep it as-is but ensure the background behind it remains dark, not light
+
+8. Footer:
+
+Same #0A0118 background, white/muted text, gradient logo
+
+The final result should look like one single cohesive dark website where every section feels like it belongs together — similar to how the hero section and the CTA/footer sections already look. The Vibe Check and Community sections are the main ones that need to be fixed to match this dark theme

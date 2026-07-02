@@ -509,26 +509,26 @@ function FlipCard() {
         style={{ transformStyle: "preserve-3d", transition: "transform 0.7s cubic-bezier(0.4,0,0.2,1)", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)", height: "340px" }}
         aria-label="Flip card"
       >
-        <div className="absolute inset-0 rounded-3xl overflow-hidden bg-white border border-[#E0E0E0] shadow-xl flex flex-col p-6" style={{ backfaceVisibility: "hidden" }}>
+        <div className="absolute inset-0 rounded-3xl overflow-hidden bg-[#0D0825] border border-white/10 shadow-xl flex flex-col p-6" style={{ backfaceVisibility: "hidden" }}>
           <div className="flex items-center gap-3 mb-5">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-bold text-lg">J</div>
             <div>
-              <div className="font-bold text-gray-900 text-sm">James Laurent</div>
-              <div className="text-xs text-gray-500">Product Lead @ TechCorp · San Francisco</div>
+              <div className="font-bold text-white text-sm">James Laurent</div>
+              <div className="text-xs text-white/40">Product Lead @ TechCorp · San Francisco</div>
             </div>
-            <div className="ml-auto"><div className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold border border-blue-100">Connect</div></div>
+            <div className="ml-auto"><div className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-semibold border border-blue-500/30">Connect</div></div>
           </div>
-          <div className="h-px bg-gray-100 mb-4" />
-          <div className="text-xs text-gray-400 font-semibold uppercase tracking-widest mb-3">Experience</div>
+          <div className="h-px bg-white/8 mb-4" />
+          <div className="text-xs text-white/30 font-semibold uppercase tracking-widest mb-3">Experience</div>
           <div className="space-y-2 mb-4">
             {["Product Lead · TechCorp · 3 yrs", "Sr. PM · StartupXYZ · 2 yrs"].map((item, i) => (
-              <div key={i} className="flex items-center gap-2 text-sm text-gray-600"><div className="w-1.5 h-1.5 rounded-full bg-blue-400" />{item}</div>
+              <div key={i} className="flex items-center gap-2 text-sm text-white/60"><div className="w-1.5 h-1.5 rounded-full bg-blue-400" />{item}</div>
             ))}
           </div>
           <div className="mt-auto flex flex-wrap gap-2">
-            {["Strategy", "B2B SaaS", "Leadership"].map(s => <span key={s} className="px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 text-xs font-medium">{s}</span>)}
+            {["Strategy", "B2B SaaS", "Leadership"].map(s => <span key={s} className="px-2.5 py-1 rounded-full bg-white/8 text-white/50 text-xs font-medium border border-white/8">{s}</span>)}
           </div>
-          <div className="mt-4 text-center text-xs text-gray-400">Tap to see the real James →</div>
+          <div className="mt-4 text-center text-xs text-white/25">Tap to see the real James →</div>
         </div>
         <div className="absolute inset-0 rounded-3xl overflow-hidden bg-gradient-to-br from-[#1A0A2E] via-[#2D0A3E] to-[#0A1228] border border-white/10 shadow-xl flex flex-col p-6" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
           <div className="flex items-center gap-3 mb-5">
@@ -558,41 +558,44 @@ function FlipCard() {
 function VibeCheckSection() {
   const [ref, isVisible] = useVisible();
   return (
-    <section className="relative py-28 px-6 bg-[#F8F5FF] overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(240,25,154,0.06),transparent)]" />
+    <section className="relative py-28 px-6 bg-[#0A0118] overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-[40rem] h-[40rem] bg-[#F0199A]/8 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-1/4 w-[40rem] h-[40rem] bg-[#7132C8]/8 rounded-full blur-[100px]" />
+      </div>
       <div className="max-w-7xl mx-auto relative z-10">
         <div ref={ref} className={`text-center mb-20 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-          <div className="inline-block mb-4 px-5 py-2 rounded-full border border-[#E9E5FF] bg-white shadow-sm text-sm font-semibold tracking-[0.2em] uppercase text-[#7132C8]">
+          <div className="inline-block mb-4 px-5 py-2 rounded-full border border-white/8 bg-white/5 text-sm font-semibold tracking-[0.2em] uppercase text-white/40">
             The Vibe Check
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-[#1A1035] leading-tight">
+          <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">
             No more picking sides.<br />
             <span className={BRAND_GRADIENT_TEXT}>Be the full you.</span>
           </h2>
         </div>
         <div className="grid lg:grid-cols-3 gap-10 items-start">
-          <div className={`bg-white rounded-3xl p-8 shadow-[0_4px_24px_rgba(113,50,200,0.1)] border border-[#E9E5FF] transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`} style={{ transitionDelay: "150ms" }}>
+          <div className={`rounded-2xl p-8 bg-white/5 border border-white/8 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`} style={{ transitionDelay: "150ms" }}>
             <div className={`w-12 h-12 rounded-2xl ${BRAND_GRADIENT} flex items-center justify-center mb-6`}>
               <Star className="w-6 h-6 text-white" />
             </div>
-            <div className="text-xs font-bold uppercase tracking-widest text-[#F0199A] mb-3">Vision</div>
-            <h3 className="text-xl font-black text-[#1A1035] mb-3 leading-tight">Authentic connections</h3>
-            <p className="text-[#4A4566] text-sm leading-relaxed">Professional networking was built for a world that no longer exists. Your passions, quirks, and inner life belong in your network too.</p>
+            <div className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3">Vision</div>
+            <h3 className="text-xl font-black text-white mb-3 leading-tight">Authentic connections</h3>
+            <p className="text-white/40 text-sm leading-relaxed">Professional networking was built for a world that no longer exists. Your passions, quirks, and inner life belong in your network too.</p>
           </div>
           <div className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`} style={{ transitionDelay: "300ms" }}>
             <div className="text-center mb-6">
-              <div className="text-sm text-[#4A4566] font-medium">See both sides of you</div>
+              <div className="text-sm text-white/40 font-medium">See both sides of you</div>
               <div className={`text-xs ${BRAND_GRADIENT_TEXT} mt-1`}>↓ Tap the card to flip</div>
             </div>
             <FlipCard />
           </div>
-          <div className={`bg-white rounded-3xl p-8 shadow-[0_4px_24px_rgba(113,50,200,0.1)] border border-[#E9E5FF] transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`} style={{ transitionDelay: "450ms" }}>
+          <div className={`rounded-2xl p-8 bg-white/5 border border-white/8 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`} style={{ transitionDelay: "450ms" }}>
             <div className={`w-12 h-12 rounded-2xl ${BRAND_GRADIENT} flex items-center justify-center mb-6`}>
               <Zap className="w-6 h-6 text-white" />
             </div>
-            <div className="text-xs font-bold uppercase tracking-widest text-[#7132C8] mb-3">Mission</div>
-            <h3 className="text-xl font-black text-[#1A1035] mb-3 leading-tight">Bridging the gap</h3>
-            <p className="text-[#4A4566] text-sm leading-relaxed">A fluid space where personal expression and professional ambition coexist. Connect over creativity, side-hustles, and genuine human energy.</p>
+            <div className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3">Mission</div>
+            <h3 className="text-xl font-black text-white mb-3 leading-tight">Bridging the gap</h3>
+            <p className="text-white/40 text-sm leading-relaxed">A fluid space where personal expression and professional ambition coexist. Connect over creativity, side-hustles, and genuine human energy.</p>
           </div>
         </div>
       </div>
