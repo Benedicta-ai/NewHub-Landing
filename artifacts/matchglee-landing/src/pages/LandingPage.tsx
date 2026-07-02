@@ -271,9 +271,9 @@ function HeroSection({ onJoin }: { onJoin: () => void }) {
         <div className="absolute bottom-[0%] right-[10%] w-[28%] h-[45%] rounded-full opacity-15" style={{background:"radial-gradient(ellipse,#F0199A 0%,#7132C8 50%,transparent 70%)",filter:"blur(80px)"}} />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-24">
-        <div ref={ref} className="grid lg:grid-cols-[1fr_auto] gap-12 items-center min-h-[80vh]">
+        <div ref={ref} className="flex items-center min-h-[80vh]">
 
-          {/* LEFT — copy */}
+          {/* copy */}
           <div className="max-w-xl">
             <h1 className={`text-5xl md:text-6xl lg:text-[68px] font-black leading-[1.02] text-white mb-5 transition-all duration-1000 ${vis?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
               Where Professional<br />Meets Personal,<br /><span className={PGT}>Seamlessly.</span>
@@ -300,32 +300,6 @@ function HeroSection({ onJoin }: { onJoin: () => void }) {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* RIGHT — floating app screenshot */}
-          <div className={`relative flex items-center justify-center w-[300px] shrink-0 transition-all duration-1000 ${vis?"opacity-100 translate-x-0":"opacity-0 translate-x-12"}`} style={{transitionDelay:"300ms"}}>
-            {/* glow behind screenshot */}
-            <div className="absolute inset-0 rounded-3xl opacity-50 blur-2xl scale-95"
-              style={{background:"radial-gradient(ellipse at 60% 40%,#7132C8,#F0199A 60%,transparent)"}} />
-            {/* floating card */}
-            <div
-              className="relative w-full rounded-2xl overflow-hidden border border-white/15 shadow-[0_24px_60px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.05)]"
-              style={{transform:"perspective(1000px) rotateY(-5deg) rotateX(2deg)",animation:"float 6s ease-in-out infinite"}}
-            >
-              {/* browser chrome */}
-              <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[#0A0118]/90 border-b border-white/8">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#F0199A]/60" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#7132C8]/60" />
-                <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
-                <div className="ml-3 flex-1 h-4 rounded-md bg-white/5 max-w-[160px]" />
-              </div>
-              <img
-                src={`${BASE}images/matchglee-app-ui.png`}
-                alt="NewHub app interface"
-                className="w-full block"
-                loading="eager"
-              />
             </div>
           </div>
         </div>
