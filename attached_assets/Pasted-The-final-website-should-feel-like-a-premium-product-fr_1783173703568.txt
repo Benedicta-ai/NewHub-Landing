@@ -1,0 +1,632 @@
+The final website should feel like a premium product from Apple, Linear, Arc Browser, Stripe, Nothing, and Framer.
+
+This is not a marketing website.
+
+It is an immersive product experience.
+
+The entire website should feel like one continuous animated journey.
+
+BRAND
+
+Platform Name
+
+NewHub
+
+Tagline
+
+Where Professional Meets Personal — Seamlessly.
+
+The platform combines
+
+Personal Identity
+Professional Identity
+Communities
+Authentic Networking
+
+into one seamless experience.
+
+LOGO
+
+The attached NewHub logo is final.
+
+DO NOT
+
+redesign it
+redraw it
+recolor it
+simplify it
+animate its shape differently
+
+Use the logo exactly as provided.
+
+Only animate its appearance during the splash screen.
+
+DESIGN STYLE
+
+The design language should combine inspiration from
+
+Apple
+Linear
+Nothing
+Framer
+Stripe
+Arc Browser
+
+Characteristics
+
+Premium
+Minimal
+Futuristic
+Elegant
+Dark Theme
+Smooth
+Interactive
+Cinematic
+
+Avoid
+
+Generic SaaS layouts
+Template-looking sections
+Hard section breaks
+Excessive text
+Flat illustrations
+COLOR PALETTE
+
+DO NOT CHANGE THE EXISTING COLOR PALETTE.
+
+Preserve the current brand colors exactly.
+
+Primary colors
+
+Pink
+Purple
+Orange Accent
+Black Background
+
+Maintain
+
+Existing gradients
+Existing glow
+Existing shadows
+Existing hover colors
+WEBSITE FLOW
+
+Splash Screen
+
+↓
+
+Homepage Hero
+
+↓
+
+Built For All Of You
+
+↓
+
+What is NewHub
+
+↓
+
+Take Up A Quiz
+
+↓
+
+Why NewHub
+
+↓
+
+Footer
+
+No abrupt transitions.
+
+Everything should feel connected.
+
+SPLASH SCREEN
+
+Before loading the homepage, play a premium splash animation.
+
+Sequence
+
+Black background
+
+↓
+
+Tiny floating particles
+
+↓
+
+A glowing pink line enters from the left.
+
+↓
+
+A glowing purple line enters from the right.
+
+↓
+
+The two flowing energy ribbons weave together.
+
+↓
+
+They perfectly recreate the provided NewHub logo.
+
+↓
+
+The logo glows.
+
+↓
+
+The logo dissolves into thousands of glowing molecular particles.
+
+↓
+
+Those particles expand outward.
+
+↓
+
+The homepage fades in beneath them.
+
+Duration
+
+3–4 seconds.
+
+Use
+
+SVG Path Morphing
+GSAP
+Motion One
+Canvas particles
+Three.js only if needed
+
+The animation should feel organic.
+
+Never robotic.
+
+HERO SECTION
+
+Use the second attached reference as inspiration.
+
+The layout should be almost identical.
+
+Large typography.
+
+Huge visual impact.
+
+Left Side
+
+Headline
+
+THEY BLEND IN.
+
+ONE STANDS OUT.
+
+Below that
+
+Replace
+
+"We're searching for the one who's different"
+
+with
+
+Where Professional Meets Personal — Seamlessly.
+
+Use the same typography sizing from the reference.
+
+Button
+
+Replace
+
+"Be The One"
+
+with
+
+Get Early Access To The App
+
+Keep the rounded premium button style.
+
+RIGHT SIDE HERO
+
+Replace the blue glowing human with a much more premium 3D character.
+
+The character should represent
+
+Someone who naturally stands out.
+
+Around them
+
+Dark silhouettes
+
+Floating particles
+
+Connected molecules
+
+Neural connections
+
+Soft volumetric lighting
+
+As the user scrolls
+
+The glowing figure should slowly dissolve into molecular particles.
+
+The particles should flow naturally into the next section.
+
+CONTINUOUS PARTICLE SYSTEM
+
+This is one of the most important requirements.
+
+The entire website should feel alive.
+
+Particles should
+
+connect
+
+disconnect
+
+reconnect
+
+flow
+
+merge
+
+split
+
+create molecular structures
+
+appear
+
+disappear
+
+throughout the scrolling experience.
+
+No section should feel isolated.
+
+Everything should feel like one continuous ecosystem.
+
+BACKGROUND
+
+The entire page should use one continuous background.
+
+No visible section breaks.
+
+No color changes.
+
+No white spaces.
+
+Only subtle depth variations.
+
+BUILT FOR ALL OF YOU
+
+Instead of static cards
+
+Create an immersive carousel inspired by the Art Museum reference.
+
+The cards should
+
+float
+
+overlap
+
+have depth
+
+use perspective
+
+glass morphism
+
+soft reflections
+
+blurred side cards
+
+smooth horizontal motion
+
+Each card should highlight
+
+Dual Personalities
+
+Authentic Networking
+
+Communities
+
+Professional Identity
+
+Personal Identity
+
+Creator Economy
+
+Career Growth
+
+Meaningful Relationships
+
+When switching
+
+The center card enlarges.
+
+Side cards blur.
+
+Everything animates smoothly.
+
+WHAT IS NEWHUB
+
+Create another premium carousel.
+
+Three primary cards
+
+Personal
+
+Professional
+
+Communities
+
+Instead of static cards
+
+They should slide
+
+expand
+
+rotate slightly
+
+and animate in 3D space.
+
+TAKE UP A QUIZ
+
+Rename
+
+How It Works
+
+to
+
+Take Up A Quiz
+
+This section represents the onboarding journey.
+
+The flow should be
+
+Intro
+
+↓
+
+Quiz
+
+↓
+
+Chapter 1
+
+↓
+
+Chapter 2
+
+↓
+
+Get Early Access
+
+Use glowing animated connectors between cards.
+
+The connector lines should resemble molecular pathways.
+
+Each step lights up sequentially.
+
+The existing quiz functionality should remain unchanged.
+
+GET EARLY ACCESS
+
+IMPORTANT
+
+Do NOT place Get Early Access anywhere else.
+
+It should appear ONLY after Chapter 2.
+
+Remove any duplicate Early Access CTA elsewhere.
+
+WHY NEWHUB
+
+Create another immersive carousel.
+
+Cards should showcase
+
+Meaningful Connections
+
+Privacy
+
+Everything in One Place
+
+Growth
+
+Identity
+
+Each card should have
+
+3D visuals
+
+animated lighting
+
+glass effects
+
+depth
+
+hover animations
+
+LOGIN / SIGN IN
+
+When clicking Login / Sign In
+
+Open a completely new full-screen experience.
+
+Use the attached login reference.
+
+Maintain the same layout.
+
+Replace the text with
+
+Welcome Back
+
+CONNECT
+
+MEANINGFULLY
+
+Subheading
+
+Sign in to continue building meaningful personal and professional connections on NewHub.
+
+Keep
+
+Glass morphism
+
+Floating 3D blobs
+
+Gradient typography
+
+Dark premium theme
+
+Large typography
+
+Social login buttons
+
+Smooth entrance animation
+
+Do not implement backend authentication yet.
+
+Frontend only.
+
+MENU
+
+Sticky navigation
+
+Transparent
+
+Glass morphism
+
+Menu items
+
+About
+
+Feedback
+
+Sign / Login
+
+About scrolls to hero.
+
+Feedback opens the existing feedback experience.
+
+Sign / Login opens the login page.
+
+SCROLL EXPERIENCE
+
+Every scroll should feel cinematic.
+
+Implement
+
+Parallax
+
+Fade
+
+Scale
+
+Rotation
+
+Particle transitions
+
+Depth
+
+Perspective
+
+Never abruptly switch between sections.
+
+ANIMATIONS
+
+Use
+
+GSAP
+
+ScrollTrigger
+
+Lenis
+
+Framer Motion
+
+Motion One
+
+CSS animations
+
+Hover animations
+
+Magnetic buttons
+
+Micro interactions
+
+Soft glowing transitions
+
+Everything should feel alive.
+
+3D GRAPHICS
+
+Replace static blobs with animated liquid forms.
+
+They should
+
+breathe
+
+morph
+
+stretch
+
+react to scrolling
+
+emit soft glow
+
+move organically
+
+No static decorative elements.
+
+Everything should feel dynamic.
+
+PERFORMANCE
+
+Despite all animations
+
+Maintain
+
+60 FPS
+
+Lazy loading
+
+GPU acceleration
+
+Responsive rendering
+
+Mobile optimization
+
+RESPONSIVENESS
+
+Perfect experience on
+
+Desktop
+
+Laptop
+
+Tablet
+
+Mobile
+
+No design compromises.
+
+PRESERVE EXISTING FUNCTIONALITY
+
+Do NOT modify
+
+Quiz logic
+
+Feedback flow
+
+Chapter structure
+
+Navigation logic
+
+Only redesign the UI and user experience.
+
+FINAL EXPERIENCE
+
+The website should not feel like a traditional landing page.
+
+It should feel like an interactive digital experience where every element is connected through particles, molecular structures, flowing motion, and immersive storytelling.
+
+The user should experience a continuous journey from the animated NewHub logo, through the hero section, into dynamic carousels, the onboarding quiz, and finally to the Get Early Access screen, with no visual interruptions or disconnected sections.
+
+Build this as a premium, production-ready experience with clean, modular, maintainable code, prioritizing smooth interactions, accessibility, responsiveness, and performance while preserving the existing functionality.
