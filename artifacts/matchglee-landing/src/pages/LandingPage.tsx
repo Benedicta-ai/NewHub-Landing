@@ -12,15 +12,36 @@ export default function LandingPage() {
   const [phase, setPhase] = useState<Phase>("splash");
   const [showLogin, setShowLogin] = useState(false);
 
-  if (phase === "splash") return <SplashScreen onFinish={() => setPhase("main")} />;
+  if (phase === "splash") {
+    return <SplashScreen onFinish={() => setPhase("main")} />;
+  }
 
   return (
     <>
       {showLogin && <LoginScreen onClose={() => setShowLogin(false)} />}
-      {phase === "main" && <MainPage onStartQuiz={() => setPhase("quiz")} onLogin={() => setShowLogin(true)} />}
-      {phase === "quiz" && <QuizPhase onComplete={() => setPhase("cinematic")} />}
-      {phase === "cinematic" && <CinematicIntro onComplete={() => setPhase("getAccess")} />}
-      {phase === "getAccess" && <GetEarlyAccessPhase onDone={() => setPhase("main")} />}
+
+      {phase === "main" && (
+        <MainPage
+          onStartQuiz={() => setPhase("quiz")}
+          onGetAccess={() => setPhase("getAccess")}
+          onLogin={() => setShowLogin(true)}
+        />
+      )}
+
+      {phase === "quiz" && (
+        <QuizPhase
+          onComplete={() => setPhase("cinematic")}
+          onExit={() => setPhase("main")}
+        />
+      )}
+
+      {phase === "cinematic" && (
+        <CinematicIntro onComplete={() => setPhase("getAccess")} />
+      )}
+
+      {phase === "getAccess" && (
+        <GetEarlyAccessPhase onDone={() => setPhase("main")} />
+      )}
     </>
   );
 }
