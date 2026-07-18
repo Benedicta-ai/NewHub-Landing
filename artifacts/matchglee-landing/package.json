@@ -75,6 +75,8 @@
     "zod": "catalog:"
   },
   "dependencies": {
-    "appwrite": "^26.2.0"
+    "appwrite": "^26.2.0",
+    "gsap": "^3.15.0",
+    "motion": "^12.42.2"
   }
 }
