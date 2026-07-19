@@ -1,15 +1,21 @@
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+} from "framer-motion";
 
 import heroCrowd from "@/assets/hero-crowd.png";
 
 import AnimatedHeadline from "./AnimatedHeadline";
+import HeroSplashCursor from "./HeroSplashCursor";
 import ScrollHint from "./ScrollHint";
 
 interface HeroSectionProps {
   onGetAccess: () => void;
 }
 
-export default function HeroSection({ onGetAccess }: HeroSectionProps) {
+export default function HeroSection({
+  onGetAccess,
+}: HeroSectionProps) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -206,7 +212,6 @@ export default function HeroSection({ onGetAccess }: HeroSectionProps) {
             h-[46%]
           "
         >
-          {/* Light theme */}
           <div
             className="
               absolute
@@ -230,7 +235,6 @@ export default function HeroSection({ onGetAccess }: HeroSectionProps) {
             }}
           />
 
-          {/* Dark theme */}
           <div
             className="
               absolute
@@ -255,7 +259,6 @@ export default function HeroSection({ onGetAccess }: HeroSectionProps) {
             }}
           />
 
-          {/* Shared purple bloom */}
           <div
             className="
               absolute
@@ -272,6 +275,9 @@ export default function HeroSection({ onGetAccess }: HeroSectionProps) {
           />
         </div>
       </div>
+
+      {/* Hero-only liquid cursor */}
+      <HeroSplashCursor />
 
       {/* Hero content */}
       <div
@@ -303,7 +309,6 @@ export default function HeroSection({ onGetAccess }: HeroSectionProps) {
             xl:col-span-5
           "
         >
-          {/* Headline readability glow */}
           <div
             aria-hidden="true"
             className="
@@ -322,7 +327,9 @@ export default function HeroSection({ onGetAccess }: HeroSectionProps) {
             "
           />
 
-          <AnimatedHeadline onGetAccess={onGetAccess} />
+          <AnimatedHeadline
+            onGetAccess={onGetAccess}
+          />
         </div>
 
         <div
