@@ -1,4 +1,13 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
+
 import {
   ArrowRight,
   BookOpen,
@@ -7,7 +16,11 @@ import {
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
-import { BRAND_GRADIENT, BRAND_GRADIENT_TEXT } from "@/lib/brand";
+
+import {
+  BRAND_GRADIENT,
+  BRAND_GRADIENT_TEXT,
+} from "@/lib/brand";
 
 interface QuizStep {
   number: string;
@@ -32,8 +45,7 @@ const steps: QuizStep[] = [
   {
     number: "03",
     title: "Chapter 1",
-    description:
-      "Explore your identity.",
+    description: "Explore your identity.",
     icon: BookOpen,
   },
   {
@@ -45,11 +57,212 @@ const steps: QuizStep[] = [
   {
     number: "05",
     title: "Get Early Access",
-    description:
-      "Join before launch.",
+    description: "Join before launch.",
     icon: CheckCircle2,
   },
 ];
+
+interface QuizStackCardProps {
+  step: QuizStep;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+  reduceMotion: boolean;
+}
+
+function QuizStackCard({
+  step,
+  index,
+  total,
+  progress,
+  reduceMotion,
+}: QuizStackCardProps) {
+  const Icon = step.icon;
+
+  /*
+    Each card enters during its own part of the scroll.
+
+    Card 1 is already visible when the sticky scene begins.
+    Later cards travel upward into the same stack.
+  */
+  const start =
+    index === 0
+      ? 0
+      : 0.08 + index * 0.155;
+
+  const end =
+    index === 0
+      ? 0.01
+      : start + 0.13;
+
+  const initialY =
+    index === 0
+      ? 0
+      : 330 + index * 24;
+
+  const stackedY = index * 14;
+
+  const finalScale =
+    1 - (total - 1 - index) * 0.006;
+
+  const y = useTransform(
+    progress,
+    [start, end],
+    [initialY, stackedY],
+  );
+
+  const opacity = useTransform(
+    progress,
+    [
+      Math.max(0, start - 0.025),
+      Math.max(0.01, start + 0.025),
+    ],
+    [
+      index === 0 ? 1 : 0,
+      1,
+    ],
+  );
+
+  const scale = useTransform(
+    progress,
+    [start, end],
+    [
+      index === 0 ? finalScale : 0.985,
+      finalScale,
+    ],
+  );
+
+  return (
+    <motion.article
+      style={
+        reduceMotion
+          ? {
+              y: stackedY,
+              opacity: 1,
+              scale: finalScale,
+              zIndex: index + 10,
+            }
+          : {
+              y,
+              opacity,
+              scale,
+              zIndex: index + 10,
+            }
+      }
+      className="
+        absolute
+        inset-x-0
+        top-0
+        mx-auto
+        max-w-[860px]
+        overflow-hidden
+        rounded-[24px]
+        border
+        border-[#7132C8]/15
+        bg-white/95
+        shadow-[0_18px_55px_rgba(78,48,140,0.12)]
+        will-change-transform
+        dark:border-white/10
+        dark:bg-[#120923]/95
+        dark:shadow-[0_20px_60px_rgba(0,0,0,0.34)]
+      "
+    >
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          inset-x-0
+          top-0
+          h-px
+          bg-gradient-to-r
+          from-transparent
+          via-[#F0199A]/55
+          to-transparent
+        "
+      />
+
+      <div
+        className="
+          relative
+          z-10
+          flex
+          min-h-[12.5rem]
+          flex-col
+          justify-center
+          gap-6
+          p-6
+          sm:flex-row
+          sm:items-center
+          sm:justify-between
+          sm:p-8
+        "
+      >
+        <div className="flex items-center gap-5">
+          <div
+            className={`
+              flex
+              h-12
+              w-12
+              shrink-0
+              items-center
+              justify-center
+              rounded-2xl
+              text-white
+              shadow-[0_10px_28px_rgba(113,50,200,0.24)]
+              ${BRAND_GRADIENT}
+            `}
+          >
+            <Icon className="h-5 w-5" />
+          </div>
+
+          <div>
+            <span
+              className="
+                text-[10px]
+                font-black
+                uppercase
+                tracking-[0.22em]
+                text-[#817b91]
+                dark:text-white/35
+              "
+            >
+              Step {step.number}
+            </span>
+
+            <h3
+              className="
+                mt-2
+                text-2xl
+                font-black
+                tracking-[-0.04em]
+                text-[#17152a]
+                dark:text-white
+                sm:text-3xl
+              "
+            >
+              {step.title}
+            </h3>
+          </div>
+        </div>
+
+        <p
+          className="
+            max-w-[280px]
+            text-sm
+            font-medium
+            leading-6
+            text-[#6d6a80]
+            dark:text-white/45
+            sm:text-right
+          "
+        >
+          {step.description}
+        </p>
+      </div>
+    </motion.article>
+  );
+}
 
 interface TakeUpAQuizSectionProps {
   onStart: () => void;
@@ -58,7 +271,20 @@ interface TakeUpAQuizSectionProps {
 export default function TakeUpAQuizSection({
   onStart,
 }: TakeUpAQuizSectionProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = Boolean(
+    useReducedMotion(),
+  );
+
+  const stageRef =
+    useRef<HTMLDivElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: stageRef,
+    offset: [
+      "start start",
+      "end end",
+    ],
+  });
 
   return (
     <section
@@ -66,7 +292,6 @@ export default function TakeUpAQuizSection({
       className="
         relative
         isolate
-        overflow-hidden
         bg-transparent
         px-5
         py-24
@@ -76,402 +301,245 @@ export default function TakeUpAQuizSection({
         lg:py-36
       "
     >
-      {/* Background lighting */}
+      {/* Decorative background lighting */}
       <div
         aria-hidden="true"
         className="
           pointer-events-none
           absolute
-          left-1/2
-          top-1/2
-          h-[620px]
-          w-[min(1050px,115vw)]
-          -translate-x-1/2
-          -translate-y-1/2
-          rounded-full
-          bg-[#7132C8]/10
-          blur-[175px]
-          dark:bg-[#7132C8]/[0.07]
+          inset-0
+          overflow-hidden
         "
-      />
-
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -left-36
-          top-[15%]
-          h-80
-          w-80
-          rounded-full
-          bg-[#F0199A]/10
-          blur-[125px]
-          dark:bg-[#F0199A]/[0.06]
-        "
-      />
-
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -right-32
-          bottom-[5%]
-          h-80
-          w-80
-          rounded-full
-          bg-blue-400/10
-          blur-[125px]
-          dark:bg-blue-500/[0.06]
-        "
-      />
-
-      <div className="relative z-10 mx-auto max-w-[1240px]">
-        {/* Heading */}
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 24,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.45,
-          }}
-          transition={{
-            duration: 0.75,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+      >
+        <div
           className="
-            mx-auto
-            mb-16
-            max-w-3xl
-            text-center
-            sm:mb-20
+            absolute
+            left-1/2
+            top-[42%]
+            h-[700px]
+            w-[min(1050px,115vw)]
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+            bg-[#7132C8]/10
+            blur-[175px]
+            dark:bg-[#7132C8]/[0.07]
           "
-        >
-          <div
-            className="
-              mb-5
-              inline-flex
-              items-center
-              gap-2
-              rounded-full
-              border
-              border-[#7132C8]/15
-              bg-white/65
-              px-5
-              py-2.5
-              shadow-[0_10px_35px_rgba(78,48,140,0.08)]
-              backdrop-blur-xl
-              dark:border-white/10
-              dark:bg-white/[0.035]
-              dark:shadow-none
-            "
-          >
-            <Sparkles className="h-3.5 w-3.5 text-[#F0199A]" />
+        />
 
-            <span
-              className="
-                text-[10px]
-                font-bold
-                uppercase
-                tracking-[0.28em]
-                text-[#746f88]
-                dark:text-white/45
-                sm:text-[11px]
-              "
-            >
-              Take up a quiz
-            </span>
-          </div>
+        <div
+          className="
+            absolute
+            -left-36
+            top-[15%]
+            h-80
+            w-80
+            rounded-full
+            bg-[#F0199A]/10
+            blur-[125px]
+            dark:bg-[#F0199A]/[0.06]
+          "
+        />
 
-          <h2
-            className="
-              text-[34px]
-              font-black
-              leading-tight
-              tracking-[-0.05em]
-              text-[#17152a]
-              dark:text-white
-              sm:text-[43px]
-              md:text-[52px]
-            "
-          >
-            A journey, <span className={BRAND_GRADIENT_TEXT}>not a form.</span>
-          </h2>
+        <div
+          className="
+            absolute
+            -right-32
+            bottom-[5%]
+            h-80
+            w-80
+            rounded-full
+            bg-blue-400/10
+            blur-[125px]
+            dark:bg-blue-500/[0.06]
+          "
+        />
+      </div>
 
-          <p
-            className="
-              mx-auto
-              mt-5
-              max-w-2xl
-              text-sm
-              leading-7
-              text-[#6d6a80]
-              dark:text-white/48
-              sm:text-base
-            "
-          >
-            Two chapters. One clearer picture.
-          </p>
-        </motion.div>
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          max-w-[1080px]
+        "
+      >
+        {/*
+          One continuous sticky scene.
 
-        {/* Journey container */}
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 35,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.12,
-          }}
-          transition={{
-            duration: 0.8,
-            delay: 0.08,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          The title and cards remain inside this same
+          container, so their distance cannot change.
+
+          When this stage ends, the complete scene
+          scrolls upward as one unit.
+        */}
+        <div
+          ref={stageRef}
           className="
             relative
-            overflow-hidden
-            rounded-[34px]
-            border
-            border-[#7132C8]/15
-            bg-white/60
-            px-5
-            py-10
-            shadow-[0_28px_90px_rgba(78,48,140,0.11)]
-            backdrop-blur-2xl
-            dark:border-white/10
-            dark:bg-white/[0.035]
-            dark:shadow-[0_28px_90px_rgba(0,0,0,0.28)]
-            sm:px-8
-            sm:py-12
-            lg:px-10
+            h-[315vh]
+            sm:h-[335vh]
           "
         >
           <div
-            aria-hidden="true"
             className="
-              pointer-events-none
-              absolute
-              left-1/2
-              top-0
-              h-52
-              w-[75%]
-              -translate-x-1/2
-              bg-gradient-to-b
-              from-[#7132C8]/10
-              to-transparent
-              blur-[65px]
-              dark:from-[#7132C8]/[0.08]
-            "
-          />
-
-          {/* Desktop timeline connector */}
-          <div
-            aria-hidden="true"
-            className="
-              absolute
-              left-[10%]
-              right-[10%]
-              top-[83px]
-              hidden
-              h-px
-              bg-gradient-to-r
-              from-[#F0199A]/35
-              via-[#7132C8]/45
-              to-blue-500/35
-              sm:block
-            "
-          />
-
-          <div
-            className="
-              relative
-              grid
-              grid-cols-1
-              gap-5
-              sm:grid-cols-5
-              sm:gap-3
-              lg:gap-5
+              sticky
+              top-[70px]
+              flex
+              h-[calc(100vh-70px)]
+              w-full
+              flex-col
+              items-center
+              justify-center
+              sm:top-[76px]
+              sm:h-[calc(100vh-76px)]
+              lg:top-[82px]
+              lg:h-[calc(100vh-82px)]
             "
           >
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              const isLast = index === steps.length - 1;
+            <div className="w-full">
+              {/* Heading */}
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 24,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.45,
+                }}
+                transition={{
+                  duration:
+                    reduceMotion ? 0 : 0.75,
 
-              return (
-                <motion.article
-                  key={step.number}
-                  initial={
-                    reduceMotion
-                      ? {
-                          opacity: 0,
-                        }
-                      : {
-                          opacity: 0,
-                          y: 35,
-                          scale: 0.94,
-                        }
-                  }
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.3,
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    delay: index * 0.1,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="
+                  mx-auto
+                  max-w-3xl
+                  text-center
+                "
+              >
+                <div
                   className="
-                    relative
-                    flex
-                    min-h-[145px]
-                    items-start
-                    gap-4
-                    rounded-[24px]
+                    mb-5
+                    inline-flex
+                    items-center
+                    gap-2
+                    rounded-full
                     border
-                    border-[#7132C8]/10
-                    bg-white/55
-                    p-4
-                    shadow-[0_12px_38px_rgba(78,48,140,0.07)]
+                    border-[#7132C8]/15
+                    bg-white/65
+                    px-5
+                    py-2.5
+                    shadow-[0_10px_35px_rgba(78,48,140,0.08)]
                     backdrop-blur-xl
-                    transition-all
-                    duration-300
-                    hover:-translate-y-1
-                    hover:border-[#7132C8]/25
-                    hover:bg-white/80
-                    dark:border-white/[0.07]
-                    dark:bg-white/[0.025]
+                    dark:border-white/10
+                    dark:bg-white/[0.035]
                     dark:shadow-none
-                    dark:hover:border-white/15
-                    dark:hover:bg-white/[0.05]
-                    sm:min-h-0
-                    sm:flex-col
-                    sm:items-center
-                    sm:border-0
-                    sm:bg-transparent
-                    sm:p-0
-                    sm:text-center
-                    sm:shadow-none
-                    sm:backdrop-blur-none
-                    sm:hover:translate-y-0
-                    sm:hover:bg-transparent
                   "
                 >
-                  {/* Mobile vertical connector */}
-                  {!isLast && (
-                    <div
-                      aria-hidden="true"
-                      className="
-                        absolute
-                        left-[35px]
-                        top-[66px]
-                        h-[calc(100%+20px)]
-                        w-px
-                        bg-gradient-to-b
-                        from-[#7132C8]/40
-                        to-[#F0199A]/15
-                        sm:hidden
-                      "
-                    />
-                  )}
+                  <Sparkles
+                    className="
+                      h-3.5
+                      w-3.5
+                      text-[#F0199A]
+                    "
+                  />
 
-                  <div
-                    className={`
-                      relative
-                      z-10
-                      flex
-                      h-14
-                      w-14
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-full
-                      text-white
-                      shadow-[0_12px_30px_rgba(113,50,200,0.28)]
-                      ${BRAND_GRADIENT}
-                      sm:h-16
-                      sm:w-16
-                    `}
+                  <span
+                    className="
+                      text-[10px]
+                      font-bold
+                      uppercase
+                      tracking-[0.28em]
+                      text-[#746f88]
+                      dark:text-white/45
+                      sm:text-[11px]
+                    "
                   >
-                    <Icon className="h-5 w-5" />
+                    Take up a quiz
+                  </span>
+                </div>
 
-                    <span
-                      className="
-                        absolute
-                        -right-1
-                        -top-1
-                        flex
-                        h-6
-                        min-w-6
-                        items-center
-                        justify-center
-                        rounded-full
-                        border
-                        border-white/30
-                        bg-[#171022]
-                        px-1
-                        text-[8px]
-                        font-black
-                        tracking-[0.08em]
-                        text-white
-                        shadow-lg
-                      "
-                    >
-                      {step.number}
-                    </span>
-                  </div>
+                <h2
+                  className="
+                    text-[34px]
+                    font-black
+                    leading-tight
+                    tracking-[-0.05em]
+                    text-[#17152a]
+                    dark:text-white
+                    sm:text-[43px]
+                    md:text-[52px]
+                  "
+                >
+                  A journey,{" "}
 
-                  <div className="relative pt-1 sm:pt-0">
-                    <h3
-                      className="
-                        text-base
-                        font-black
-                        tracking-[-0.025em]
-                        text-[#17152a]
-                        dark:text-white
-                        sm:mt-5
-                      "
-                    >
-                      {step.title}
-                    </h3>
+                  <span
+                    className={
+                      BRAND_GRADIENT_TEXT
+                    }
+                  >
+                    not a form.
+                  </span>
+                </h2>
 
-                    <p
-                      className="
-                        mt-2
-                        text-xs
-                        leading-6
-                        text-[#777386]
-                        dark:text-white/40
-                        sm:px-1
-                      "
-                    >
-                      {step.description}
-                    </p>
-                  </div>
-                </motion.article>
-              );
-            })}
+                <p
+                  className="
+                    mx-auto
+                    mt-5
+                    max-w-2xl
+                    text-sm
+                    leading-7
+                    text-[#6d6a80]
+                    dark:text-white/48
+                    sm:text-base
+                  "
+                >
+                  Two chapters. One clearer picture.
+                </p>
+              </motion.div>
+
+              {/*
+                Fixed title-to-card gap.
+
+                Because both elements are inside the same
+                sticky scene, this gap remains unchanged
+                during stacking and during the final exit.
+              */}
+              <div
+                className="
+                  relative
+                  mx-auto
+                  mt-10
+                  h-[13rem]
+                  w-full
+                  sm:mt-12
+                "
+              >
+                {steps.map(
+                  (step, index) => (
+                    <QuizStackCard
+                      key={step.number}
+                      step={step}
+                      index={index}
+                      total={steps.length}
+                      progress={scrollYProgress}
+                      reduceMotion={reduceMotion}
+                    />
+                  ),
+                )}
+              </div>
+            </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* CTA */}
+        {/* CTA follows immediately after the scene */}
         <motion.div
           initial={{
             opacity: 0,
@@ -483,13 +551,19 @@ export default function TakeUpAQuizSection({
           }}
           viewport={{
             once: true,
-            amount: 0.8,
+            amount: 0.6,
           }}
           transition={{
-            duration: 0.65,
-            delay: 0.25,
+            duration:
+              reduceMotion ? 0 : 0.65,
           }}
-          className="mt-12 text-center"
+          className="
+            relative
+            z-50
+            mt-8
+            text-center
+            sm:mt-10
+          "
         >
           <button
             type="button"
@@ -520,6 +594,7 @@ export default function TakeUpAQuizSection({
             `}
           >
             Start Quiz
+
             <ArrowRight
               className="
                 h-4

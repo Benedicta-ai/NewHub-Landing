@@ -25,7 +25,7 @@ export default function MainPage({
         theme-transition
         relative
         min-h-screen
-        overflow-x-hidden
+        overflow-x-clip
       "
     >
       {/* Continuous ambient page lighting */}
