@@ -76,11 +76,11 @@ export default function WhatIsNewHubSection() {
           </div>
 
           <h2 className="text-[34px] font-black leading-tight tracking-[-0.05em] text-[#17152a] dark:text-white sm:text-[43px] md:text-[52px]">
-            Three sides. <span className={BRAND_GRADIENT_TEXT}>One complete you.</span>
+            One profile. <span className={BRAND_GRADIENT_TEXT}>Three dimensions.</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#6d6a80] dark:text-white/48 sm:text-base">
-            Explore personal expression, professional growth and communities in one free-moving visual space.
+            Personal. Professional. Community.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
@@ -167,7 +167,7 @@ export default function WhatIsNewHubSection() {
       </motion.div>
 
       <p className="relative z-10 mx-auto mt-2 max-w-2xl px-5 text-center text-xs leading-6 text-[#8b879d] dark:text-white/30 sm:px-7 sm:text-sm lg:px-10">
-        Click the canvas to activate it. Use “Release scroll” or press Esc to return to normal page scrolling.
+        Click to explore. Press Esc to exit.
       </p>
     </section>
   );

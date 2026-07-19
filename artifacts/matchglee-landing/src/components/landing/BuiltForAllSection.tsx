@@ -542,7 +542,7 @@ export default function BuiltForAllSection() {
                 sm:text-[11px]
               "
             >
-              Built for all of you
+              Built for all
             </p>
 
             <span
@@ -571,7 +571,7 @@ export default function BuiltForAllSection() {
               lg:text-5xl
             "
           >
-            One space for{" "}
+            Every side of you.{" "}
             <span
               className="
                 bg-gradient-to-r
@@ -582,9 +582,8 @@ export default function BuiltForAllSection() {
                 text-transparent
               "
             >
-              every side
-            </span>{" "}
-            of you.
+              One space.
+            </span>
           </h2>
 
           <p
@@ -599,9 +598,7 @@ export default function BuiltForAllSection() {
               sm:text-base
             "
           >
-            Build your career, express your personality and create relationships
-            that feel genuine—all without splitting yourself across different
-            platforms.
+            Personal. Professional. Social.
           </p>
         </motion.div>
 
@@ -617,7 +614,7 @@ export default function BuiltForAllSection() {
           <FeatureCard
             icon={HeartHandshake}
             title="Meaningful Relationships"
-            description="Create deeper relationships built around shared values, interests and real conversations."
+            description="Connections that feel real."
             image={meaningfulRelationshipsImage}
             label="Relationships"
             initialX={-60}
@@ -627,7 +624,7 @@ export default function BuiltForAllSection() {
           <FeatureCard
             icon={Sparkles}
             title="Dual Personalities"
-            description="Show your professional ambition and your personal identity together. NewHub gives both sides of you equal space without forcing you to choose."
+            description="Personal and professional, together."
             image={dualPersonalitiesImage}
             label="Your complete identity"
             featured
@@ -638,7 +635,7 @@ export default function BuiltForAllSection() {
           <FeatureCard
             icon={Network}
             title="Authentic Networking"
-            description="Build genuine connections without transactional conversations or unnecessary professional pressure."
+            description="Connect without the pressure."
             image={authenticNetworkingImage}
             label="Connections"
             initialX={60}
@@ -674,7 +671,7 @@ export default function BuiltForAllSection() {
             sm:text-sm
           "
         >
-          Personal, professional and social growth—designed to exist together.
+          Every side, together.
         </motion.p>
       </div>
     </section>

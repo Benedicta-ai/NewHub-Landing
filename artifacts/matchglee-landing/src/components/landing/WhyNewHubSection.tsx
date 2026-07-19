@@ -148,13 +148,12 @@ export default function WhyNewHubSection() {
           </div>
 
           <h2 className="text-[34px] font-black leading-tight tracking-[-0.05em] text-[#17152a] dark:text-white sm:text-[43px] md:text-[52px]">
-            Designed for{" "}
-            <span className={BRAND_GRADIENT_TEXT}>meaningful growth.</span>
+            Built around{" "}
+            <span className={BRAND_GRADIENT_TEXT}>you.</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#6d6a80] dark:text-white/48 sm:text-base">
-            NewHub focuses on the things that matter most: control over your
-            identity, genuine relationships and one connected experience.
+            Private. Meaningful. Connected.
           </p>
         </motion.div>
 
@@ -184,8 +183,7 @@ export default function WhyNewHubSection() {
           className="mx-auto mt-12 max-w-3xl rounded-[24px] border border-[#7132C8]/15 bg-white/55 px-6 py-5 text-center shadow-[0_16px_50px_rgba(78,48,140,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.035] dark:shadow-none sm:px-8"
         >
           <p className="text-sm leading-7 text-[#6f6b81] dark:text-white/42">
-            A platform should help you grow without asking you to compromise who
-            you are.
+            Grow without compromise.
           </p>
         </motion.div>
       </div>

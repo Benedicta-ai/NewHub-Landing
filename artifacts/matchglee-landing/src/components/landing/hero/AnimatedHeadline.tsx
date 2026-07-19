@@ -3,7 +3,7 @@ import CTAButton from "./CTAButton";
 import useMousePosition from "./hooks/useMousePosition";
 import useViewport from "./hooks/useViewport";
 
-const subtitle = "Where Professional Meets Personal — Seamlessly.";
+const subtitle = "Personal. Professional. One profile.";
 
 interface AnimatedHeadlineProps {
   onGetAccess: () => void;
@@ -45,7 +45,7 @@ export default function AnimatedHeadline({
         max-w-[720px]
       "
     >
-      <motion.p
+      <motion.div
         initial={
           reduceMotion
             ? false
@@ -65,18 +65,50 @@ export default function AnimatedHeadline({
           ease: [0.22, 1, 0.36, 1],
         }}
         className="
-          mb-5
-          text-[13px]
-          font-medium
-          uppercase
-          tracking-[0.32em]
-          text-white/65
-          sm:text-sm
-          md:text-base
+          mb-6
+          inline-flex
+          items-center
+          gap-3
+          rounded-full
+          border
+          border-[#7132C8]/15
+          bg-white/70
+          px-4
+          py-2.5
+          shadow-[0_10px_30px_rgba(78,48,140,0.08)]
+          backdrop-blur-xl
+          dark:border-white/10
+          dark:bg-black/20
+          dark:shadow-none
         "
       >
-        They blend in.
-      </motion.p>
+        <span
+          aria-hidden="true"
+          className="
+            h-2
+            w-2
+            rounded-full
+            bg-gradient-to-br
+            from-[#F0199A]
+            to-[#7132C8]
+            shadow-[0_0_14px_rgba(240,25,154,0.7)]
+          "
+        />
+
+        <p
+          className="
+            text-[10px]
+            font-bold
+            uppercase
+            tracking-[0.28em]
+            text-[#6d687c]
+            dark:text-white/60
+            sm:text-[11px]
+          "
+        >
+          They blend in.
+        </p>
+      </motion.div>
 
       <motion.h1
         initial={
@@ -100,11 +132,11 @@ export default function AnimatedHeadline({
         }}
         className="
           max-w-full
+          text-[44px]
           font-black
           uppercase
           leading-[0.94]
           tracking-[-0.055em]
-          text-[44px]
           min-[380px]:text-[48px]
           sm:text-[50px]
           md:text-[56px]
@@ -120,14 +152,19 @@ export default function AnimatedHeadline({
             drop-shadow-[0_8px_28px_rgba(240,25,154,0.14)]
           "
         >
-          {/* Mobile */}
           <span className="block sm:hidden">
             <span className="block">One stands</span>
+
             <span className="block">out.</span>
           </span>
 
-          {/* Desktop */}
-          <span className="hidden whitespace-nowrap sm:inline">
+          <span
+            className="
+              hidden
+              whitespace-nowrap
+              sm:inline
+            "
+          >
             One stands out.
           </span>
         </span>
@@ -153,16 +190,48 @@ export default function AnimatedHeadline({
         }}
         className="
           mt-6
-          max-w-[430px]
+          max-w-[470px]
           text-base
+          font-medium
           leading-7
-          text-white/80
+          text-[#4f4b60]
+          dark:text-white/80
           sm:text-lg
           sm:leading-8
           md:text-[20px]
         "
       >
         {subtitle}
+      </motion.p>
+
+      <motion.p
+        initial={
+          reduceMotion
+            ? false
+            : {
+                opacity: 0,
+                y: 18,
+              }
+        }
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.7,
+          delay: 0.48,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="
+          mt-4
+          max-w-[500px]
+          text-sm
+          leading-7
+          text-[#777286]
+          dark:text-white/42
+        "
+      >
+        Every side of you, together.
       </motion.p>
 
       <motion.div
@@ -182,7 +251,7 @@ export default function AnimatedHeadline({
         }}
         transition={{
           duration: 0.7,
-          delay: 0.55,
+          delay: 0.6,
           ease: [0.22, 1, 0.36, 1],
         }}
         className="mt-8 sm:mt-10"
