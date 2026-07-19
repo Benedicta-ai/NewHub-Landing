@@ -21,77 +21,144 @@ export default function MainPage({
   return (
     <main
       className="
+        theme-page
+        theme-transition
         relative
         min-h-screen
         overflow-x-hidden
-        bg-[#0A0118]
-        text-white
       "
     >
+      {/* Continuous ambient page lighting */}
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          fixed
+          inset-0
+          z-0
+          overflow-hidden
+        "
+      >
+        <div
+          className="
+            absolute
+            -left-[18rem]
+            top-[12%]
+            h-[42rem]
+            w-[42rem]
+            rounded-full
+            bg-[#F0199A]/10
+            blur-[150px]
+            transition-opacity
+            duration-500
+            dark:bg-[#F0199A]/[0.07]
+          "
+        />
+
+        <div
+          className="
+            absolute
+            -right-[18rem]
+            top-[30%]
+            h-[44rem]
+            w-[44rem]
+            rounded-full
+            bg-[#7132C8]/12
+            blur-[160px]
+            transition-opacity
+            duration-500
+            dark:bg-[#7132C8]/[0.09]
+          "
+        />
+
+        <div
+          className="
+            absolute
+            bottom-[-20rem]
+            left-[30%]
+            h-[42rem]
+            w-[42rem]
+            rounded-full
+            bg-blue-400/[0.08]
+            blur-[170px]
+            transition-opacity
+            duration-500
+            dark:bg-blue-500/[0.05]
+          "
+        />
+      </div>
+
       {/* Continuous molecule/network background */}
-      <ParticleBackground />
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          fixed
+          inset-0
+          z-[1]
+          transition-opacity
+          duration-500
+        "
+        style={{
+          opacity: "var(--particle-opacity)",
+        }}
+      >
+        <ParticleBackground />
+      </div>
 
       <div className="relative z-10">
-        <Navbar onFeedback={onStartQuiz} onLogin={onLogin} />
+        <Navbar
+          onFeedback={onStartQuiz}
+          onLogin={onLogin}
+        />
 
-        <HeroSection onGetAccess={onGetAccess} />
+        <HeroSection
+          onGetAccess={onGetAccess}
+        />
 
-        {/* One continuous transparent area after the hero */}
-        <div className="relative bg-transparent">
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              inset-x-0
-              top-0
-              z-0
-              h-40
-              bg-gradient-to-b
-              from-[#05070C]
-              via-[#0A0118]/70
-              to-transparent
-            "
-          />
-
+        {/* All remaining sections share one page atmosphere */}
+        <div
+          className="
+            theme-transition
+            relative
+            -mt-px
+          "
+        >
+          {/* Adaptive central glow */}
           <div
             aria-hidden="true"
             className="
               pointer-events-none
               absolute
               left-1/2
-              top-[20%]
+              top-[12%]
               z-0
               h-[800px]
-              w-[1000px]
+              w-[min(1000px,110vw)]
               -translate-x-1/2
               rounded-full
-              opacity-20
               blur-[180px]
             "
             style={{
               background:
-                "radial-gradient(circle, rgba(113,50,200,0.18) 0%, rgba(240,25,154,0.06) 44%, transparent 72%)",
+                "radial-gradient(circle, var(--glow-purple) 0%, var(--glow-pink) 44%, transparent 72%)",
             }}
           />
 
-          <div
-            className="
-              relative
-              z-10
-              [&>section]:!bg-transparent
-              [&>footer]:!bg-transparent
-            "
-          >
+          <div className="relative z-10">
             <BuiltForAllSection />
 
             <WhatIsNewHubSection />
 
-            <TakeUpAQuizSection onStart={onStartQuiz} />
+            <TakeUpAQuizSection
+              onStart={onStartQuiz}
+            />
 
             <WhyNewHubSection />
 
-            <JoinFooter onJoin={onGetAccess} />
+            <JoinFooter
+              onJoin={onGetAccess}
+            />
           </div>
         </div>
       </div>
