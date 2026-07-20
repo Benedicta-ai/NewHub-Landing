@@ -1,0 +1,75 @@
+.scroll-stack-scroller {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.scroll-stack-inner {
+  position: relative;
+  width: 100%;
+  padding-top: 1.5rem;
+}
+
+.scroll-stack-card {
+  position: sticky;
+
+  top: calc(
+    var(--scroll-stack-top-desktop, 300px) +
+    var(--scroll-stack-offset, 0px)
+  );
+
+  z-index: calc(
+    10 + var(--scroll-stack-index, 0)
+  );
+
+  width: 100%;
+
+  margin-bottom:
+    var(--scroll-stack-card-distance, 175px);
+
+  transform: none !important;
+  filter: none !important;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  transition:
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    background-color 300ms ease;
+}
+
+.scroll-stack-end {
+  width: 100%;
+
+  height:
+    var(--scroll-stack-end-distance, 180px);
+
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .scroll-stack-inner {
+    padding-top: 1rem;
+  }
+
+  .scroll-stack-card {
+    top: calc(
+      var(--scroll-stack-top-mobile, 280px) +
+      var(--scroll-stack-offset, 0px)
+    );
+
+    margin-bottom: 145px;
+  }
+
+  .scroll-stack-end {
+    height: 150px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-stack-card {
+    transition: none;
+  }
+}

@@ -1,0 +1,264 @@
+import { motion, useReducedMotion } from "framer-motion";
+import CTAButton from "./CTAButton";
+import useMousePosition from "./hooks/useMousePosition";
+import useViewport from "./hooks/useViewport";
+
+const subtitle = "Where Professional Meets Personal — Seamlessly.";
+
+interface AnimatedHeadlineProps {
+  onGetAccess: () => void;
+}
+
+export default function AnimatedHeadline({
+  onGetAccess,
+}: AnimatedHeadlineProps) {
+  const mouse = useMousePosition();
+  const { width, height } = useViewport();
+  const reduceMotion = useReducedMotion();
+
+  const enableParallax = !reduceMotion && width >= 1024;
+
+  const translateX = enableParallax
+    ? Math.max(-10, Math.min(10, (mouse.x - width / 2) * 0.008))
+    : 0;
+
+  const translateY = enableParallax
+    ? Math.max(-8, Math.min(8, (mouse.y - height / 2) * 0.008))
+    : 0;
+
+  return (
+    <motion.div
+      animate={{
+        x: translateX,
+        y: translateY,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 55,
+        damping: 22,
+        mass: 0.8,
+      }}
+      className="
+        relative
+        z-20
+        w-full
+        max-w-[720px]
+      "
+    >
+      <motion.div
+        initial={
+          reduceMotion
+            ? false
+            : {
+                opacity: 0,
+                y: 18,
+                filter: "blur(8px)",
+              }
+        }
+        animate={{
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+        }}
+        transition={{
+          duration: 0.7,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="
+          mb-6
+          inline-flex
+          items-center
+          gap-3
+          rounded-full
+          border
+          border-[#7132C8]/15
+          bg-white/70
+          px-4
+          py-2.5
+          shadow-[0_10px_30px_rgba(78,48,140,0.08)]
+          backdrop-blur-xl
+          dark:border-white/10
+          dark:bg-black/20
+          dark:shadow-none
+        "
+      >
+        <span
+          aria-hidden="true"
+          className="
+            h-2
+            w-2
+            rounded-full
+            bg-gradient-to-br
+            from-[#F0199A]
+            to-[#7132C8]
+            shadow-[0_0_14px_rgba(240,25,154,0.7)]
+          "
+        />
+
+        <p
+          className="
+            text-[10px]
+            font-bold
+            uppercase
+            tracking-[0.28em]
+            text-[#6d687c]
+            dark:text-white/60
+            sm:text-[11px]
+          "
+        >
+          They blend in.
+        </p>
+      </motion.div>
+
+      <motion.h1
+        initial={
+          reduceMotion
+            ? false
+            : {
+                opacity: 0,
+                y: 35,
+                filter: "blur(14px)",
+              }
+        }
+        animate={{
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+        }}
+        transition={{
+          duration: 0.9,
+          delay: 0.15,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="
+          max-w-full
+          text-[44px]
+          font-black
+          uppercase
+          leading-[0.94]
+          tracking-[-0.055em]
+          min-[380px]:text-[48px]
+          sm:text-[50px]
+          md:text-[56px]
+          lg:text-[58px]
+          xl:text-[64px]
+        "
+      >
+        <span
+          className="
+            bg-[linear-gradient(90deg,#ff7547_0%,#f0199a_52%,#8b5cf6_100%)]
+            bg-clip-text
+            text-transparent
+            drop-shadow-[0_8px_28px_rgba(240,25,154,0.14)]
+          "
+        >
+          <span className="block sm:hidden">
+            <span className="block">One stands</span>
+
+            <span className="block">out.</span>
+          </span>
+
+          <span
+            className="
+              hidden
+              whitespace-nowrap
+              sm:inline
+            "
+          >
+            One stands out.
+          </span>
+        </span>
+      </motion.h1>
+
+      <motion.p
+        initial={
+          reduceMotion
+            ? false
+            : {
+                opacity: 0,
+                y: 24,
+              }
+        }
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.75,
+          delay: 0.38,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="
+          mt-6
+          max-w-[470px]
+          text-base
+          font-medium
+          leading-7
+          text-[#4f4b60]
+          dark:text-white/80
+          sm:text-lg
+          sm:leading-8
+          md:text-[20px]
+        "
+      >
+        {subtitle}
+      </motion.p>
+
+      <motion.p
+        initial={
+          reduceMotion
+            ? false
+            : {
+                opacity: 0,
+                y: 18,
+              }
+        }
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.7,
+          delay: 0.48,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="
+          mt-4
+          max-w-[500px]
+          text-sm
+          leading-7
+          text-[#777286]
+          dark:text-white/42
+        "
+      >
+        Build your career, express your identity and discover meaningful
+        communities through one connected profile.
+      </motion.p>
+
+      <motion.div
+        initial={
+          reduceMotion
+            ? false
+            : {
+                opacity: 0,
+                y: 24,
+                scale: 0.97,
+              }
+        }
+        animate={{
+          opacity: 1,
+          y: 0,
+          scale: 1,
+        }}
+        transition={{
+          duration: 0.7,
+          delay: 0.6,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="mt-8 sm:mt-10"
+      >
+        <CTAButton onClick={onGetAccess} />
+      </motion.div>
+    </motion.div>
+  );
+}

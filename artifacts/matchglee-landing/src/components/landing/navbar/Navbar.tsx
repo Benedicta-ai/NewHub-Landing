@@ -1,4 +1,11 @@
 import { motion } from "framer-motion";
+import { Moon, Sun } from "lucide-react";
+
+import { useTheme } from "@/context/ThemeContext";
+
+import StaggeredMenu, {
+  type StaggeredMenuItem,
+} from "../effects/StaggeredMenu";
 import Logo from "./Logo";
 
 interface NavbarProps {
@@ -6,15 +13,94 @@ interface NavbarProps {
   onFeedback?: () => void;
 }
 
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className="
+        relative
+        h-[30px]
+        w-[52px]
+        shrink-0
+        rounded-full
+        border
+        border-[#7132C8]/15
+        bg-[#ece8f8]/90
+        shadow-inner
+        transition-all
+        duration-300
+        hover:border-[#7132C8]/30
+        dark:border-white/10
+        dark:bg-white/[0.07]
+      "
+    >
+      <motion.span
+        animate={{
+          x: isDark ? 22 : 2,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 430,
+          damping: 30,
+        }}
+        className="
+          absolute
+          left-0
+          top-[2px]
+          flex
+          h-6
+          w-6
+          items-center
+          justify-center
+          rounded-full
+          bg-white
+          text-[#7132C8]
+          shadow-[0_4px_14px_rgba(83,51,144,0.22)]
+          dark:bg-gradient-to-br
+          dark:from-[#F0199A]
+          dark:to-[#7132C8]
+          dark:text-white
+        "
+      >
+        {isDark ? (
+          <Moon className="h-3.5 w-3.5" />
+        ) : (
+          <Sun className="h-3.5 w-3.5" />
+        )}
+      </motion.span>
+    </button>
+  );
+}
+
 export default function Navbar({ onLogin, onFeedback }: NavbarProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      return;
+    }
+
+    window.scrollTo({
+      top: 0,
       behavior: "smooth",
-      block: "start",
     });
   };
 
-  const handleFeedback = () => {
+  const openFeedback = () => {
     if (onFeedback) {
       onFeedback();
       return;
@@ -23,8 +109,26 @@ export default function Navbar({ onLogin, onFeedback }: NavbarProps) {
     scrollToSection("feedback");
   };
 
+  const menuItems: StaggeredMenuItem[] = [
+    {
+      label: "About",
+      ariaLabel: "Go to the About section",
+      onSelect: () => scrollToSection("about"),
+    },
+    {
+      label: "Feedback",
+      ariaLabel: "Share feedback about NewHub",
+      onSelect: openFeedback,
+    },
+    {
+      label: "Sign / Login",
+      ariaLabel: "Open the NewHub login form",
+      onSelect: onLogin,
+    },
+  ];
+
   return (
-    <motion.header
+    <motion.div
       initial={{
         opacity: 0,
         y: -16,
@@ -37,148 +141,20 @@ export default function Navbar({ onLogin, onFeedback }: NavbarProps) {
         duration: 0.7,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="absolute inset-x-0 top-0 z-50"
     >
-      <div
-        className="
-          relative
-          mx-auto
-          flex
-          h-[76px]
-          w-full
-          max-w-[1500px]
-          items-center
-          justify-between
-          px-6
-          sm:px-8
-          lg:px-12
-        "
-      >
-        <button
-          type="button"
-          onClick={() => scrollToSection("about")}
-          aria-label="Go to NewHub homepage"
-          className="
-            flex
-            items-center
-            border-0
-            bg-transparent
-            p-0
-            transition-transform
-            duration-300
-            hover:scale-[1.03]
-          "
-        >
-          <Logo />
-        </button>
-
-        <nav
-          aria-label="Main navigation"
-          className="
-            absolute
-            left-1/2
-            top-1/2
-            hidden
-            h-[42px]
-            w-[320px]
-            -translate-x-1/2
-            -translate-y-1/2
-            items-center
-            rounded-full
-            border
-            border-white/[0.14]
-            bg-black/30
-            px-2
-            shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-            backdrop-blur-xl
-            sm:flex
-          "
-        >
-          <button
-            type="button"
-            onClick={() => scrollToSection("built-for-all")}
-            className="
-              flex
-              h-8
-              flex-1
-              items-center
-              justify-center
-              rounded-full
-              text-[11px]
-              font-medium
-              text-white/75
-              transition
-              hover:bg-white/[0.06]
-              hover:text-white
-            "
-          >
-            About
-          </button>
-
-          <button
-            type="button"
-            onClick={handleFeedback}
-            className="
-              flex
-              h-8
-              flex-1
-              items-center
-              justify-center
-              rounded-full
-              text-[11px]
-              font-medium
-              text-white/75
-              transition
-              hover:bg-white/[0.06]
-              hover:text-white
-            "
-          >
-            Feedback
-          </button>
-
-          <button
-            type="button"
-            onClick={onLogin}
-            className="
-              flex
-              h-8
-              flex-1
-              items-center
-              justify-center
-              whitespace-nowrap
-              rounded-full
-              text-[11px]
-              font-medium
-              text-white/85
-              transition
-              hover:bg-white/[0.06]
-              hover:text-white
-            "
-          >
-            Sign / Login
-          </button>
-        </nav>
-
-        <button
-          type="button"
-          onClick={onLogin}
-          className="
-            rounded-full
-            border
-            border-white/[0.14]
-            bg-black/30
-            px-4
-            py-2
-            text-[11px]
-            font-medium
-            text-white/80
-            backdrop-blur-xl
-            sm:hidden
-          "
-        >
-          Sign / Login
-        </button>
-      </div>
-    </motion.header>
+      <StaggeredMenu
+        position="right"
+        items={menuItems}
+        displayItemNumbering
+        colors={["#F0199A", "#9E38DD", "#7132C8"]}
+        accentColor="#F0199A"
+        menuButtonColor={isDark ? "#ffffff" : "#17152a"}
+        openMenuButtonColor="#ffffff"
+        theme={theme}
+        logoContent={<Logo />}
+        headerActions={<ThemeToggle />}
+        onLogoClick={() => scrollToSection("about")}
+      />
+    </motion.div>
   );
 }
