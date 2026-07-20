@@ -58,7 +58,7 @@ export default function WhatIsNewHubSection() {
   return (
     <section
       id="what-is-newhub"
-      className="relative isolate overflow-hidden bg-transparent pb-6 pt-6 sm:pb-6 sm:pt-6 lg:pb-8 lg:pt-8"
+      className="relative isolate overflow-hidden bg-transparent py-24 sm:py-28 lg:py-36"
     >
       <div className="relative z-10 mx-auto max-w-[1380px] px-5 sm:px-7 lg:px-10">
         <motion.div
@@ -76,11 +76,11 @@ export default function WhatIsNewHubSection() {
           </div>
 
           <h2 className="text-[34px] font-black leading-tight tracking-[-0.05em] text-[#17152a] dark:text-white sm:text-[43px] md:text-[52px]">
-            One profile. <span className={BRAND_GRADIENT_TEXT}>Three dimensions.</span>
+            Three sides. <span className={BRAND_GRADIENT_TEXT}>One complete you.</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#6d6a80] dark:text-white/48 sm:text-base">
-            Personal. Professional. Community.
+            Explore personal expression, professional growth and communities in one free-moving visual space.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
@@ -117,9 +117,9 @@ export default function WhatIsNewHubSection() {
           height="100%"
           images={newHubImages}
           density={5}
-          imageWidth={220}
-          imageHeight={220}
-          rounded={2}
+          imageWidth={190}
+          imageHeight={190}
+          rounded={3}
           dragSpeed={20}
           driftAmount={20}
           friction={10}
@@ -167,7 +167,7 @@ export default function WhatIsNewHubSection() {
       </motion.div>
 
       <p className="relative z-10 mx-auto mt-2 max-w-2xl px-5 text-center text-xs leading-6 text-[#8b879d] dark:text-white/30 sm:px-7 sm:text-sm lg:px-10">
-        Click to explore. Press Esc to exit.
+        Click the canvas to activate it. Use “Release scroll” or press Esc to return to normal page scrolling.
       </p>
     </section>
   );

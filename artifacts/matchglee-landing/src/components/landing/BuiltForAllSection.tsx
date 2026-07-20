@@ -1,17 +1,35 @@
-import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
+  useEffect,
+  useState,
+} from "react";
+
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+} from "framer-motion";
+
+import {
   HeartHandshake,
   Network,
   Sparkles,
+  X,
   type LucideIcon,
 } from "lucide-react";
 
-import authenticNetworkingImage from "@/assets/newhub_carousel_assets/02_authentic_networking.png";
+import OrbitImages from "@/components/OrbitImages";
+
 import dualPersonalitiesImage from "@/assets/newhub_carousel_assets/01_dual_personalities.png";
+import authenticNetworkingImage from "@/assets/newhub_carousel_assets/02_authentic_networking.png";
+import communitiesImage from "@/assets/newhub_carousel_assets/03_communities.png";
+import professionalIdentityImage from "@/assets/newhub_carousel_assets/04_professional_identity.png";
+import personalIdentityImage from "@/assets/newhub_carousel_assets/05_personal_identity.png";
 import meaningfulRelationshipsImage from "@/assets/newhub_carousel_assets/08_meaningful_relationships.png";
 
-import ImageTrail, { type ImageTrailItem } from "./effects/ImageTrail";
+
+import ImageTrail, {
+  type ImageTrailItem,
+} from "./effects/ImageTrail";
 
 const imageTrailItems: ImageTrailItem[] = [
   {
@@ -70,272 +88,110 @@ const imageTrailItems: ImageTrailItem[] = [
   },
 ];
 
-interface FeatureCardProps {
-  icon: LucideIcon;
+interface OrbitFeature {
   title: string;
   description: string;
   image: string;
-  label: string;
-  featured?: boolean;
-  initialX?: number;
-  className?: string;
+  icon: LucideIcon;
 }
 
-function FeatureCard({
-  icon: Icon,
-  title,
-  description,
-  image,
-  label,
-  featured = false,
-  initialX = 0,
-  className = "",
-}: FeatureCardProps) {
-  return (
-    <motion.article
-      initial={{
-        opacity: 0,
-        x: initialX,
-        y: 35,
-        scale: 0.96,
-      }}
-      whileInView={{
-        opacity: 1,
-        x: 0,
-        y: 0,
-        scale: 1,
-      }}
-      viewport={{
-        once: true,
-        amount: 0.2,
-      }}
-      transition={{
-        duration: 0.75,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      whileHover={{
-        y: -8,
-      }}
-      className={`
-        group
-        relative
-        flex
-        h-full
-        flex-col
-        overflow-hidden
-        rounded-[30px]
-        border
-        border-[#7132C8]/15
-        bg-white/75
-        shadow-[0_22px_70px_rgba(78,48,140,0.11)]
-        backdrop-blur-xl
-        transition-[border-color,background-color,box-shadow]
-        duration-500
-        hover:border-[#7132C8]/30
-        hover:bg-white/95
-        hover:shadow-[0_30px_90px_rgba(78,48,140,0.18)]
-        dark:border-white/10
-        dark:bg-white/[0.045]
-        dark:shadow-[0_24px_80px_rgba(0,0,0,0.3)]
-        dark:hover:border-white/20
-        dark:hover:bg-white/[0.07]
-        ${
-          featured
-            ? "min-h-[480px] lg:min-h-[540px]"
-            : "min-h-[400px] lg:min-h-[460px]"
-        }
-        ${className}
-      `}
-    >
-      <div
-        className={`
-          relative
-          overflow-hidden
-          ${featured ? "h-[300px] lg:h-[350px]" : "h-[235px] lg:h-[270px]"}
-        `}
-      >
-        <motion.img
-          src={image}
-          alt={title}
-          loading="lazy"
-          decoding="async"
-          whileHover={{
-            scale: 1.045,
-          }}
-          transition={{
-            duration: 0.7,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="h-full w-full object-cover"
-        />
-
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            bg-gradient-to-t
-            from-[#16101f]/75
-            via-transparent
-            to-white/5
-          "
-        />
-
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            bg-gradient-to-br
-            from-[#F0199A]/10
-            via-transparent
-            to-[#7132C8]/15
-          "
-        />
-
-        <div
-          className="
-            absolute
-            left-5
-            top-5
-            flex
-            items-center
-            gap-2
-            rounded-full
-            border
-            border-white/20
-            bg-black/25
-            px-3
-            py-1.5
-            text-[10px]
-            font-semibold
-            uppercase
-            tracking-[0.18em]
-            text-white/85
-            backdrop-blur-xl
-          "
-        >
-          <Icon className="h-3.5 w-3.5" />
-          {label}
-        </div>
-
-        {featured && (
-          <div
-            className="
-              absolute
-              right-5
-              top-5
-              flex
-              items-center
-              gap-1.5
-              rounded-full
-              bg-gradient-to-r
-              from-[#F0199A]
-              to-[#7132C8]
-              px-3
-              py-1.5
-              text-[10px]
-              font-bold
-              uppercase
-              tracking-[0.16em]
-              text-white
-              shadow-[0_8px_24px_rgba(240,25,154,0.28)]
-            "
-          >
-            <Sparkles className="h-3 w-3" />
-            Featured
-          </div>
-        )}
-      </div>
-
-      <div
-        className={`
-          flex
-          flex-1
-          flex-col
-          ${featured ? "p-7 sm:p-8" : "p-6"}
-        `}
-      >
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h3
-              className={`
-                font-black
-                tracking-[-0.035em]
-                text-[#17152a]
-                dark:text-white
-                ${featured ? "text-2xl sm:text-3xl" : "text-xl"}
-              `}
-            >
-              {title}
-            </h3>
-
-            <p
-              className={`
-                mt-3
-                max-w-xl
-                leading-7
-                text-[#6d6a80]
-                dark:text-white/50
-                ${featured ? "text-sm sm:text-base" : "text-sm"}
-              `}
-            >
-              {description}
-            </p>
-          </div>
-
-          <div
-            className="
-              flex
-              h-10
-              w-10
-              shrink-0
-              items-center
-              justify-center
-              rounded-full
-              border
-              border-[#7132C8]/15
-              bg-[#f5f0ff]
-              text-[#7132C8]
-              transition-all
-              duration-300
-              group-hover:rotate-[-8deg]
-              group-hover:border-[#7132C8]/30
-              group-hover:bg-[#7132C8]
-              group-hover:text-white
-              dark:border-white/10
-              dark:bg-white/[0.06]
-              dark:text-white/60
-              dark:group-hover:bg-white
-              dark:group-hover:text-[#7132C8]
-            "
-          >
-            <ArrowUpRight className="h-4 w-4" />
-          </div>
-        </div>
-
-        <div className="mt-auto pt-6">
-          <div
-            className="
-              h-px
-              w-full
-              bg-gradient-to-r
-              from-[#7132C8]/20
-              via-[#F0199A]/15
-              to-transparent
-              dark:from-white/15
-              dark:via-white/5
-            "
-          />
-        </div>
-      </div>
-    </motion.article>
-  );
-}
+const orbitFeatures: OrbitFeature[] = [
+  {
+    title: "Meaningful Relationships",
+    description:
+      "Build genuine connections around shared interests, goals and experiences.",
+    image: meaningfulRelationshipsImage,
+    icon: HeartHandshake,
+  },
+  {
+    title: "Dual Personality",
+    description:
+      "Bring your personal and professional identities together in one profile.",
+    image: dualPersonalitiesImage,
+    icon: Sparkles,
+  },
+  {
+    title: "Authentic Networking",
+    description:
+      "Connect through transparent profiles and conversations that feel genuine.",
+    image: authenticNetworkingImage,
+    icon: Network,
+  },
+  {
+    title: "Communities",
+    description:
+      "Discover spaces created around shared interests, ideas and experiences.",
+    image: communitiesImage,
+    icon: Network,
+  },
+  {
+    title: "Professional Identity",
+    description:
+      "Showcase your skills, achievements, projects and professional journey.",
+    image: professionalIdentityImage,
+    icon: Sparkles,
+  },
+  {
+    title: "Personal Identity",
+    description:
+      "Express your interests, personality, memories and everyday experiences.",
+    image: personalIdentityImage,
+    icon: HeartHandshake,
+  },
+];
 
 export default function BuiltForAllSection() {
+  const reduceMotion =
+    Boolean(useReducedMotion());
+
+  const [
+    selectedIndex,
+    setSelectedIndex,
+  ] = useState<number | null>(null);
+
+  const selectedFeature =
+    selectedIndex === null
+      ? null
+      : orbitFeatures[selectedIndex];
+
+  const SelectedIcon =
+    selectedFeature?.icon ?? Sparkles;
+
+  useEffect(() => {
+    const handleKeyDown = (
+      event: KeyboardEvent,
+    ) => {
+      if (
+        event.key === "Escape" &&
+        selectedIndex !== null
+      ) {
+        setSelectedIndex(null);
+      }
+    };
+
+    window.addEventListener(
+      "keydown",
+      handleKeyDown,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown,
+      );
+    };
+  }, [selectedIndex]);
+
+  const handleItemClick = (
+    index: number,
+  ) => {
+    setSelectedIndex(
+      selectedIndex === index
+        ? null
+        : index,
+    );
+  };
+
   return (
     <section
       id="built-for-all"
@@ -346,19 +202,23 @@ export default function BuiltForAllSection() {
         overflow-hidden
         bg-transparent
         px-5
-        pb-24
+        pb-6
         pt-24
         sm:px-7
-        sm:pb-28
+        sm:pb-6
         sm:pt-28
         lg:px-10
-        lg:pb-36
+        lg:pb-8
         lg:pt-32
       "
     >
-      <ImageTrail items={imageTrailItems} threshold={80} />
+      {/* Restored image trail */}
+      <ImageTrail
+        items={imageTrailItems}
+        threshold={80}
+      />
 
-      {/* Gradually reveal particles and section atmosphere */}
+      {/* Hero-to-section transition */}
       <div
         aria-hidden="true"
         className="
@@ -370,7 +230,6 @@ export default function BuiltForAllSection() {
           h-[460px]
         "
       >
-        {/* Light theme */}
         <div
           className="
             absolute
@@ -394,7 +253,6 @@ export default function BuiltForAllSection() {
           }}
         />
 
-        {/* Dark theme */}
         <div
           className="
             absolute
@@ -420,7 +278,7 @@ export default function BuiltForAllSection() {
         />
       </div>
 
-      {/* Cinematic glow extending from hero */}
+      {/* Section atmosphere */}
       <div
         aria-hidden="true"
         className="
@@ -444,26 +302,8 @@ export default function BuiltForAllSection() {
         className="
           pointer-events-none
           absolute
-          left-[26%]
-          top-[-5rem]
-          z-[3]
-          h-64
-          w-[48%]
-          rounded-[50%]
-          bg-[#F0199A]/[0.07]
-          blur-[110px]
-          dark:bg-[#F0199A]/[0.06]
-        "
-      />
-
-      {/* Existing section glows */}
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
           left-[-10rem]
-          top-[15%]
+          top-[18%]
           z-[3]
           h-[30rem]
           w-[30rem]
@@ -480,7 +320,7 @@ export default function BuiltForAllSection() {
           pointer-events-none
           absolute
           right-[-12rem]
-          top-[35%]
+          top-[34%]
           z-[3]
           h-[34rem]
           w-[34rem]
@@ -491,7 +331,15 @@ export default function BuiltForAllSection() {
         "
       />
 
-      <div className="relative z-10 mx-auto max-w-[1380px]">
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          max-w-[1380px]
+        "
+      >
+        {/* Section heading */}
         <motion.div
           initial={{
             opacity: 0,
@@ -506,18 +354,27 @@ export default function BuiltForAllSection() {
             amount: 0.5,
           }}
           transition={{
-            duration: 0.7,
+            duration:
+              reduceMotion ? 0 : 0.7,
             ease: [0.22, 1, 0.36, 1],
           }}
           className="
             mx-auto
-            mb-14
+            mb-5
             max-w-3xl
             text-center
-            sm:mb-16
+            sm:mb-6
           "
         >
-          <div className="mb-5 flex items-center justify-center gap-4">
+          <div
+            className="
+              mb-5
+              flex
+              items-center
+              justify-center
+              gap-4
+            "
+          >
             <span
               className="
                 hidden
@@ -572,6 +429,7 @@ export default function BuiltForAllSection() {
             "
           >
             Every side of you.{" "}
+
             <span
               className="
                 bg-gradient-to-r
@@ -602,46 +460,328 @@ export default function BuiltForAllSection() {
           </p>
         </motion.div>
 
-        <div
+        {/* Free-floating orbit */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            scale: 0.97,
+          }}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration:
+              reduceMotion ? 0 : 0.85,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          onClick={(event) => {
+            const target =
+              event.target as HTMLElement;
+
+            const orbitItem =
+              target.closest(
+                "[data-orbit-interactive]",
+              );
+
+            const descriptionCard =
+              target.closest(
+                "[data-orbit-card]",
+              );
+
+            if (
+              selectedIndex !== null &&
+              !orbitItem &&
+              !descriptionCard
+            ) {
+              setSelectedIndex(null);
+            }
+          }}
           className="
-            grid
-            gap-5
-            sm:gap-6
-            lg:grid-cols-12
-            lg:items-stretch
+            relative
+            mx-auto
+            max-w-[1050px]
+            py-3
+            sm:py-5
           "
         >
-          <FeatureCard
-            icon={HeartHandshake}
-            title="Meaningful Relationships"
-            description="Connections that feel real."
-            image={meaningfulRelationshipsImage}
-            label="Relationships"
-            initialX={-60}
-            className="order-2 lg:order-1 lg:col-span-3"
+          {/* Subtle ambient glow, not a box */}
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              left-1/2
+              top-1/2
+              h-[260px]
+              w-[70%]
+              -translate-x-1/2
+              -translate-y-1/2
+              rounded-[50%]
+              bg-[#7132C8]/10
+              blur-[100px]
+              dark:bg-[#7132C8]/[0.10]
+            "
           />
 
-          <FeatureCard
-            icon={Sparkles}
-            title="Dual Personalities"
-            description="Personal and professional, together."
-            image={dualPersonalitiesImage}
-            label="Your complete identity"
-            featured
-            initialX={0}
-            className="order-1 lg:order-2 lg:col-span-6"
+          <OrbitImages
+            items={orbitFeatures.map(
+              (feature) => ({
+                src: feature.image,
+                alt: feature.title,
+              }),
+            )}
+            shape="ellipse"
+            baseWidth={1200}
+            baseHeight={500}
+            aspectRatio="12 / 5"
+            radiusX={455}
+            radiusY={105}
+            rotation={-8}
+            duration={32}
+            itemSize={98}
+            responsive
+            fill
+            showPath
+            pathColor="rgba(155, 92, 220, 0.28)"
+            pathWidth={1.5}
+            direction="normal"
+            paused={
+              reduceMotion ||
+              selectedIndex !== null
+            }
+            interactive
+            selectedIndex={selectedIndex}
+            onItemClick={handleItemClick}
+            centerContent={
+              selectedFeature ? (
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={
+                      selectedFeature.title
+                    }
+                    data-orbit-card="true"
+                    initial={{
+                      opacity: 0,
+                      scale: 0.9,
+                      y: 10,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      y: 0,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      scale: 0.94,
+                      y: -8,
+                    }}
+                    transition={{
+                      duration:
+                        reduceMotion
+                          ? 0
+                          : 0.28,
+                    }}
+                    className="
+                      relative
+                      hidden
+                      w-[330px]
+                      rounded-[24px]
+                      border
+                      border-[#7132C8]/15
+                      bg-white/90
+                      p-7
+                      text-center
+                      shadow-[0_24px_75px_rgba(78,48,140,0.2)]
+                      backdrop-blur-2xl
+                      dark:border-white/10
+                      dark:bg-[#120923]/92
+                      dark:shadow-[0_28px_80px_rgba(0,0,0,0.4)]
+                      sm:block
+                    "
+                  >
+                    <button
+                      type="button"
+                      aria-label="Close description"
+                      onClick={() => {
+                        setSelectedIndex(null);
+                      }}
+                      className="
+                        absolute
+                        right-4
+                        top-4
+                        flex
+                        h-8
+                        w-8
+                        items-center
+                        justify-center
+                        rounded-full
+                        border
+                        border-[#7132C8]/10
+                        bg-white/70
+                        text-[#746f88]
+                        transition-colors
+                        hover:bg-[#7132C8]
+                        hover:text-white
+                        dark:border-white/10
+                        dark:bg-white/[0.06]
+                        dark:text-white/55
+                      "
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+
+                    <div
+                      className="
+                        mx-auto
+                        flex
+                        h-11
+                        w-11
+                        items-center
+                        justify-center
+                        rounded-2xl
+                        bg-gradient-to-br
+                        from-[#F0199A]
+                        to-[#7132C8]
+                        text-white
+                        shadow-[0_10px_28px_rgba(113,50,200,0.28)]
+                      "
+                    >
+                      <SelectedIcon className="h-5 w-5" />
+                    </div>
+
+                    <h3
+                      className="
+                        mt-5
+                        text-xl
+                        font-black
+                        tracking-[-0.035em]
+                        text-[#17152a]
+                        dark:text-white
+                      "
+                    >
+                      {selectedFeature.title}
+                    </h3>
+
+                    <p
+                      className="
+                        mt-3
+                        text-sm
+                        leading-6
+                        text-[#6d6a80]
+                        dark:text-white/50
+                      "
+                    >
+                      {
+                        selectedFeature.description
+                      }
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              ) : null
+            }
           />
 
-          <FeatureCard
-            icon={Network}
-            title="Authentic Networking"
-            description="Connect without the pressure."
-            image={authenticNetworkingImage}
-            label="Connections"
-            initialX={60}
-            className="order-3 lg:col-span-3"
-          />
-        </div>
+          {/* Mobile description */}
+          <AnimatePresence mode="wait">
+            {selectedFeature && (
+              <motion.div
+                key={selectedFeature.title}
+                data-orbit-card="true"
+                initial={{
+                  opacity: 0,
+                  y: 16,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  y: 10,
+                }}
+                transition={{
+                  duration:
+                    reduceMotion ? 0 : 0.3,
+                }}
+                className="
+                  relative
+                  mt-5
+                  rounded-[22px]
+                  border
+                  border-[#7132C8]/15
+                  bg-white/85
+                  p-6
+                  text-center
+                  shadow-[0_18px_55px_rgba(78,48,140,0.15)]
+                  backdrop-blur-xl
+                  dark:border-white/10
+                  dark:bg-white/[0.045]
+                  sm:hidden
+                "
+              >
+                <button
+                  type="button"
+                  aria-label="Close description"
+                  onClick={() => {
+                    setSelectedIndex(null);
+                  }}
+                  className="
+                    absolute
+                    right-4
+                    top-4
+                    flex
+                    h-8
+                    w-8
+                    items-center
+                    justify-center
+                    rounded-full
+                    border
+                    border-[#7132C8]/10
+                    bg-white/70
+                    text-[#746f88]
+                    dark:border-white/10
+                    dark:bg-white/[0.06]
+                    dark:text-white/55
+                  "
+                >
+                  <X className="h-4 w-4" />
+                </button>
+
+                <h3
+                  className="
+                    pr-8
+                    text-xl
+                    font-black
+                    tracking-[-0.035em]
+                    text-[#17152a]
+                    dark:text-white
+                  "
+                >
+                  {selectedFeature.title}
+                </h3>
+
+                <p
+                  className="
+                    mt-3
+                    text-sm
+                    leading-6
+                    text-[#6d6a80]
+                    dark:text-white/50
+                  "
+                >
+                  {
+                    selectedFeature.description
+                  }
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
 
         <motion.p
           initial={{
@@ -656,12 +796,14 @@ export default function BuiltForAllSection() {
             once: true,
           }}
           transition={{
-            duration: 0.65,
-            delay: 0.25,
+            duration:
+              reduceMotion ? 0 : 0.65,
+            delay:
+              reduceMotion ? 0 : 0.25,
           }}
           className="
             mx-auto
-            mt-10
+            mt-2
             max-w-2xl
             text-center
             text-xs
@@ -671,7 +813,7 @@ export default function BuiltForAllSection() {
             sm:text-sm
           "
         >
-          Every side, together.
+          Select an image to explore.
         </motion.p>
       </div>
     </section>

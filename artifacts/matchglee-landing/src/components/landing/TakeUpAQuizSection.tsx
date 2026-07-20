@@ -294,11 +294,14 @@ export default function TakeUpAQuizSection({
         isolate
         bg-transparent
         px-5
-        py-24
+        pb-6
+        pt-6
         sm:px-7
-        sm:py-28
+        sm:pb-6
+        sm:pt-6
         lg:px-10
-        lg:py-36
+        lg:pb-8
+        lg:pt-8
       "
     >
       {/* Decorative background lighting */}

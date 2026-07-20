@@ -11,30 +11,30 @@ import { BRAND_GRADIENT_TEXT } from "@/lib/brand";
 import InfiniteGallery from "./effects/InfiniteGallery";
 
 const newHubImages = [
-  { src: "/infinity-canvas/canvas-01.webp", alt: "Your only limit is you", width: 731, height: 912 },
-  { src: "/infinity-canvas/canvas-02.webp", alt: "Person walking through golden light", width: 736, height: 1227 },
-  { src: "/infinity-canvas/canvas-03.webp", alt: "Be the energy you want to attract", width: 736, height: 1104 },
-  { src: "/infinity-canvas/canvas-04.webp", alt: "Professional team celebrating together", width: 736, height: 1104 },
-  { src: "/infinity-canvas/canvas-05.webp", alt: "Community over competition", width: 736, height: 736 },
-  { src: "/infinity-canvas/canvas-06.webp", alt: "Personal identity and self connection", width: 735, height: 665 },
-  { src: "/infinity-canvas/canvas-07.webp", alt: "Diverse team celebrating", width: 735, height: 638 },
-  { src: "/infinity-canvas/canvas-08.webp", alt: "Individual standing out from a crowd", width: 540, height: 720 },
-  { src: "/infinity-canvas/canvas-09.webp", alt: "Collaborative professional workspace", width: 736, height: 1104 },
-  { src: "/infinity-canvas/canvas-10.webp", alt: "Friends sharing a meaningful conversation", width: 736, height: 1308 },
-  { src: "/infinity-canvas/canvas-11.webp", alt: "Creative team working together", width: 736, height: 920 },
-  { src: "/infinity-canvas/canvas-12.webp", alt: "Together we can overcome anything", width: 736, height: 920 },
-  { src: "/infinity-canvas/canvas-13.webp", alt: "Your vision, our mission", width: 736, height: 1104 },
-  { src: "/infinity-canvas/canvas-14.webp", alt: "Diverse hands joined in teamwork", width: 736, height: 920 },
-  { src: "/infinity-canvas/canvas-15.webp", alt: "Colleagues connecting outdoors", width: 735, height: 673 },
-  { src: "/infinity-canvas/canvas-16.webp", alt: "Think bigger", width: 332, height: 498 },
-  { src: "/infinity-canvas/canvas-17.webp", alt: "Professional team collaborating", width: 736, height: 1349 },
-  { src: "/infinity-canvas/canvas-18.webp", alt: "Friends sharing a supportive group hug", width: 640, height: 641 },
-  { src: "/infinity-canvas/canvas-19.webp", alt: "Community editorial collage", width: 586, height: 734 },
-  { src: "/infinity-canvas/canvas-20.webp", alt: "People forming a connected circle", width: 736, height: 815 },
-  { src: "/infinity-canvas/canvas-21.webp", alt: "Community embracing one another", width: 725, height: 1000 },
-  { src: "/infinity-canvas/canvas-22.webp", alt: "Professional presenting to a team", width: 736, height: 1041 },
-  { src: "/infinity-canvas/canvas-23.webp", alt: "Hands connected through a network", width: 736, height: 1030 },
-  { src: "/infinity-canvas/canvas-24.webp", alt: "In the right eyes you will be art", width: 736, height: 979 },
+  { src: "/infinity-canvas/canvas-01.webp", alt: "Your only limit is you" },
+  { src: "/infinity-canvas/canvas-02.webp", alt: "Person walking through golden light" },
+  { src: "/infinity-canvas/canvas-03.webp", alt: "Be the energy you want to attract" },
+  { src: "/infinity-canvas/canvas-04.webp", alt: "Professional team celebrating together" },
+  { src: "/infinity-canvas/canvas-05.webp", alt: "Community over competition" },
+  { src: "/infinity-canvas/canvas-06.webp", alt: "Personal identity and self connection" },
+  { src: "/infinity-canvas/canvas-07.webp", alt: "Diverse team celebrating" },
+  { src: "/infinity-canvas/canvas-08.webp", alt: "Individual standing out from a crowd" },
+  { src: "/infinity-canvas/canvas-09.webp", alt: "Collaborative professional workspace" },
+  { src: "/infinity-canvas/canvas-10.webp", alt: "Friends sharing a meaningful conversation" },
+  { src: "/infinity-canvas/canvas-11.webp", alt: "Creative team working together" },
+  { src: "/infinity-canvas/canvas-12.webp", alt: "Together we can overcome anything" },
+  { src: "/infinity-canvas/canvas-13.webp", alt: "Your vision, our mission" },
+  { src: "/infinity-canvas/canvas-14.webp", alt: "Diverse hands joined in teamwork" },
+  { src: "/infinity-canvas/canvas-15.webp", alt: "Colleagues connecting outdoors" },
+  { src: "/infinity-canvas/canvas-16.webp", alt: "Think bigger" },
+  { src: "/infinity-canvas/canvas-17.webp", alt: "Professional team collaborating" },
+  { src: "/infinity-canvas/canvas-18.webp", alt: "Friends sharing a supportive group hug" },
+  { src: "/infinity-canvas/canvas-19.webp", alt: "Community editorial collage" },
+  { src: "/infinity-canvas/canvas-20.webp", alt: "People forming a connected circle" },
+  { src: "/infinity-canvas/canvas-21.webp", alt: "Community embracing one another" },
+  { src: "/infinity-canvas/canvas-22.webp", alt: "Professional presenting to a team" },
+  { src: "/infinity-canvas/canvas-23.webp", alt: "Hands connected through a network" },
+  { src: "/infinity-canvas/canvas-24.webp", alt: "In the right eyes you will be art" },
 ];
 
 const identityPills = ["Personal", "Professional", "Communities"];
@@ -58,7 +58,7 @@ export default function WhatIsNewHubSection() {
   return (
     <section
       id="what-is-newhub"
-      className="relative isolate overflow-hidden bg-transparent pb-6 pt-6 sm:pb-6 sm:pt-6 lg:pb-8 lg:pt-8"
+      className="relative isolate overflow-hidden bg-transparent py-24 sm:py-28 lg:py-36"
     >
       <div className="relative z-10 mx-auto max-w-[1380px] px-5 sm:px-7 lg:px-10">
         <motion.div
@@ -76,11 +76,11 @@ export default function WhatIsNewHubSection() {
           </div>
 
           <h2 className="text-[34px] font-black leading-tight tracking-[-0.05em] text-[#17152a] dark:text-white sm:text-[43px] md:text-[52px]">
-            One profile. <span className={BRAND_GRADIENT_TEXT}>Three dimensions.</span>
+            Three sides. <span className={BRAND_GRADIENT_TEXT}>One complete you.</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#6d6a80] dark:text-white/48 sm:text-base">
-            Personal. Professional. Community.
+            Explore personal expression, professional growth and communities in one free-moving visual space.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
@@ -107,7 +107,7 @@ export default function WhatIsNewHubSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.12 }}
         transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-        className="relative h-[620px] w-full sm:h-[720px] lg:h-[820px]"
+        className="relative h-[560px] w-full sm:h-[680px] lg:h-[760px]"
         onClick={() => {
           if (!isCanvasActive) setIsCanvasActive(true);
         }}
@@ -117,9 +117,9 @@ export default function WhatIsNewHubSection() {
           height="100%"
           images={newHubImages}
           density={5}
-          imageWidth={220}
-          imageHeight={220}
-          rounded={2}
+          imageWidth={150}
+          imageHeight={150}
+          rounded={3}
           dragSpeed={20}
           driftAmount={20}
           friction={10}
@@ -167,7 +167,7 @@ export default function WhatIsNewHubSection() {
       </motion.div>
 
       <p className="relative z-10 mx-auto mt-2 max-w-2xl px-5 text-center text-xs leading-6 text-[#8b879d] dark:text-white/30 sm:px-7 sm:text-sm lg:px-10">
-        Click to explore. Press Esc to exit.
+        Click the canvas to activate it. Use “Release scroll” or press Esc to return to normal page scrolling.
       </p>
     </section>
   );

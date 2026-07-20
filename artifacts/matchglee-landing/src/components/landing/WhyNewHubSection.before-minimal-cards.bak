@@ -1,39 +1,68 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import {
+  ArrowUpRight,
+  HeartHandshake,
+  Layers3,
+  ShieldCheck,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 
 import { BRAND_GRADIENT_TEXT } from "@/lib/brand";
 import TiltedCard from "./effects/TiltedCard";
 
 const privacyImage = "/tilted-cards/privacy-first.webp";
-const meaningfulConnectionImage =
-  "/tilted-cards/meaningful-connections.webp";
-const everythingInOnePlaceImage =
-  "/tilted-cards/everything-in-one-place.webp";
+const meaningfulConnectionsImage = "/tilted-cards/meaningful-connections.webp";
+const everythingInOnePlaceImage = "/tilted-cards/everything-in-one-place.webp";
 
 interface ReasonCardData {
+  icon: LucideIcon;
+  number: string;
   title: string;
+  description: string;
   image: string;
   imageAlt: string;
+  tag: string;
+  accentClassName: string;
+  iconClassName: string;
   delay: number;
 }
 
 const reasons: ReasonCardData[] = [
   {
+    icon: ShieldCheck,
+    number: "01",
     title: "Privacy First",
+    description: "Control what you share, who sees it and how people reach you.",
     image: privacyImage,
-    imageAlt: "Keys representing personal privacy and control",
+    imageAlt: "Digital privacy shield protecting personal information",
+    tag: "Your identity. Your control.",
+    accentClassName: "from-[#F0199A]/35 via-[#F0199A]/8 to-transparent",
+    iconClassName: "bg-[#F0199A]/25 text-pink-100",
     delay: 0.05,
   },
   {
-    title: "Meaningful Connection",
-    image: meaningfulConnectionImage,
-    imageAlt: "Hands connected through a shared thread",
+    icon: HeartHandshake,
+    number: "02",
+    title: "Meaningful Connections",
+    description: "Build genuine relationships around shared values and interests.",
+    image: meaningfulConnectionsImage,
+    imageAlt: "Glowing hands representing meaningful human connections",
+    tag: "Quality over quantity.",
+    accentClassName: "from-[#7132C8]/40 via-[#7132C8]/8 to-transparent",
+    iconClassName: "bg-[#7132C8]/28 text-purple-100",
     delay: 0.15,
   },
   {
+    icon: Layers3,
+    number: "03",
     title: "Everything in One Place",
+    description: "Bring personal, professional and community life together.",
     image: everythingInOnePlaceImage,
-    imageAlt: "A connected person bringing different parts of life together",
+    imageAlt: "Connected digital platform combining multiple identities",
+    tag: "One connected experience.",
+    accentClassName: "from-blue-500/35 via-blue-500/8 to-transparent",
+    iconClassName: "bg-blue-500/25 text-blue-100",
     delay: 0.25,
   },
 ];
@@ -44,6 +73,7 @@ interface ReasonCardProps {
 
 function ReasonCard({ reason }: ReasonCardProps) {
   const reduceMotion = useReducedMotion();
+  const Icon = reason.icon;
 
   return (
     <motion.div
@@ -52,8 +82,8 @@ function ReasonCard({ reason }: ReasonCardProps) {
           ? { opacity: 0 }
           : {
               opacity: 0,
-              y: 34,
-              scale: 0.97,
+              y: 40,
+              scale: 0.96,
             }
       }
       whileInView={{
@@ -66,7 +96,7 @@ function ReasonCard({ reason }: ReasonCardProps) {
         amount: 0.2,
       }}
       transition={{
-        duration: 0.7,
+        duration: 0.72,
         delay: reason.delay,
         ease: [0.22, 1, 0.36, 1],
       }}
@@ -75,7 +105,7 @@ function ReasonCard({ reason }: ReasonCardProps) {
       <TiltedCard
         imageSrc={reason.image}
         altText={reason.imageAlt}
-        containerHeight="clamp(350px, 32vw, 385px)"
+        containerHeight="clamp(365px, 34vw, 390px)"
         containerWidth="100%"
         imageHeight="100%"
         imageWidth="100%"
@@ -85,10 +115,48 @@ function ReasonCard({ reason }: ReasonCardProps) {
         showTooltip={false}
         displayOverlayContent
         overlayContent={
-          <div className="relative h-full w-full">
-            <div className="absolute left-5 top-5 sm:left-6 sm:top-6">
-              <div className="rounded-full border border-white/20 bg-black/35 px-4 py-2 text-xs font-semibold tracking-[-0.01em] text-white shadow-[0_8px_24px_rgba(0,0,0,0.18)] backdrop-blur-lg sm:px-5 sm:py-2.5 sm:text-sm">
-                {reason.title}
+          <div className="group relative flex h-full flex-col overflow-hidden rounded-[28px] border border-white/15">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#10071d] via-[#10071d]/40 to-transparent"
+            />
+
+            <div
+              aria-hidden="true"
+              className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${reason.accentClassName}`}
+            />
+
+            <div className="relative z-10 flex items-start justify-between gap-4 p-5 sm:p-6">
+              <div
+                className={`flex h-11 w-11 items-center justify-center rounded-2xl border border-white/15 backdrop-blur-xl ${reason.iconClassName}`}
+              >
+                <Icon className="h-5 w-5" />
+              </div>
+
+              <span className="rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[10px] font-bold tracking-[0.16em] text-white/80 backdrop-blur-xl">
+                {reason.number}
+              </span>
+            </div>
+
+            <div className="relative z-10 mt-auto p-5 sm:p-6">
+              <span className="inline-flex max-w-full rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/75 backdrop-blur-xl sm:text-[10px]">
+                {reason.tag}
+              </span>
+
+              <div className="mt-4 flex items-end justify-between gap-5">
+                <div className="min-w-0">
+                  <h3 className="max-w-[12ch] text-[28px] font-black leading-[0.98] tracking-[-0.045em] text-white sm:text-[32px]">
+                    {reason.title}
+                  </h3>
+
+                  <p className="mt-3 max-w-[31ch] text-sm leading-6 text-white/68">
+                    {reason.description}
+                  </p>
+                </div>
+
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/80 backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-white group-hover:text-[#7132C8]">
+                  <ArrowUpRight className="h-4 w-4" />
+                </div>
               </div>
             </div>
           </div>
@@ -102,8 +170,9 @@ export default function WhyNewHubSection() {
   return (
     <section
       id="why-newhub"
-      className="relative isolate overflow-hidden bg-transparent px-5 pb-24 pt-6 sm:px-7 sm:pb-28 sm:pt-6 lg:px-10 lg:pb-32 lg:pt-8"
+      className="relative isolate overflow-hidden bg-transparent px-5 py-24 sm:px-7 sm:py-28 lg:px-10 lg:py-32"
     >
+      {/* Background lighting */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-[53%] h-[650px] w-[min(1100px,115vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7132C8]/10 blur-[175px] dark:bg-[#7132C8]/[0.07]"
@@ -120,6 +189,7 @@ export default function WhyNewHubSection() {
       />
 
       <div className="relative z-10 mx-auto max-w-[1180px]">
+        {/* Heading */}
         <motion.div
           initial={{
             opacity: 0,
@@ -148,21 +218,24 @@ export default function WhyNewHubSection() {
           </div>
 
           <h2 className="text-[34px] font-black leading-tight tracking-[-0.05em] text-[#17152a] dark:text-white sm:text-[43px] md:text-[52px]">
-            Built around{" "}
-            <span className={BRAND_GRADIENT_TEXT}>you.</span>
+            Designed for{" "}
+            <span className={BRAND_GRADIENT_TEXT}>meaningful growth.</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#6d6a80] dark:text-white/48 sm:text-base">
-            Private. Meaningful. Connected.
+            NewHub focuses on the things that matter most: control over your
+            identity, genuine relationships and one connected experience.
           </p>
         </motion.div>
 
+        {/* Compact React Bits tilted-card grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {reasons.map((reason) => (
             <ReasonCard key={reason.title} reason={reason} />
           ))}
         </div>
 
+        {/* Closing statement */}
         <motion.div
           initial={{
             opacity: 0,
@@ -183,7 +256,8 @@ export default function WhyNewHubSection() {
           className="mx-auto mt-12 max-w-3xl rounded-[24px] border border-[#7132C8]/15 bg-white/55 px-6 py-5 text-center shadow-[0_16px_50px_rgba(78,48,140,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.035] dark:shadow-none sm:px-8"
         >
           <p className="text-sm leading-7 text-[#6f6b81] dark:text-white/42">
-            Grow without compromise.
+            A platform should help you grow without asking you to compromise who
+            you are.
           </p>
         </motion.div>
       </div>
