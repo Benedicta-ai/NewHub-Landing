@@ -5,6 +5,7 @@ import BuiltForAllSection from "./BuiltForAllSection";
 import WhatIsNewHubSection from "./WhatIsNewHubSection";
 import TakeUpAQuizSection from "./TakeUpAQuizSection";
 import WhyNewHubSection from "./WhyNewHubSection";
+import RotatingIdentitySection from "./RotatingIdentitySection";
 import JoinFooter from "./JoinFooter";
 
 interface MainPageProps {
@@ -156,9 +157,10 @@ export default function MainPage({
 
             <WhyNewHubSection />
 
-            <JoinFooter
-              onJoin={onGetAccess}
-            />
+            <RotatingIdentitySection />
+
+            <JoinFooter />
+
           </div>
         </div>
       </div>

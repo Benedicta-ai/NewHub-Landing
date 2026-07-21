@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import OrbitImages from "@/components/OrbitImages";
+import ScrollFloat from "@/components/ScrollFloat";
 
 import dualPersonalitiesImage from "@/assets/newhub_carousel_assets/01_dual_personalities.png";
 import authenticNetworkingImage from "@/assets/newhub_carousel_assets/02_authentic_networking.png";
@@ -416,8 +417,16 @@ export default function BuiltForAllSection() {
             />
           </div>
 
-          <h2
-            className="
+          <ScrollFloat
+            tag="h2"
+            animationDuration={1}
+            ease="back.inOut(2)"
+            scrollStart="center bottom+=50%"
+            scrollEnd="bottom bottom-=40%"
+            stagger={0.03}
+            scrub
+            respectReducedMotion
+            containerClassName="
               text-3xl
               font-black
               leading-tight
@@ -427,22 +436,17 @@ export default function BuiltForAllSection() {
               sm:text-4xl
               lg:text-5xl
             "
-          >
-            Every side of you.{" "}
-
-            <span
-              className="
-                bg-gradient-to-r
-                from-[#F0199A]
-                via-[#9E38DD]
-                to-[#7132C8]
-                bg-clip-text
-                text-transparent
-              "
-            >
-              One space.
-            </span>
-          </h2>
+            segments={[
+              {
+                text: "Every side of you. ",
+              },
+              {
+                text: "One space.",
+                className:
+                  "bg-gradient-to-r from-[#F0199A] via-[#9E38DD] to-[#7132C8] bg-clip-text text-transparent",
+              },
+            ]}
+          />
 
           <p
             className="

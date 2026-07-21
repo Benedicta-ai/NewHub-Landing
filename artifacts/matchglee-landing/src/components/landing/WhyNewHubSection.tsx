@@ -3,6 +3,7 @@ import { Sparkles } from "lucide-react";
 
 import { BRAND_GRADIENT_TEXT } from "@/lib/brand";
 import TiltedCard from "./effects/TiltedCard";
+import ScrollFloat from "@/components/ScrollFloat";
 
 const privacyImage = "/tilted-cards/privacy-first.webp";
 const meaningfulConnectionImage =
@@ -147,10 +148,26 @@ export default function WhyNewHubSection() {
             </span>
           </div>
 
-          <h2 className="text-[34px] font-black leading-tight tracking-[-0.05em] text-[#17152a] dark:text-white sm:text-[43px] md:text-[52px]">
-            Built around{" "}
-            <span className={BRAND_GRADIENT_TEXT}>you.</span>
-          </h2>
+          <ScrollFloat
+            tag="h2"
+            animationDuration={1}
+            ease="back.inOut(2)"
+            scrollStart="center bottom+=50%"
+            scrollEnd="bottom bottom-=40%"
+            stagger={0.03}
+            scrub
+            respectReducedMotion
+            containerClassName="text-[34px] font-black leading-tight tracking-[-0.05em] text-[#17152a] dark:text-white sm:text-[43px] md:text-[52px]"
+            segments={[
+              {
+                text: "Built around ",
+              },
+              {
+                text: "you.",
+                className: BRAND_GRADIENT_TEXT,
+              },
+            ]}
+          />
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#6d6a80] dark:text-white/48 sm:text-base">
             Private. Meaningful. Connected.

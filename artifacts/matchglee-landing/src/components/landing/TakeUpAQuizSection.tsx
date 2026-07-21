@@ -21,6 +21,7 @@ import {
   BRAND_GRADIENT,
   BRAND_GRADIENT_TEXT,
 } from "@/lib/brand";
+import ScrollFloat from "@/components/ScrollFloat";
 
 interface QuizStep {
   number: string;
@@ -469,8 +470,16 @@ export default function TakeUpAQuizSection({
                   </span>
                 </div>
 
-                <h2
-                  className="
+                <ScrollFloat
+                  tag="h2"
+                  animationDuration={1}
+                  ease="back.inOut(2)"
+                  scrollStart="center bottom+=50%"
+                  scrollEnd="bottom bottom-=40%"
+                  stagger={0.03}
+                  scrub
+                  respectReducedMotion
+                  containerClassName="
                     text-[34px]
                     font-black
                     leading-tight
@@ -480,17 +489,17 @@ export default function TakeUpAQuizSection({
                     sm:text-[43px]
                     md:text-[52px]
                   "
-                >
-                  A journey,{" "}
-
-                  <span
-                    className={
-                      BRAND_GRADIENT_TEXT
-                    }
-                  >
-                    not a form.
-                  </span>
-                </h2>
+                  segments={[
+                    {
+                      text: "A journey, ",
+                    },
+                    {
+                      text: "not a form.",
+                      className:
+                        BRAND_GRADIENT_TEXT,
+                    },
+                  ]}
+                />
 
                 <p
                   className="

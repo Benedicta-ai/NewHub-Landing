@@ -1,0 +1,43 @@
+.shuffle-parent {
+  display: inline-block;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  visibility: hidden;
+  will-change: transform;
+}
+
+.shuffle-parent.is-ready {
+  visibility: visible;
+}
+
+.shuffle-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.shuffle-char-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: baseline;
+}
+
+.shuffle-char-wrapper > span {
+  display: inline-flex;
+  will-change: transform;
+}
+
+.shuffle-char {
+  display: inline-block;
+  line-height: inherit;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shuffle-parent,
+  .shuffle-char-wrapper > span {
+    will-change: auto;
+  }
+}

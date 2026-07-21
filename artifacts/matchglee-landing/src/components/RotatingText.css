@@ -1,0 +1,74 @@
+.text-rotate {
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  white-space: pre-wrap;
+}
+
+.text-rotate-content {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-rotate-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+}
+
+.text-rotate-word {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.text-rotate-lines {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.text-rotate-element {
+  display: inline-block;
+  transform-origin: center;
+}
+
+.text-rotate-space {
+  white-space: pre;
+}
+
+/*
+  NewHub gradient is applied directly to every
+  animated character so it remains visible.
+*/
+.newhub-rotating-gradient
+  .text-rotate-element {
+  background:
+    linear-gradient(
+      90deg,
+      #f0199a 0%,
+      #c72dca 48%,
+      #7132c8 100%
+    );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-rotate-element {
+    transform: none !important;
+  }
+}

@@ -1,0 +1,53 @@
+.scroll-float {
+  margin: 0;
+  overflow: hidden;
+}
+
+.scroll-float-text {
+  display: inline;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.scroll-float-segment {
+  display: inline;
+}
+
+.scroll-float-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.scroll-float-space {
+  display: inline;
+  white-space: pre;
+}
+
+.scroll-float-character {
+  display: inline-block;
+  transform-origin: 50% 0%;
+  vertical-align: baseline;
+}
+
+/*
+  Gradient utilities are now attached directly
+  to every animated character.
+*/
+.scroll-float-character.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.scroll-float-character.text-transparent {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-float-character {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
