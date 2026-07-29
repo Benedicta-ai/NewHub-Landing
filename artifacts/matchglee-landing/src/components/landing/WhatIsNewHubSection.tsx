@@ -165,12 +165,6 @@ const newHubImages = [
   },
 ];
 
-const identityPills = [
-  "Personal",
-  "Professional",
-  "Communities",
-];
-
 export default function WhatIsNewHubSection() {
   const [isCanvasActive, setIsCanvasActive] =
     useState(false);
@@ -366,56 +360,9 @@ export default function WhatIsNewHubSection() {
             ]}
           />
 
-          <p
-            className="
-              mx-auto
-              mt-5
-              max-w-2xl
-              text-sm
-              leading-7
-              text-[#6d6a80]
-              dark:text-white/48
-              sm:text-base
-            "
-          >
-            Personal. Professional. Community.
-          </p>
+          
 
-          <div
-            className="
-              mt-7
-              flex
-              flex-wrap
-              items-center
-              justify-center
-              gap-2.5
-            "
-          >
-            {identityPills.map(
-              (pill, index) => (
-                <span
-                  key={pill}
-                  className={`
-                    rounded-full
-                    border
-                    px-4
-                    py-2
-                    text-xs
-                    font-semibold
-                    ${
-                      index === 0
-                        ? "border-[#F0199A]/20 bg-[#F0199A]/[0.07] text-[#C91B83] dark:text-pink-300"
-                        : index === 1
-                          ? "border-[#7132C8]/20 bg-[#7132C8]/[0.07] text-[#7132C8] dark:text-purple-300"
-                          : "border-blue-500/20 bg-blue-500/[0.07] text-blue-600 dark:text-blue-300"
-                    }
-                  `}
-                >
-                  {pill}
-                </span>
-              ),
-            )}
-          </div>
+          
         </motion.div>
       </div>
 

@@ -1,0 +1,108 @@
+/*
+ * Final menu visibility correction.
+ * Changes colours and contrast only.
+ */
+
+.newhub-layers-page .nh-side-menu__panel {
+  background:
+    radial-gradient(
+      circle at 82% 82%,
+      rgba(113, 50, 200, 0.24),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 12% 10%,
+      rgba(240, 25, 154, 0.11),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      #12001f 0%,
+      #130022 52%,
+      #19052e 100%
+    );
+}
+
+/* Make every navigation button fully visible */
+.newhub-layers-page
+.nh-side-menu__navigation
+button {
+  opacity: 1;
+  visibility: visible;
+  color: #ffffff;
+}
+
+/* Main menu labels */
+.newhub-layers-page
+.nh-side-menu__label {
+  display: block;
+  background: none;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  opacity: 1;
+  visibility: visible;
+  filter: none;
+  mix-blend-mode: normal;
+  text-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.45),
+    0 0 28px rgba(255, 255, 255, 0.08);
+}
+
+/* Menu item numbers */
+.newhub-layers-page
+.nh-side-menu__number {
+  color: #ff2ba5;
+  -webkit-text-fill-color: #ff2ba5;
+  opacity: 1;
+  visibility: visible;
+  text-shadow:
+    0 0 18px rgba(240, 25, 154, 0.5);
+}
+
+/* Bright Close button */
+.newhub-layers-page
+.nh-side-menu__close {
+  border-color: #f0199a;
+  background: rgba(10, 1, 24, 0.82);
+  color: #ffffff;
+  opacity: 1;
+  visibility: visible;
+  box-shadow:
+    0 0 0 4px rgba(240, 25, 154, 0.1),
+    0 12px 36px rgba(113, 50, 200, 0.26);
+}
+
+.newhub-layers-page
+.nh-side-menu__close span {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  opacity: 1;
+  visibility: visible;
+  font-weight: 700;
+}
+
+.newhub-layers-page
+.nh-side-menu__close svg {
+  color: #ffffff;
+  stroke: #ffffff;
+  opacity: 1;
+}
+
+/* Hover states */
+@media (hover: hover) and (pointer: fine) {
+  .newhub-layers-page
+  .nh-side-menu__navigation
+  button:hover
+  .nh-side-menu__label {
+    color: #f0199a;
+    -webkit-text-fill-color: #f0199a;
+    text-shadow:
+      0 0 24px rgba(240, 25, 154, 0.32);
+  }
+
+  .newhub-layers-page
+  .nh-side-menu__close:hover {
+    border-color: #ff55bc;
+    background: rgba(240, 25, 154, 0.15);
+  }
+}

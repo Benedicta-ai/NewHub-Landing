@@ -101,7 +101,8 @@ export default function MainPage({
           duration-500
         "
         style={{
-          opacity: "var(--particle-opacity)",
+          opacity:
+            "var(--particle-opacity)",
         }}
       >
         <ParticleBackground />
@@ -109,12 +110,16 @@ export default function MainPage({
 
       <div className="relative z-10">
         <Navbar
-          onFeedback={onStartQuiz}
+          onFeedback={
+            onStartQuiz
+          }
           onLogin={onLogin}
         />
 
         <HeroSection
-          onGetAccess={onGetAccess}
+          onGetAccess={
+            onGetAccess
+          }
         />
 
         {/* All remaining sections share one page atmosphere */}
@@ -152,7 +157,9 @@ export default function MainPage({
             <WhatIsNewHubSection />
 
             <TakeUpAQuizSection
-              onStart={onStartQuiz}
+              onStart={
+                onStartQuiz
+              }
             />
 
             <WhyNewHubSection />
@@ -160,7 +167,6 @@ export default function MainPage({
             <RotatingIdentitySection />
 
             <JoinFooter />
-
           </div>
         </div>
       </div>

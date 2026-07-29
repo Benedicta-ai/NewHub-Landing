@@ -1,0 +1,237 @@
+.nh-hero-copy {
+  position: relative;
+  z-index: 25;
+  display: flex;
+  width: 100%;
+  max-width: 620px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.nh-hero-copy__eyebrow {
+  margin: 0 0 26px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(12px, 0.92vw, 15px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  text-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transform: translateY(14px);
+  animation:
+    nh-hero-copy-reveal
+    700ms
+    180ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+.nh-hero-copy__title {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  font-size: clamp(54px, 5.25vw, 82px);
+  font-weight: 700;
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+
+.nh-hero-copy__title span {
+  display: block;
+  width: fit-content;
+  background:
+    linear-gradient(
+      100deg,
+      #ff7048 0%,
+      #ff2a92 43%,
+      #cf32cf 70%,
+      #914dff 100%
+    );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(5px);
+  animation:
+    nh-hero-title-reveal
+    850ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+.nh-hero-copy__title span:first-child {
+  animation-delay: 300ms;
+}
+
+.nh-hero-copy__title span:last-child {
+  margin-top: 0.12em;
+  animation-delay: 410ms;
+}
+
+.nh-hero-copy__supporting {
+  display: flex;
+  margin: 36px 0 0;
+  flex-direction: column;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: clamp(17px, 1.35vw, 22px);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  text-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.65);
+  opacity: 0;
+  transform: translateY(18px);
+  animation:
+    nh-hero-copy-reveal
+    750ms
+    570ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+.nh-hero-copy__supporting span {
+  display: block;
+}
+
+.nh-hero-copy__button {
+  display: inline-flex;
+  min-height: 56px;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 30px;
+  border: 0;
+  border-radius: 9999px;
+  background:
+    linear-gradient(
+      105deg,
+      #f0199a 0%,
+      #d82fd2 48%,
+      #754cff 100%
+    );
+  color: #ffffff;
+  box-shadow:
+    0 15px 38px rgba(113, 50, 200, 0.28);
+  font-size: clamp(14px, 1vw, 17px);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(18px);
+  animation:
+    nh-hero-copy-reveal
+    750ms
+    700ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+  transition:
+    transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 350ms ease;
+}
+
+.nh-hero-copy__button svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  transition:
+    transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes nh-hero-copy-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nh-hero-title-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nh-hero-copy__button:hover {
+    transform:
+      translateY(-3px)
+      scale(1.025);
+    box-shadow:
+      0 20px 50px rgba(113, 50, 200, 0.4);
+  }
+
+  .nh-hero-copy__button:hover svg {
+    transform: translateX(5px);
+  }
+}
+
+@media (max-width: 767px) {
+  .nh-hero-copy {
+    max-width: 100%;
+  }
+
+  .nh-hero-copy__eyebrow {
+    margin-bottom: 20px;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+  }
+
+  .nh-hero-copy__title {
+    font-size: clamp(43px, 13vw, 64px);
+    line-height: 0.88;
+  }
+
+  .nh-hero-copy__supporting {
+    margin-top: 26px;
+    font-size: 16px;
+  }
+
+  .nh-hero-copy__button {
+    min-height: 52px;
+    margin-top: 32px;
+    gap: 14px;
+    padding: 0 22px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .nh-hero-copy__title {
+    font-size: clamp(39px, 12.5vw, 52px);
+  }
+
+  .nh-hero-copy__button {
+    width: 100%;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nh-hero-copy__eyebrow,
+  .nh-hero-copy__title span,
+  .nh-hero-copy__supporting,
+  .nh-hero-copy__button {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none;
+  }
+}

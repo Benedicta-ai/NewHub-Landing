@@ -1,0 +1,52 @@
+/*
+ * Makes the Built Around You feature rows
+ * clickable and keyboard accessible.
+ */
+
+#services .nh-built-around-login-target {
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+#services .nh-built-around-login-target:focus-visible {
+  border-color: rgba(113, 50, 200, 0.42);
+  box-shadow:
+    0 0 0 4px rgba(113, 50, 200, 0.12),
+    0 18px 48px rgba(78, 48, 140, 0.08);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #services .nh-built-around-login-target:hover {
+    background: rgba(241, 240, 238, 0.96);
+    border-color: rgba(113, 50, 200, 0.2);
+    box-shadow:
+      0 18px 48px rgba(78, 48, 140, 0.08);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #services .nh-built-around-login-target {
+    transition: none;
+  }
+
+  #services .nh-built-around-login-target:hover {
+    transform: none;
+  }
+}
+
+footer .nh-footer-profile-login-link {
+  cursor: pointer;
+}
+
+footer .nh-footer-profile-login-link:focus-visible {
+  outline: 2px solid rgba(240, 25, 154, 0.75);
+  outline-offset: 5px;
+  border-radius: 4px;
+}

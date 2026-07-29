@@ -1,0 +1,1642 @@
+import {
+  type FormEvent,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import Lenis from "lenis";
+
+import {
+  Instagram,
+  Linkedin,
+} from "lucide-react";
+
+import HeroSplashCursor from "@/components/landing/hero/HeroSplashCursor";
+import LoginScreen from "@/components/landing/LoginScreen";
+
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CircleDotIcon,
+  CloseIcon,
+  GlobeIcon,
+  LogoMark,
+  MenuIcon,
+  StarIcon,
+} from "./icons";
+
+import LiquidMetaHumanReveal from "./LiquidMetaHumanReveal";
+import MolecularBackground from "./MolecularBackground";
+import NewHubHeroText from "./NewHubHeroText";
+import NewHubSideMenu from "./NewHubSideMenu";
+import BuiltAroundLoginRedirect from "./BuiltAroundLoginRedirect";
+import FooterProfileLoginRedirect from "./FooterProfileLoginRedirect";
+import {
+  RestoredDiscoverySections,
+  RestoredWhySection,
+} from "./RestoredNewHubSections";
+import NewHubBrand from "./NewHubBrand";
+import useAdaptiveGrid from "./useAdaptiveGrid";
+import useLiveClock from "./useLiveClock";
+import useReveal from "./useReveal";
+
+import "./NewHubLayers.css";
+import "./NewHubLayersPage.css";
+import "./NewHubBrandOverrides.css";
+import "./NewHubMenuFix.css";
+import "./NewHubScrollCinema.css";
+import "./NewHubHeroLogoSize.css";
+import "./NewHubHeroLayerFix.css";
+import "./NewHubHeroCopyFix.css";
+import "./NewHubMenuButtonBright.css";
+import "./RestoredNewHubFlow.css";
+import "./BuiltAroundContinuation.css";
+import "./BuiltForAllImmediateFix.css";
+
+interface PillButtonProps {
+  children: ReactNode;
+  variant:
+    | "dark"
+    | "light"
+    | "outline";
+  arrow?:
+    | "right"
+    | "up-right";
+  onClick?: () => void;
+  type?:
+    | "button"
+    | "submit";
+}
+
+interface RevealProps {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}
+
+interface LineRevealProps {
+  as:
+    | "h1"
+    | "h2";
+  lines: string[];
+  className: string;
+  delay?: number;
+  stagger?: number;
+}
+
+const INSTAGRAM_URL =
+  "https://www.instagram.com/matchglee?igsh=OWN5ZXF3YjE3eXAy";
+
+const LINKEDIN_URL =
+  "https://www.linkedin.com/company/matchglee/";
+
+const navigation = [
+  {
+    label: "Home",
+    target: "home",
+  },
+  {
+    label: "Platform",
+    target: "works",
+  },
+  {
+    label: "Features",
+    target: "services",
+  },
+  {
+    label: "About",
+    target: "about",
+  },
+  {
+    label: "Community",
+    target: "stats",
+  },
+  {
+    label: "Join",
+    target: "join",
+  },
+];
+
+const heroSlides = [
+  {
+    caption:
+      "Personal identity",
+    title:
+      "Express who you are.",
+  },
+  {
+    caption:
+      "Professional growth",
+    title:
+      "Show what you can do.",
+  },
+  {
+    caption:
+      "Meaningful community",
+    title:
+      "Connect with purpose.",
+  },
+];
+
+
+
+const portfolioItems = [
+  {
+    category:
+      "Identity",
+    year: "01",
+    name:
+      "Personal Identity",
+    description:
+      "Share your interests, moments and personality through one expressive personal space.",
+    tags: [
+      "Gallery",
+      "Stories",
+      "Interests",
+    ],
+  },
+  {
+    category:
+      "Growth",
+    year: "02",
+    name:
+      "Professional Identity",
+    description:
+      "Showcase your skills, experience, projects and professional journey with clarity.",
+    tags: [
+      "Skills",
+      "Experience",
+      "Portfolio",
+    ],
+  },
+  {
+    category:
+      "Discovery",
+    year: "03",
+    name:
+      "Meaningful Connections",
+    description:
+      "Discover people through shared interests, goals, communities and opportunities.",
+    tags: [
+      "Discovery",
+      "Followers",
+      "Messages",
+    ],
+  },
+  {
+    category:
+      "Control",
+    year: "04",
+    name:
+      "Privacy and Control",
+    description:
+      "Choose what you share, who sees it and how every part of your profile is experienced.",
+    tags: [
+      "Visibility",
+      "Privacy",
+      "Control",
+    ],
+  },
+];
+
+const services = [
+  {
+    index: "01",
+    title:
+      "Unified Profile",
+    description:
+      "Personal and professional identity within one connected profile.",
+  },
+  {
+    index: "02",
+    title:
+      "Authentic Connections",
+    description:
+      "Discover people through shared interests, ambitions and communities.",
+  },
+  {
+    index: "03",
+    title:
+      "Content Sharing",
+    description:
+      "Share personal moments and professional updates with the right audience.",
+  },
+  {
+    index: "04",
+    title:
+      "Privacy Control",
+    description:
+      "Control messaging, visibility, calls, posts and profile access.",
+  },
+];
+
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: RevealProps) {
+  const ref =
+    useReveal<HTMLDivElement>();
+
+  return (
+    <div
+      ref={ref}
+      className={[
+        "nh-reveal",
+        className,
+      ].join(" ")}
+      style={{
+        transitionDelay:
+          `${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function LineReveal({
+  as,
+  lines,
+  className,
+  delay = 0,
+  stagger = 120,
+}: LineRevealProps) {
+  const ref =
+    useReveal<HTMLDivElement>();
+
+  const Heading = as;
+
+  return (
+    <div
+      ref={ref}
+      className="nh-line-reveal"
+    >
+      <Heading
+        className={className}
+      >
+        {lines.map(
+          (line, index) => (
+            <span
+              className="nh-line-clip"
+              key={line}
+            >
+              <span
+                className="nh-line-inner"
+                style={{
+                  transitionDelay:
+                    `${
+                      delay +
+                      index *
+                        stagger
+                    }ms`,
+                }}
+              >
+                {line}
+              </span>
+            </span>
+          ),
+        )}
+      </Heading>
+    </div>
+  );
+}
+
+function PillButton({
+  children,
+  variant,
+  arrow,
+  onClick,
+  type = "button",
+}: PillButtonProps) {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      className={[
+        "nh-pill-button",
+        `nh-pill-button--${variant}`,
+        arrow
+          ? "nh-pill-button--with-arrow"
+          : "nh-pill-button--without-arrow",
+      ].join(" ")}
+    >
+      <span
+        className="nh-pill-button__inner"
+      >
+        {children}
+
+        {arrow && (
+          <span
+            className={[
+              "nh-pill-button__icon",
+              arrow === "right"
+                ? "nh-pill-button__icon--right"
+                : "nh-pill-button__icon--up-right",
+            ].join(" ")}
+          >
+            {arrow ===
+            "right" ? (
+              <ArrowRight />
+            ) : (
+              <ArrowUpRight />
+            )}
+          </span>
+        )}
+      </span>
+    </button>
+  );
+}
+
+function HeroCarousel() {
+  const [
+    activeIndex,
+    setActiveIndex,
+  ] = useState(0);
+
+  const move = (
+    direction: number,
+  ) => {
+    setActiveIndex(
+      (current) =>
+        (current +
+          direction +
+          heroSlides.length) %
+        heroSlides.length,
+    );
+  };
+
+  const activeSlide =
+    heroSlides[activeIndex];
+
+  return (
+    <div
+      className="nh-hero-card"
+    >
+      <button
+        className="nh-hero-card__row"
+        type="button"
+        onClick={() => move(1)}
+        aria-label="Show next NewHub feature"
+      >
+        <span
+          className="nh-hero-card__logo"
+        >
+          <LogoMark />
+        </span>
+
+        <span
+          className="nh-hero-card__panel"
+        >
+          <span
+            className="nh-hero-card__copy"
+            key={activeIndex}
+          >
+            <span
+              className="nh-hero-card__caption"
+            >
+              {
+                activeSlide.caption
+              }
+            </span>
+
+            <span
+              className="nh-hero-card__title"
+            >
+              {
+                activeSlide.title
+              }
+            </span>
+          </span>
+
+          <span
+            className="nh-hero-card__controls"
+          >
+            <span
+              className="nh-hero-card__dots"
+            >
+              {heroSlides.map(
+                (
+                  slide,
+                  index,
+                ) => (
+                  <span
+                    key={
+                      slide.caption
+                    }
+                    className={
+                      index ===
+                      activeIndex
+                        ? "is-active"
+                        : ""
+                    }
+                  />
+                ),
+              )}
+            </span>
+
+            <span
+              className="nh-hero-card__arrows"
+            >
+              <button
+                type="button"
+                onClick={(
+                  event,
+                ) => {
+                  event.stopPropagation();
+                  move(-1);
+                }}
+                aria-label="Previous feature"
+              >
+                <ArrowRight />
+              </button>
+
+              <button
+                type="button"
+                onClick={(
+                  event,
+                ) => {
+                  event.stopPropagation();
+                  move(1);
+                }}
+                aria-label="Next feature"
+              >
+                <ArrowRight />
+              </button>
+            </span>
+          </span>
+        </span>
+      </button>
+    </div>
+  );
+}
+
+interface StatItemProps {
+  value: number;
+  suffix?: string;
+  label: string;
+  pad?: boolean;
+}
+
+function StatItem({
+  value,
+  suffix = "",
+  label,
+  pad = false,
+}: StatItemProps) {
+  const itemRef =
+    useRef<HTMLLIElement | null>(
+      null,
+    );
+
+  const [displayValue, setDisplayValue] =
+    useState(0);
+
+  const [visible, setVisible] =
+    useState(false);
+
+  useEffect(() => {
+    let animationFrame = 0;
+    let lastUpdate = 0;
+
+    const update = (
+      time: number,
+    ) => {
+      if (
+        time - lastUpdate <
+        30
+      ) {
+        return;
+      }
+
+      lastUpdate = time;
+
+      const item =
+        itemRef.current;
+
+      if (!item) {
+        return;
+      }
+
+      const bounds =
+        item.getBoundingClientRect();
+
+      const viewportHeight =
+        window.innerHeight;
+
+      const distance =
+        viewportHeight / 2 +
+        bounds.height / 2;
+
+      const progress =
+        Math.min(
+          1,
+          Math.max(
+            0,
+            (viewportHeight -
+              bounds.top) /
+              distance,
+          ),
+        );
+
+      if (progress > 0) {
+        setVisible(true);
+      }
+
+      setDisplayValue(
+        Math.round(
+          progress * value,
+        ),
+      );
+    };
+
+    const schedule = () => {
+      window.cancelAnimationFrame(
+        animationFrame,
+      );
+
+      animationFrame =
+        window.requestAnimationFrame(
+          update,
+        );
+    };
+
+    schedule();
+
+    window.addEventListener(
+      "scroll",
+      schedule,
+      {
+        passive: true,
+      },
+    );
+
+    window.addEventListener(
+      "resize",
+      schedule,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        schedule,
+      );
+
+      window.removeEventListener(
+        "resize",
+        schedule,
+      );
+
+      window.cancelAnimationFrame(
+        animationFrame,
+      );
+    };
+  }, [value]);
+
+  const formatted =
+    pad
+      ? String(
+          displayValue,
+        ).padStart(2, "0")
+      : String(displayValue);
+
+  return (
+    <li
+      ref={itemRef}
+      className={[
+        "nh-stat",
+        visible
+          ? "is-visible"
+          : "",
+      ].join(" ")}
+    >
+      <div
+        className="nh-stat__value"
+      >
+        {formatted}
+        {suffix}
+      </div>
+
+      <p>{label}</p>
+    </li>
+  );
+}
+
+export default function NewHubLayersPage() {
+  useAdaptiveGrid();
+
+  const clock =
+    useLiveClock();
+
+  const lenisRef =
+    useRef<Lenis | null>(
+      null,
+    );
+
+  const [
+    menuOpen,
+    setMenuOpen,
+  ] = useState(false);
+
+  const [
+    modalOpen,
+    setModalOpen,
+  ] = useState(false);
+
+  const [
+    showLogin,
+    setShowLogin,
+  ] = useState(false);
+
+  const [
+    submitted,
+    setSubmitted,
+  ] = useState(false);
+
+  const [
+    submitting,
+    setSubmitting,
+  ] = useState(false);
+
+  const [ready, setReady] =
+    useState(false);
+
+  useEffect(() => {
+    window.history.scrollRestoration =
+      "manual";
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+
+    const lenis =
+      new Lenis({
+        smoothWheel: true,
+      });
+
+    lenisRef.current =
+      lenis;
+
+    let animationFrame = 0;
+
+    const raf = (
+      time: number,
+    ) => {
+      lenis.raf(time);
+
+      animationFrame =
+        window.requestAnimationFrame(
+          raf,
+        );
+    };
+
+    animationFrame =
+      window.requestAnimationFrame(
+        raf,
+      );
+
+    const readyFrame =
+      window.requestAnimationFrame(
+        () => {
+          setReady(true);
+        },
+      );
+
+    return () => {
+      window.cancelAnimationFrame(
+        animationFrame,
+      );
+
+      window.cancelAnimationFrame(
+        readyFrame,
+      );
+
+      lenis.destroy();
+
+      lenisRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const html =
+      document.documentElement;
+
+    if (
+      menuOpen ||
+      modalOpen ||
+      showLogin
+    ) {
+      lenisRef.current?.stop();
+
+      html.classList.add(
+        "nh-scroll-locked",
+      );
+    } else {
+      html.classList.remove(
+        "nh-scroll-locked",
+      );
+
+      lenisRef.current?.start();
+    }
+
+    return () => {
+      html.classList.remove(
+        "nh-scroll-locked",
+      );
+    };
+  }, [
+    menuOpen,
+    modalOpen,
+    showLogin,
+  ]);
+
+  useEffect(() => {
+    const handleEscape = (
+      event: KeyboardEvent,
+    ) => {
+      if (
+        event.key !== "Escape"
+      ) {
+        return;
+      }
+
+      if (modalOpen) {
+        setModalOpen(false);
+        return;
+      }
+
+      if (menuOpen) {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener(
+      "keydown",
+      handleEscape,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleEscape,
+      );
+    };
+  }, [
+    menuOpen,
+    modalOpen,
+  ]);
+
+  const scrollToId = (
+    id: string,
+  ) => {
+    const element =
+      document.getElementById(
+        id,
+      );
+
+    if (!element) {
+      return;
+    }
+
+    setMenuOpen(false);
+
+    window.setTimeout(() => {
+      lenisRef.current?.scrollTo(
+        element,
+        {
+          duration: 1.1,
+        },
+      );
+    }, 50);
+  };
+
+  const handleNavigation = (
+    target: string,
+  ) => {
+    if (target === "login") {
+      setMenuOpen(false);
+      setShowLogin(true);
+      return;
+    }
+
+    if (target === "join") {
+      setMenuOpen(false);
+      setModalOpen(true);
+      return;
+    }
+
+    scrollToId(target);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+
+    window.setTimeout(() => {
+      setSubmitted(false);
+      setSubmitting(false);
+    }, 300);
+  };
+
+  const handleSubmit = (
+    event: FormEvent<HTMLFormElement>,
+  ) => {
+    event.preventDefault();
+
+    setSubmitting(true);
+
+    window.setTimeout(() => {
+      setSubmitting(false);
+      setSubmitted(true);
+    }, 700);
+  };
+
+  return (
+    <div
+      className="newhub-layers-page"
+    >
+
+        <BuiltAroundLoginRedirect
+          onLogin={() =>
+            setShowLogin(true)
+          }
+        />
+
+        <FooterProfileLoginRedirect
+          onLogin={() =>
+            setShowLogin(true)
+          }
+        />
+
+      <LiquidMetaHumanReveal />
+      <div
+        className="nh-global-splash-cursor"
+        aria-hidden="true"
+      >
+        <HeroSplashCursor />
+      </div>
+      <div
+        className="nh-global-splash-cursor"
+        aria-hidden="true"
+      >
+      </div>
+      <a
+        className="nh-skip-link"
+        href="#main"
+      >
+        Skip to content
+      </a>
+
+      <header
+        className={[
+          "nh-header",
+          ready
+            ? "is-ready"
+            : "",
+        ].join(" ")}
+      >
+        <div
+          className="nh-shell nh-header__inner"
+        >
+          
+
+          
+
+          <div
+            className="nh-header__actions"
+          >
+            <button
+              type="button"
+              className="nh-menu-button"
+              onClick={() =>
+                setMenuOpen(true)
+              }
+              aria-label="Open navigation menu"
+            >
+              <MenuIcon />
+
+              <span>Menu</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main id="main">
+        <section
+          id="home"
+          className="nh-hero"
+        >
+          <button
+            type="button"
+            className="nh-hero-brand"
+            onClick={() =>
+              scrollToId("home")
+            }
+            aria-label="Go to the NewHub homepage"
+          >
+            <img
+              src="/images/matchglee-logo-new.png"
+              alt=""
+              draggable={false}
+              className="nh-hero-brand__logo"
+            />
+
+            <span
+              className="nh-hero-brand__text"
+            >
+              NEWHUB
+            </span>
+          </button>
+
+          <div
+            className="nh-hero__vignette"
+            aria-hidden="true"
+          />
+          <div
+            className={[
+              "nh-hero__watermark",
+              ready
+                ? "is-ready"
+                : "",
+            ].join(" ")}
+            aria-hidden="true"
+          >
+            NEWHUB
+          </div>
+
+          <div
+            className="nh-shell nh-hero__content"
+          >
+            <NewHubHeroText
+              onGetAccess={() =>
+                setModalOpen(true)
+              }
+            />
+
+            <div
+              className="nh-hero__right"
+            >
+              <Reveal
+                className="nh-hero__card-reveal"
+                delay={400}
+              >
+                <HeroCarousel />
+              </Reveal>
+
+              
+            </div>
+          </div>
+
+          <div
+            className={[
+              "nh-shell nh-hero__status",
+              ready
+                ? "is-ready"
+                : "",
+            ].join(" ")}
+          >
+            <span>
+              One unified profile
+            </span>
+
+            <span>
+              Personal and
+              professional
+            </span>
+
+            <span>
+              Scroll to explore
+              <b>↓</b>
+            </span>
+          </div>
+        </section>
+
+        <section
+          id="about"
+          className="nh-about"
+        >
+          <div
+            className="nh-shell nh-about__grid"
+          >
+            <div
+              className="nh-about__visual"
+            >
+              <GlobeIcon
+                className="nh-about__globe"
+              />
+
+              <Reveal>
+                <div
+                  className="nh-section-eyebrow"
+                >
+                  The Platform
+                </div>
+              </Reveal>
+
+              <Reveal
+                className="nh-about__distributed"
+                delay={160}
+              >
+                <GlobeIcon />
+
+                <span>
+                  Built for authentic
+                  connections across
+                  every part of life.
+                </span>
+              </Reveal>
+            </div>
+
+            <div
+              className="nh-about__statement"
+            >
+              <Reveal>
+                <h2>
+                  NewHub brings your
+                  personal identity,
+                  professional journey
+                  and{" "}
+                  <span>
+                    meaningful
+                    connections together
+                    in one unified
+                    digital experience.
+                  </span>
+                </h2>
+              </Reveal>
+
+              <Reveal
+                className="nh-about__footer"
+                delay={200}
+              >
+                <div>
+                  <p>
+                    Find us online
+                  </p>
+
+                  <div
+                    className="nh-socials"
+                  >
+                    <a
+                      href={INSTAGRAM_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Open NewHub on Instagram"
+                    >
+                      <Instagram />
+                    </a>
+
+                    <a
+                      href={LINKEDIN_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Open NewHub on LinkedIn"
+                    >
+                      <Linkedin />
+                    </a>
+                  </div>
+                </div>
+
+                <PillButton
+                  variant="outline"
+                  arrow="right"
+                  onClick={() =>
+                    scrollToId(
+                      "services",
+                    )
+                  }
+                >
+                  Discover NewHub
+                </PillButton>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="nh-create-band"
+          aria-label="Be seen fully"
+        
+          data-be-seen-boundary="true"
+        >
+          <ul
+            className="nh-shell"
+          >
+            {[
+              {
+                label: "Be",
+                variant:
+                  "light",
+              },
+              {
+                label: "Seen",
+                variant:
+                  "accent",
+              },
+              {
+                label: "",
+                variant:
+                  "dark",
+              },
+              {
+                label: "Fully",
+                variant:
+                  "ghost",
+              },
+            ].map(
+              (
+                item,
+                index,
+              ) => (
+                <li
+                  key={
+                    item.label ||
+                    "arrow"
+                  }
+                >
+                  <Reveal
+                    delay={
+                      index * 120
+                    }
+                  >
+                    <div
+                      className={`nh-create-tile nh-create-tile--${item.variant}`}
+                    >
+                      {item.label ? (
+                        item.label
+                      ) : (
+                        <ArrowRight />
+                      )}
+                    </div>
+                  </Reveal>
+                </li>
+              ),
+            )}
+          </ul>
+        </section>
+
+                <RestoredDiscoverySections />
+
+        <section
+          id="services"
+          className="nh-services"
+        >
+          <MolecularBackground
+            variant="light"
+          />
+
+          <div
+            className="nh-shell nh-services__inner"
+          >
+            <Reveal>
+              <div
+                className="nh-section-eyebrow"
+              >
+                Features
+              </div>
+            </Reveal>
+
+            <LineReveal
+              as="h2"
+              className="nh-services__title"
+              delay={120}
+              lines={[
+                "Built around you",
+              ]}
+            />
+
+            <ul
+              className="nh-services__list"
+            >
+              {services.map(
+                (
+                  service,
+                  index,
+                ) => (
+                  <li
+                    key={
+                      service.index
+                    }
+                  >
+                    <Reveal
+                      delay={
+                        index *
+                        80
+                      }
+                    >
+                      <button
+                        type="button"
+                        className="nh-service-row"
+                        onClick={() =>
+                          setModalOpen(
+                            true,
+                          )
+                        }
+                      >
+                        <span
+                          className="nh-service-row__index"
+                        >
+                          {
+                            service.index
+                          }
+                        </span>
+
+                        <h3>
+                          {
+                            service.title
+                          }
+                        </h3>
+
+                        <p>
+                          {
+                            service.description
+                          }
+                        </p>
+
+                        <span
+                          className="nh-service-row__arrow"
+                        >
+                          <ArrowUpRight />
+                        </span>
+                      </button>
+                    </Reveal>
+                  </li>
+                ),
+              )}
+            </ul>
+          </div>
+        </section>
+
+        <RestoredWhySection />
+
+        
+      </main>
+
+      <footer
+        className="nh-footer"
+      >
+        <div
+          className="nh-shell nh-footer__inner"
+        >
+          <div
+            className="nh-footer__cta"
+          >
+            <LineReveal
+              as="h2"
+              className="nh-footer__heading"
+              stagger={100}
+              lines={[
+                "Ready to bring",
+                "every side of you",
+                "together?",
+              ]}
+            />
+
+            <PillButton
+              variant="light"
+              arrow="up-right"
+              onClick={() =>
+                setModalOpen(true)
+              }
+            >
+              Get Early Access
+            </PillButton>
+          </div>
+
+          <div
+            className="nh-footer__columns"
+          >
+            <div
+              className="nh-footer__brand"
+            >
+              <div>
+                <NewHubBrand />
+              </div>
+
+              <p>
+                A unified social
+                platform for personal
+                expression,
+                professional growth
+                and meaningful
+                connections.
+              </p>
+            </div>
+
+            {[
+              {
+                title:
+                  "Platform",
+                links: [
+                  "About",
+                  "Features",
+                  "Community",
+                  "Early Access",
+                ],
+              },
+              {
+                title:
+                  "Explore",
+                links: [
+                  "Personal Profile",
+                  "Professional Profile",
+                  "Privacy",
+                  "Discovery",
+                ],
+              },
+              {
+                title:
+                  "Social",
+                links: [
+                  "Instagram",
+                  "LinkedIn",
+                ],
+              },
+            ].map(
+              (column) => (
+                <div
+                  className="nh-footer__column"
+                  key={
+                    column.title
+                  }
+                >
+                  <h3>
+                    {
+                      column.title
+                    }
+                  </h3>
+
+                  <ul>
+                    {column.links.map(
+                      (link) => (
+                        <li
+                          key={
+                            link
+                          }
+                        >
+                          <a
+                            className="nh-animated-link"
+                            href="#home"
+                          >
+                            <span>
+                              {
+                                link
+                              }
+                            </span>
+                          </a>
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                </div>
+              ),
+            )}
+          </div>
+
+          <div
+            className="nh-footer__legal"
+          >
+            <span>
+              ©{" "}
+              {new Date().getFullYear()}{" "}
+              NewHub. All rights
+              reserved.
+            </span>
+
+            <div>
+              <a
+                href="#privacy"
+                className="nh-animated-link"
+              >
+                <span>
+                  Privacy
+                </span>
+              </a>
+
+              <a
+                href="#terms"
+                className="nh-animated-link"
+              >
+                <span>
+                  Terms
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="nh-footer__watermark"
+          aria-hidden="true"
+        >
+          NEWHUB
+        </div>
+      </footer>
+
+      {showLogin && (
+        <LoginScreen
+          onClose={() =>
+            setShowLogin(false)
+          }
+        />
+      )}
+
+      {showLogin && (
+        <div
+          className="nh-login-layer"
+        >
+          <LoginScreen
+            onClose={() =>
+              setShowLogin(false)
+            }
+          />
+        </div>
+      )}
+
+      {menuOpen && (
+        <NewHubSideMenu
+          onClose={() =>
+            setMenuOpen(false)
+          }
+          onAbout={() => {
+            setMenuOpen(false);
+
+            window.setTimeout(
+              () =>
+                scrollToId(
+                  "about",
+                ),
+              80,
+            );
+          }}
+          onBuiltAroundYou={() => {
+            setMenuOpen(false);
+
+            window.setTimeout(
+              () =>
+                scrollToId(
+                  "services",
+                ),
+              80,
+            );
+          }}
+          onLogin={() => {
+            setMenuOpen(false);
+            setShowLogin(true);
+          }}
+        />
+      )}
+
+      {modalOpen && (
+        <div
+          className="nh-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="newhub-modal-title"
+          onMouseDown={
+            closeModal
+          }
+        >
+          <div
+            className="nh-modal__panel"
+            onMouseDown={(
+              event,
+            ) =>
+              event.stopPropagation()
+            }
+          >
+            <button
+              type="button"
+              className="nh-modal__close"
+              onClick={
+                closeModal
+              }
+              aria-label="Close early access form"
+            >
+              <CloseIcon />
+            </button>
+
+            {submitted ? (
+              <div
+                className="nh-modal__success"
+              >
+                <div>
+                  <LogoMark />
+                </div>
+
+                <h2
+                  id="newhub-modal-title"
+                >
+                  You’re on the list
+                </h2>
+
+                <p>
+                  Thanks for joining —
+                  we’ll share NewHub
+                  access updates with
+                  you soon.
+                </p>
+
+                <PillButton
+                  variant="dark"
+                  onClick={
+                    closeModal
+                  }
+                >
+                  Close
+                </PillButton>
+              </div>
+            ) : (
+              <>
+                <div
+                  className="nh-modal__heading"
+                >
+                  <div>
+                    <span />
+
+                    Join NewHub
+                  </div>
+
+                  <h2
+                    id="newhub-modal-title"
+                  >
+                    Get early access to
+                    a more complete
+                    social identity.
+                  </h2>
+                </div>
+
+                <form
+                  onSubmit={
+                    handleSubmit
+                  }
+                >
+                  <label>
+                    <span>
+                      Name
+                    </span>
+
+                    <input
+                      type="text"
+                      required
+                      placeholder="Your name"
+                    />
+                  </label>
+
+                  <label>
+                    <span>
+                      Email
+                    </span>
+
+                    <input
+                      type="email"
+                      required
+                      placeholder="you@example.com"
+                    />
+                  </label>
+
+                  <label>
+                    <span>
+                      What brings you
+                      to NewHub?
+                    </span>
+
+                    <textarea
+                      rows={4}
+                      required
+                      placeholder="Tell us what you want from a platform that combines your personal and professional world."
+                    />
+                  </label>
+
+                  <div
+                    className="nh-modal__submit"
+                  >
+                    <p>
+                      We’ll only
+                      contact you
+                      about NewHub
+                      access.
+                    </p>
+
+                    <PillButton
+                      type="submit"
+                      variant="dark"
+                      arrow="up-right"
+                    >
+                      {submitting
+                        ? "Sending…"
+                        : "Request Access"}
+                    </PillButton>
+                  </div>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

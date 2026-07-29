@@ -1,0 +1,213 @@
+/*
+ * Continues the existing Built Around You
+ * section into the tilted-card area.
+ */
+
+.nh-built-around-continuation {
+  position: relative;
+  isolation: isolate;
+  margin-top: -1px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 16% 16%,
+      rgba(240, 25, 154, 0.055),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 84% 76%,
+      rgba(113, 50, 200, 0.065),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fcfaff 48%,
+      #ffffff 100%
+    );
+}
+
+.nh-built-around-continuation::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.72),
+      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0.72)
+    );
+  content: "";
+  pointer-events: none;
+}
+
+.nh-built-around-continuation
+> .nh-molecular-background {
+  z-index: 0;
+  opacity: 0.68;
+}
+
+.nh-built-around-continuation__content {
+  position: relative;
+  z-index: 2;
+}
+
+.nh-built-around-cards {
+  position: relative;
+  margin: 0;
+  padding:
+    32px
+    38px
+    96px;
+  background: transparent;
+}
+
+.nh-built-around-cards__inner {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+.nh-built-around-cards__grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+  gap: 20px;
+}
+
+.nh-built-around-card {
+  min-width: 0;
+}
+
+.nh-built-around-card__label {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding:
+    0
+    18px;
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.24);
+  border-radius: 9999px;
+  background:
+    rgba(10, 1, 24, 0.58);
+  color: #ffffff;
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.18);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  backdrop-filter:
+    blur(12px);
+  -webkit-backdrop-filter:
+    blur(12px);
+}
+
+.nh-built-around-cards__closing {
+  width: min(
+    100%,
+    760px
+  );
+  margin:
+    48px
+    auto
+    0;
+  padding:
+    20px
+    28px;
+  border:
+    1px solid
+    rgba(113, 50, 200, 0.14);
+  border-radius: 24px;
+  background:
+    rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 16px 50px
+    rgba(78, 48, 140, 0.07);
+  text-align: center;
+  backdrop-filter:
+    blur(12px);
+  -webkit-backdrop-filter:
+    blur(12px);
+}
+
+.nh-built-around-cards__closing p {
+  margin: 0;
+  color:
+    rgba(23, 21, 42, 0.66);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+/*
+ * Reduce the gap below the existing
+ * Built Around You feature list.
+ */
+
+.nh-services {
+  padding-bottom: 32px;
+}
+
+@media (max-width: 1023px) {
+  .nh-built-around-cards__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+  .nh-built-around-card:last-child {
+    grid-column:
+      1 / -1;
+    width: min(
+      100%,
+      560px
+    );
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .nh-built-around-continuation
+  > .nh-molecular-background {
+    opacity: 0.46;
+  }
+
+  .nh-built-around-cards {
+    padding:
+      22px
+      20px
+      72px;
+  }
+
+  .nh-built-around-cards__grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .nh-built-around-card:last-child {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .nh-built-around-cards__closing {
+    margin-top: 36px;
+    padding:
+      18px
+      20px;
+    border-radius: 20px;
+  }
+
+  .nh-services {
+    padding-bottom: 22px;
+  }
+}

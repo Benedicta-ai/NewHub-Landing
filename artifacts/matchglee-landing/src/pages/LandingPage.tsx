@@ -1,47 +1,29 @@
-import { useState } from "react";
-import SplashScreen from "@/components/landing/SplashScreen";
-import MainPage from "@/components/landing/MainPage";
-import QuizPhase from "@/components/landing/QuizPhase";
-import CinematicIntro from "@/components/landing/CinematicIntro";
-import GetEarlyAccessPhase from "@/components/landing/GetEarlyAccessPhase";
-import LoginScreen from "@/components/landing/LoginScreen";
+import {
+  useState,
+} from "react";
 
-type Phase = "splash" | "main" | "quiz" | "cinematic" | "getAccess";
+import NewHubLayersPage from "@/components/getlayers-newhub/NewHubLayersPage";
+import SplashScreen from "@/components/landing/SplashScreen";
+
+type Phase =
+  | "splash"
+  | "main";
 
 export default function LandingPage() {
-  const [phase, setPhase] = useState<Phase>("splash");
-  const [showLogin, setShowLogin] = useState(false);
+  const [phase, setPhase] =
+    useState<Phase>(
+      "splash",
+    );
 
   if (phase === "splash") {
-    return <SplashScreen onFinish={() => setPhase("main")} />;
+    return (
+      <SplashScreen
+        onFinish={() =>
+          setPhase("main")
+        }
+      />
+    );
   }
 
-  return (
-    <>
-      {showLogin && <LoginScreen onClose={() => setShowLogin(false)} />}
-
-      {phase === "main" && (
-        <MainPage
-          onStartQuiz={() => setPhase("quiz")}
-          onGetAccess={() => setPhase("getAccess")}
-          onLogin={() => setShowLogin(true)}
-        />
-      )}
-
-      {phase === "quiz" && (
-        <QuizPhase
-          onComplete={() => setPhase("cinematic")}
-          onExit={() => setPhase("main")}
-        />
-      )}
-
-      {phase === "cinematic" && (
-        <CinematicIntro onComplete={() => setPhase("getAccess")} />
-      )}
-
-      {phase === "getAccess" && (
-        <GetEarlyAccessPhase onDone={() => setPhase("main")} />
-      )}
-    </>
-  );
+  return <NewHubLayersPage />;
 }

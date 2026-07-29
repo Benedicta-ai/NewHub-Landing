@@ -1,0 +1,131 @@
+/*
+ * Be Seen Fully must be followed immediately
+ * by the Built for All section.
+ */
+
+/* Collapse the cinematic section to its visible content. */
+section[data-be-seen-boundary="true"] {
+  position: relative !important;
+  z-index: 30 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  overflow: hidden !important;
+}
+
+/*
+ * The MetaHuman/cinema media may remain inside the section,
+ * but it must not add another viewport of document height.
+ */
+section[data-be-seen-boundary="true"]
+> .nh-scroll-cinema-media,
+section[data-be-seen-boundary="true"]
+> [class*="cinema-media"],
+section[data-be-seen-boundary="true"]
+> [class*="metahuman"],
+section[data-be-seen-boundary="true"]
+> [class*="meta-human"],
+section[data-be-seen-boundary="true"]
+> video,
+section[data-be-seen-boundary="true"]
+> canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  pointer-events: none !important;
+}
+
+/* Remove common cinema spacer elements. */
+section[data-be-seen-boundary="true"]
+.nh-scroll-cinema-spacer,
+section[data-be-seen-boundary="true"]
+[class*="cinema-spacer"],
+section[data-be-seen-boundary="true"]
+[class*="scroll-spacer"],
+section[data-be-seen-boundary="true"]
+[class*="pin-spacer"] {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/*
+ * Keep the Be / Seen / Arrow / Fully block above
+ * the remaining MetaHuman visual.
+ */
+section[data-be-seen-boundary="true"]
+.nh-create-band,
+section[data-be-seen-boundary="true"]
+[class*="create-band"] {
+  position: relative !important;
+  z-index: 40 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Built for All begins directly at the boundary. */
+section[data-be-seen-boundary="true"]
++ .nh-restored-discovery,
+.nh-create-band
++ .nh-restored-discovery {
+  margin-top: 0 !important;
+}
+
+.nh-restored-discovery {
+  position: relative !important;
+  z-index: 50 !important;
+  margin-top: 0 !important;
+}
+
+/*
+ * Give Built for All its own opaque background so the released
+ * MetaHuman cannot remain visible behind the section.
+ */
+.nh-restored-discovery #built-for-all {
+  position: relative !important;
+  z-index: 2 !important;
+  margin-top: 0 !important;
+  background:
+    radial-gradient(
+      circle at 18% 18%,
+      rgba(240, 25, 154, 0.12),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 82% 52%,
+      rgba(113, 50, 200, 0.14),
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      #0a0118 0%,
+      #100220 52%,
+      #0a0118 100%
+    ) !important;
+}
+
+/* Stop the fixed MetaHuman once Built for All is reached. */
+body:has(#built-for-all:first-child)
+.nh-scroll-cinema-media {
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  section[data-be-seen-boundary="true"] {
+    padding-bottom: 0 !important;
+  }
+
+  .nh-restored-discovery #built-for-all {
+    padding-top: 64px !important;
+  }
+}

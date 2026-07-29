@@ -1,0 +1,23 @@
+/*
+ * Final hero copy adjustments.
+ * The existing hero structure and positions
+ * remain unchanged.
+ */
+
+/* Remove the large NEWHUB watermark */
+.nh-hero__watermark {
+  display: none !important;
+}
+
+/* Give the new single-line heading suitable width */
+.nh-hero__heading {
+  max-width: 16ch;
+}
+
+/* Supporting sentence visibility */
+.nh-hero__rating strong {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 600;
+  text-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.65);
+}

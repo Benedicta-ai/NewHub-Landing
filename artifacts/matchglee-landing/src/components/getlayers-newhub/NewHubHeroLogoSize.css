@@ -1,0 +1,79 @@
+/*
+ * Hero top-left NewHub brand.
+ * Displays the logo symbol and NEWHUB text.
+ */
+
+.nh-hero-brand {
+  display: inline-flex;
+  width: auto;
+  min-width: 0;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 18px 0 13px;
+  overflow: visible;
+  border: 1px solid rgba(240, 25, 154, 0.16);
+  border-radius: 9999px;
+  background: rgba(10, 1, 24, 0.2);
+  box-shadow: 0 10px 30px rgba(10, 1, 24, 0.16);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 300ms ease,
+    background-color 300ms ease;
+}
+
+.nh-hero-brand__logo {
+  display: block;
+  width: 27px;
+  height: 27px;
+  max-width: none;
+  flex: 0 0 27px;
+  object-fit: contain;
+}
+
+.nh-hero-brand__text {
+  display: inline-block;
+  background: linear-gradient(
+    100deg,
+    #f0199a 0%,
+    #d82fd2 48%,
+    #754cff 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nh-hero-brand:hover {
+    border-color: rgba(240, 25, 154, 0.38);
+    background-color: rgba(10, 1, 24, 0.36);
+    transform: scale(1.035);
+  }
+}
+
+@media (max-width: 639px) {
+  .nh-hero-brand {
+    height: 46px;
+    gap: 8px;
+    padding: 0 14px 0 11px;
+  }
+
+  .nh-hero-brand__logo {
+    width: 23px;
+    height: 23px;
+    flex-basis: 23px;
+  }
+
+  .nh-hero-brand__text {
+    font-size: 14px;
+  }
+}

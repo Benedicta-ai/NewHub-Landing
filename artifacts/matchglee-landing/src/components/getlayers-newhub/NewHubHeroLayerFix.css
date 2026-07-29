@@ -1,0 +1,124 @@
+/*
+ * Hero stacking order:
+ *
+ * 0  — large NEWHUB watermark
+ * 1  — fixed Metal Human video
+ * 2+ — colour effects and vignette
+ * 20 — hero text, CTA and feature card
+ * 45 — logo
+ * 50 — menu/header
+ */
+
+.newhub-layers-page {
+  position: relative;
+  isolation: isolate;
+}
+
+/*
+ * Do not place the whole hero above the video.
+ * Its individual children control their own layers.
+ */
+.nh-hero {
+  position: relative;
+  z-index: auto !important;
+  isolation: auto !important;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+/* Large NEWHUB word behind the Metal Human */
+.nh-hero__WHUB word behind the Metal Human */
+.nh-hero__watermark {
+  position: absolute;
+  z-index: 0 !important;
+  pointer-events: none;
+}
+
+/* Fixed Metal Human layer */
+.nh-scroll-cinema-media {
+  position: fixed !important;
+  z-index: 1 !important;
+  pointer-events: none;
+}
+
+/* Video and poster remain above the watermark */
+.nh-scroll-cinema-media__poster {
+  z-index: 1;
+}
+
+.nh-scroll-cinema-media__video {
+  z-index: 2;
+}
+
+/* NewHub colour treatment over the video */
+.nh-scroll-cinema-media__colour {
+  z-index: 3;
+}
+
+.nh-scroll-cinema-media__shade {
+  z-index: 4;
+}
+
+/*
+ * Hero visual treatments stay above the video,
+ * but below the readable content.
+ */
+.nh-hero::before {
+  z-index: 5 !important;
+}
+
+.nh-hero__vignette {
+  z-index: 6 !important;
+}
+
+/* Heading, subtext, CTA and feature card */
+.nh-hero__content,
+.nh-hero__status {
+  position: relative;
+  z-index: 20 !important;
+}
+
+.nh-hero__left,
+.nh-hero__right,
+.nh-hero__card-reveal {
+  position: relative;
+  z-index: 21;
+}
+
+/* Top-left logo */
+.nh-hero-brand {
+  z-index: 45 !important;
+}
+
+/* Header and Menu button */
+.nh-header {
+  z-index: 50 !important;
+}
+
+/*
+ * Sections after the hero remain above the
+ * pinned cinema while they scroll normally.
+ */
+.nh-about,
+.nh-create-band {
+  position: relative;
+  z-index: 10;
+}
+
+.nh-portfolio,
+.nh-services,
+.nh-stats,
+.nh-footer {
+  position: relative;
+  z-index: 30;
+}
+
+/*
+ * Keep the watermark visible behind the subject
+ * without allowing it to overpower the video.
+ */
+.nh-hero__watermark {
+  color: rgba(255, 255, 255, 0.18) !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal;
+}

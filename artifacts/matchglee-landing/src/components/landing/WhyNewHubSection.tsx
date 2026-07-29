@@ -1,13 +1,16 @@
-import { motion, useReducedMotion } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import {
+  motion,
+  useReducedMotion,
+} from "framer-motion";
 
-import { BRAND_GRADIENT_TEXT } from "@/lib/brand";
 import TiltedCard from "./effects/TiltedCard";
-import ScrollFloat from "@/components/ScrollFloat";
 
-const privacyImage = "/tilted-cards/privacy-first.webp";
+const privacyImage =
+  "/tilted-cards/privacy-first.webp";
+
 const meaningfulConnectionImage =
   "/tilted-cards/meaningful-connections.webp";
+
 const everythingInOnePlaceImage =
   "/tilted-cards/everything-in-one-place.webp";
 
@@ -22,19 +25,25 @@ const reasons: ReasonCardData[] = [
   {
     title: "Privacy First",
     image: privacyImage,
-    imageAlt: "Keys representing personal privacy and control",
+    imageAlt:
+      "Keys representing personal privacy and control",
     delay: 0.05,
   },
   {
     title: "Meaningful Connection",
-    image: meaningfulConnectionImage,
-    imageAlt: "Hands connected through a shared thread",
+    image:
+      meaningfulConnectionImage,
+    imageAlt:
+      "Hands connected through a shared thread",
     delay: 0.15,
   },
   {
-    title: "Everything in One Place",
-    image: everythingInOnePlaceImage,
-    imageAlt: "A connected person bringing different parts of life together",
+    title:
+      "Everything in One Place",
+    image:
+      everythingInOnePlaceImage,
+    imageAlt:
+      "People connected through one shared network",
     delay: 0.25,
   },
 ];
@@ -43,14 +52,19 @@ interface ReasonCardProps {
   reason: ReasonCardData;
 }
 
-function ReasonCard({ reason }: ReasonCardProps) {
-  const reduceMotion = useReducedMotion();
+function ReasonCard({
+  reason,
+}: ReasonCardProps) {
+  const reduceMotion =
+    Boolean(useReducedMotion());
 
   return (
     <motion.div
       initial={
         reduceMotion
-          ? { opacity: 0 }
+          ? {
+              opacity: 0,
+            }
           : {
               opacity: 0,
               y: 34,
@@ -67,11 +81,22 @@ function ReasonCard({ reason }: ReasonCardProps) {
         amount: 0.2,
       }}
       transition={{
-        duration: 0.7,
-        delay: reason.delay,
-        ease: [0.22, 1, 0.36, 1],
+        duration:
+          reduceMotion
+            ? 0
+            : 0.7,
+        delay:
+          reduceMotion
+            ? 0
+            : reason.delay,
+        ease: [
+          0.22,
+          1,
+          0.36,
+          1,
+        ],
       }}
-      className="min-w-0"
+      className="nh-built-around-card"
     >
       <TiltedCard
         imageSrc={reason.image}
@@ -88,7 +113,7 @@ function ReasonCard({ reason }: ReasonCardProps) {
         overlayContent={
           <div className="relative h-full w-full">
             <div className="absolute left-5 top-5 sm:left-6 sm:top-6">
-              <div className="rounded-full border border-white/20 bg-black/35 px-4 py-2 text-xs font-semibold tracking-[-0.01em] text-white shadow-[0_8px_24px_rgba(0,0,0,0.18)] backdrop-blur-lg sm:px-5 sm:py-2.5 sm:text-sm">
+              <div className="nh-built-around-card__label">
                 {reason.title}
               </div>
             </div>
@@ -103,81 +128,18 @@ export default function WhyNewHubSection() {
   return (
     <section
       id="why-newhub"
-      className="relative isolate overflow-hidden bg-transparent px-5 pb-24 pt-6 sm:px-7 sm:pb-28 sm:pt-6 lg:px-10 lg:pb-32 lg:pt-8"
+      className="nh-built-around-cards"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[53%] h-[650px] w-[min(1100px,115vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7132C8]/10 blur-[175px] dark:bg-[#7132C8]/[0.07]"
-      />
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-36 top-[20%] h-80 w-80 rounded-full bg-[#F0199A]/10 blur-[125px] dark:bg-[#F0199A]/[0.06]"
-      />
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-36 bottom-[10%] h-80 w-80 rounded-full bg-blue-400/10 blur-[125px] dark:bg-blue-500/[0.06]"
-      />
-
-      <div className="relative z-10 mx-auto max-w-[1180px]">
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 24,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.45,
-          }}
-          transition={{
-            duration: 0.75,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="mx-auto mb-11 max-w-3xl text-center sm:mb-14"
-        >
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#7132C8]/15 bg-white/65 px-5 py-2.5 shadow-[0_10px_35px_rgba(78,48,140,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.035] dark:shadow-none">
-            <Sparkles className="h-3.5 w-3.5 text-[#F0199A]" />
-
-            <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#746f88] dark:text-white/45 sm:text-[11px]">
-              Why NewHub?
-            </span>
-          </div>
-
-          <ScrollFloat
-            tag="h2"
-            animationDuration={1}
-            ease="back.inOut(2)"
-            scrollStart="center bottom+=50%"
-            scrollEnd="bottom bottom-=40%"
-            stagger={0.03}
-            scrub
-            respectReducedMotion
-            containerClassName="text-[34px] font-black leading-tight tracking-[-0.05em] text-[#17152a] dark:text-white sm:text-[43px] md:text-[52px]"
-            segments={[
-              {
-                text: "Built around ",
-              },
-              {
-                text: "you.",
-                className: BRAND_GRADIENT_TEXT,
-              },
-            ]}
-          />
-
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#6d6a80] dark:text-white/48 sm:text-base">
-            Private. Meaningful. Connected.
-          </p>
-        </motion.div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {reasons.map((reason) => (
-            <ReasonCard key={reason.title} reason={reason} />
-          ))}
+      <div className="nh-built-around-cards__inner">
+        <div className="nh-built-around-cards__grid">
+          {reasons.map(
+            (reason) => (
+              <ReasonCard
+                key={reason.title}
+                reason={reason}
+              />
+            ),
+          )}
         </div>
 
         <motion.div
@@ -195,11 +157,17 @@ export default function WhyNewHubSection() {
           }}
           transition={{
             duration: 0.7,
-            delay: 0.3,
+            delay: 0.25,
+            ease: [
+              0.22,
+              1,
+              0.36,
+              1,
+            ],
           }}
-          className="mx-auto mt-12 max-w-3xl rounded-[24px] border border-[#7132C8]/15 bg-white/55 px-6 py-5 text-center shadow-[0_16px_50px_rgba(78,48,140,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.035] dark:shadow-none sm:px-8"
+          className="nh-built-around-cards__closing"
         >
-          <p className="text-sm leading-7 text-[#6f6b81] dark:text-white/42">
+          <p>
             Grow without compromise.
           </p>
         </motion.div>

@@ -1,11 +1,13 @@
 import {
-  motion,
+  useRef,
+} from "react";
+
+import {
   useReducedMotion,
 } from "framer-motion";
 
-import heroCrowd from "@/assets/hero-crowd.png";
-
 import AnimatedHeadline from "./AnimatedHeadline";
+import HeroCinemaCanvas from "./HeroCinemaCanvas";
 import HeroSplashCursor from "./HeroSplashCursor";
 import ScrollHint from "./ScrollHint";
 
@@ -16,191 +18,91 @@ interface HeroSectionProps {
 export default function HeroSection({
   onGetAccess,
 }: HeroSectionProps) {
-  const reduceMotion = useReducedMotion();
+  const sectionRef =
+    useRef<HTMLElement | null>(
+      null,
+    );
+
+  const reduceMotion =
+    useReducedMotion();
 
   return (
     <section
+      ref={sectionRef}
       id="about"
-      className="
+      className={`
         relative
         isolate
-        min-h-[100svh]
-        overflow-hidden
         bg-[#f8f6ff]
         transition-colors
         duration-500
         dark:bg-[#05070C]
-      "
+        ${
+          reduceMotion
+            ? "min-h-[100svh]"
+            : "h-[420svh] sm:h-[460svh] lg:h-[520svh]"
+        }
+      `}
     >
-      {/* Continuous hero base */}
       <div
-        aria-hidden="true"
         className="
-          pointer-events-none
-          absolute
-          inset-0
-          z-0
-          bg-[linear-gradient(135deg,#ffffff_0%,#faf7ff_46%,#f8f6ff_100%)]
-          dark:bg-[linear-gradient(135deg,#05070C_0%,#070311_48%,#0A0118_100%)]
-        "
-      />
-
-      {/* Purple atmosphere */}
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -right-[12%]
-          top-[3%]
-          z-[1]
-          h-[700px]
-          w-[700px]
-          rounded-full
-          bg-[#7132C8]/14
-          blur-[155px]
-          dark:bg-[#7132C8]/16
-        "
-      />
-
-      {/* Pink atmosphere */}
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          bottom-[8%]
-          right-[12%]
-          z-[1]
-          h-[320px]
-          w-[320px]
-          rounded-full
-          bg-[#F0199A]/10
-          blur-[120px]
-          dark:bg-[#F0199A]/[0.09]
-        "
-      />
-
-      {/* Full-bleed crowd artwork */}
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          z-[2]
+          sticky
+          top-0
+          h-[100svh]
           overflow-hidden
         "
       >
-        <motion.img
-          src={heroCrowd}
-          alt=""
-          draggable={false}
-          loading="eager"
-          fetchPriority="high"
-          initial={
-            reduceMotion
-              ? {
-                  opacity: 1,
-                }
-              : {
-                  opacity: 0,
-                  scale: 1.035,
-                  x: 20,
-                }
-          }
-          animate={{
-            opacity: 1,
-            scale: 1,
-            x: 0,
-          }}
-          transition={{
-            duration: 1.2,
-            delay: 0.06,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="
-            absolute
-            inset-0
-            h-full
-            w-full
-            select-none
-            object-cover
-            object-[72%_50%]
-          "
-        />
-
-        {/* Light-theme text-side blend */}
+        {/* Theme-compatible base */}
         <div
           aria-hidden="true"
           className="
+            pointer-events-none
             absolute
             inset-0
-            dark:hidden
+            z-0
+            bg-[linear-gradient(135deg,#ffffff_0%,#faf7ff_46%,#f8f6ff_100%)]
+            dark:bg-[linear-gradient(135deg,#05070C_0%,#070311_48%,#0A0118_100%)]
           "
-          style={{
-            background: `
-              linear-gradient(
-                90deg,
-                #f8f6ff 0%,
-                rgba(248,246,255,0.99) 17%,
-                rgba(248,246,255,0.93) 30%,
-                rgba(248,246,255,0.70) 44%,
-                rgba(248,246,255,0.34) 59%,
-                rgba(248,246,255,0.08) 74%,
-                transparent 88%
-              )
-            `,
-          }}
         />
 
-        {/* Light-theme upper corner blend */}
+        {/* Metal Human scroll cinema */}
+        <HeroCinemaCanvas
+          sectionRef={sectionRef}
+        />
+
+        {/* Left-side readability layer */}
         <div
           aria-hidden="true"
           className="
+            pointer-events-none
             absolute
             inset-0
-            dark:hidden
+            z-[3]
+            bg-[linear-gradient(90deg,rgba(248,246,255,0.97)_0%,rgba(248,246,255,0.92)_16%,rgba(248,246,255,0.72)_31%,rgba(248,246,255,0.38)_46%,rgba(248,246,255,0.10)_61%,transparent_78%)]
+            dark:bg-[linear-gradient(90deg,rgba(5,7,12,0.96)_0%,rgba(5,7,12,0.91)_16%,rgba(5,7,12,0.72)_31%,rgba(5,7,12,0.40)_47%,rgba(5,7,12,0.12)_63%,transparent_80%)]
           "
-          style={{
-            background: `
-              radial-gradient(
-                circle at 0% 0%,
-                rgba(255,255,255,0.96) 0%,
-                rgba(255,255,255,0.58) 26%,
-                rgba(255,255,255,0.14) 43%,
-                transparent 58%
-              )
-            `,
-          }}
         />
 
-        {/* Dark-theme text-side blend */}
+        {/* Upper navbar fade */}
         <div
           aria-hidden="true"
           className="
+            pointer-events-none
             absolute
-            inset-0
-            hidden
-            dark:block
+            inset-x-0
+            top-0
+            z-[4]
+            h-52
+            bg-gradient-to-b
+            from-[#f8f6ff]/90
+            via-[#f8f6ff]/35
+            to-transparent
+            dark:from-[#05070C]/90
+            dark:via-[#05070C]/35
           "
-          style={{
-            background: `
-              linear-gradient(
-                90deg,
-                #05070C 0%,
-                rgba(5,7,12,0.99) 17%,
-                rgba(5,7,12,0.91) 30%,
-                rgba(5,7,12,0.68) 44%,
-                rgba(5,7,12,0.31) 60%,
-                rgba(5,7,12,0.07) 76%,
-                transparent 90%
-              )
-            `,
-          }}
         />
 
-        {/* Single cinematic bottom fade */}
+        {/* Bottom transition into next section */}
         <div
           aria-hidden="true"
           className="
@@ -208,143 +110,107 @@ export default function HeroSection({
             absolute
             inset-x-0
             bottom-0
+            z-[4]
+            h-[30%]
+            bg-gradient-to-t
+            from-[#f8f6ff]
+            via-[#f8f6ff]/38
+            to-transparent
+            dark:from-[#0A0118]
+            dark:via-[#0A0118]/42
+          "
+        />
+
+        {/* Existing splash cursor effect */}
+        <div
+          className="
+            pointer-events-none
+            absolute
+            inset-0
             z-[8]
-            h-[46%]
           "
         >
-          <div
-            className="
-              absolute
-              inset-0
-              dark:hidden
-            "
-            style={{
-              background: `
-                linear-gradient(
-                  180deg,
-                  transparent 0%,
-                  rgba(248,246,255,0.01) 12%,
-                  rgba(248,246,255,0.06) 27%,
-                  rgba(248,246,255,0.16) 43%,
-                  rgba(248,246,255,0.34) 59%,
-                  rgba(248,246,255,0.62) 76%,
-                  rgba(248,246,255,0.88) 91%,
-                  #f8f6ff 100%
-                )
-              `,
-            }}
-          />
-
-          <div
-            className="
-              absolute
-              inset-0
-              hidden
-              dark:block
-            "
-            style={{
-              background: `
-                linear-gradient(
-                  180deg,
-                  transparent 0%,
-                  rgba(10,1,24,0.01) 12%,
-                  rgba(10,1,24,0.06) 27%,
-                  rgba(10,1,24,0.16) 43%,
-                  rgba(10,1,24,0.34) 59%,
-                  rgba(10,1,24,0.62) 76%,
-                  rgba(10,1,24,0.88) 91%,
-                  #0A0118 100%
-                )
-              `,
-            }}
-          />
-
-          <div
-            className="
-              absolute
-              bottom-[-8rem]
-              left-1/2
-              h-72
-              w-[88%]
-              -translate-x-1/2
-              rounded-[50%]
-              bg-[#7132C8]/10
-              blur-[120px]
-              dark:bg-[#7132C8]/[0.09]
-            "
-          />
+          <HeroSplashCursor />
         </div>
-      </div>
 
-      {/* Hero-only liquid cursor */}
-      <HeroSplashCursor />
-
-      {/* Hero content */}
-      <div
-        className="
-          relative
-          z-20
-          mx-auto
-          grid
-          min-h-[100svh]
-          w-full
-          max-w-[1500px]
-          grid-cols-1
-          items-center
-          px-6
-          pb-24
-          pt-32
-          sm:px-8
-          md:px-10
-          lg:grid-cols-12
-          lg:px-14
-          xl:px-16
-        "
-      >
+        {/* Existing hero content */}
         <div
           className="
             relative
-            max-w-[680px]
-            lg:col-span-6
-            xl:col-span-5
+            z-20
+            mx-auto
+            grid
+            h-full
+            w-full
+            max-w-[1500px]
+            grid-cols-1
+            items-center
+            px-5
+            pb-24
+            pt-28
+            sm:px-8
+            md:px-10
+            lg:grid-cols-12
+            lg:px-14
+            xl:px-16
           "
         >
           <div
+            className="
+              relative
+              max-w-[700px]
+              lg:col-span-6
+              xl:col-span-5
+            "
+          >
+            <div
+              aria-hidden="true"
+              className="
+                pointer-events-none
+                absolute
+                -left-28
+                top-1/2
+                -z-10
+                h-[470px]
+                w-[470px]
+                -translate-y-1/2
+                rounded-full
+                bg-white/45
+                blur-[115px]
+                dark:bg-[#7132C8]/[0.08]
+              "
+            />
+
+            <AnimatedHeadline
+              onGetAccess={
+                onGetAccess
+              }
+            />
+          </div>
+
+          <div
             aria-hidden="true"
             className="
-              pointer-events-none
-              absolute
-              -left-24
-              top-1/2
-              -z-10
-              h-[440px]
-              w-[440px]
-              -translate-y-1/2
-              rounded-full
-              bg-white/55
-              blur-[110px]
-              dark:bg-[#7132C8]/[0.07]
+              hidden
+              lg:col-span-6
+              lg:block
+              xl:col-span-7
             "
-          />
-
-          <AnimatedHeadline
-            onGetAccess={onGetAccess}
           />
         </div>
 
-        <div
-          aria-hidden="true"
-          className="
-            hidden
-            lg:col-span-6
-            lg:block
-            xl:col-span-7
-          "
-        />
-      </div>
-
-      <div className="relative z-30">
-        <ScrollHint />
+        {!reduceMotion && (
+          <div
+            className="
+              absolute
+              inset-x-0
+              bottom-0
+              z-30
+            "
+          >
+            <ScrollHint />
+          </div>
+        )}
       </div>
     </section>
   );

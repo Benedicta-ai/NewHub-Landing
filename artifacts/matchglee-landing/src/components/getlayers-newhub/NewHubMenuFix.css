@@ -1,0 +1,269 @@
+/*
+ * Full-screen navigation correction.
+ * Keeps the existing menu design while
+ * preventing clipping and blocked scrolling.
+ */
+
+.nh-nav-menu {
+  display the existing menu design while
+ * preventing clipping and blocked scrolling.
+ */
+
+: flex;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.nh-nav-menu__top {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  flex: 0 0 auto;
+  background:
+    rgba(10, 1, 24, 0.94);
+  backdrop-filter: blur(16px);
+}
+
+.nh-nav-menu__nav {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding:
+    1.5rem
+    2rem
+    3rem;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nh-nav-menu__nav ul {
+  display: flex;
+  width: 100%;
+  min-height: min-content;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.2rem;
+  padding:
+    0.75rem
+    0
+    1.5rem;
+}
+
+.nh-nav-menu__nav li {
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.nh-nav-menu__nav button {
+  display: grid;
+  width: 100%;
+  grid-template-columns:
+    2.25rem
+    minmax(0, 1fr);
+  align-items: start;
+  gap: 1rem;
+  padding:
+    0.55rem
+    0;
+  overflow: visible;
+}
+
+.nh-nav-menu__nav button span {
+  padding-top: 0.45rem;
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.nh-nav-menu__nav button strong {
+  display: block;
+  min-width: 0;
+  overflow: visible;
+  font-size:
+    clamp(
+      2.5rem,
+      7.2vh,
+      4.75rem
+    );
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  white-space: normal;
+  word-break: normal;
+}
+
+.nh-nav-menu__bottom {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  width: 100%;
+  min-height: 5.25rem;
+  flex: 0 0 auto;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding:
+    1.1rem
+    2rem
+    calc(
+      1.1rem +
+      env(
+        safe-area-inset-bottom
+      )
+    );
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+  background:
+    rgba(10, 1, 24, 0.97);
+  backdrop-filter: blur(18px);
+}
+
+.nh-nav-menu__bottom > span {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.nh-nav-menu__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  white-space: nowrap;
+}
+
+.nh-nav-menu__actions button {
+  display: inline-flex;
+  min-height: 2.65rem;
+  align-items: center;
+  justify-content: center;
+  padding:
+    0.65rem
+    1rem;
+  border-radius: 9999px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.nh-nav-menu__login {
+  border:
+    1px solid
+    rgba(240, 25, 154, 0.5);
+  background:
+    linear-gradient(
+      120deg,
+      rgba(240, 25, 154, 0.16),
+      rgba(113, 50, 200, 0.2)
+    );
+  color: #ffffff;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nh-nav-menu__login:hover {
+    border-color: #f0199a;
+    background:
+      linear-gradient(
+        120deg,
+        rgba(240, 25, 154, 0.28),
+        rgba(113, 50, 200, 0.3)
+      );
+  }
+}
+
+@media (max-height: 760px) and (min-width: 640px) {
+  .nh-nav-menu__nav {
+    padding-top: 0.75rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .nh-nav-menu__nav button {
+    padding-block: 0.32rem;
+  }
+
+  .nh-nav-menu__nav button strong {
+    font-size:
+      clamp(
+        2rem,
+        6.2vh,
+        3.4rem
+      );
+  }
+
+  .nh-nav-menu__bottom {
+    min-height: 4.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .nh-nav-menu__nav {
+    padding:
+      1rem
+      1.25rem
+      2rem;
+  }
+
+  .nh-nav-menu__nav button {
+    grid-template-columns:
+      1.8rem
+      minmax(0, 1fr);
+    gap: 0.65rem;
+  }
+
+  .nh-nav-menu__nav button strong {
+    font-size:
+      clamp(
+        2.15rem,
+        11vw,
+        3.25rem
+      );
+  }
+
+  .nh-nav-menu__bottom {
+    display: flex;
+    min-height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding:
+      1rem
+      1.25rem
+      calc(
+        1rem +
+        env(
+          safe-area-inset-bottom
+        )
+      );
+  }
+
+  .nh-nav-menu__bottom > span {
+    font-size: 0.65rem;
+  }
+
+  .nh-nav-menu__actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nh-nav-menu__actions button {
+    flex: 1;
+  }
+}
+
+/* Align Close after removing the menu logo */
+.nh-nav-menu__top {
+  justify-content: flex-end;
+}

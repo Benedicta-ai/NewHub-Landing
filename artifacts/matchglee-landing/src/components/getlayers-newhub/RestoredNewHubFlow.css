@@ -1,0 +1,467 @@
+/*
+ * Current page sequence:
+ *
+ * Hero
+ * About / Be Seen Fully
+ * Built for All
+ * What Is NewHub
+ * Built Around You
+ * Tilted Cards
+ * Footer
+ */
+
+/* =========================================================
+   MOLECULAR BACKGROUND
+   ========================================================= */
+
+.nh-molecular-background {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* =========================================================
+   REMOVE THE EMPTY CINEMA GAP
+   ========================================================= */
+
+/*
+ * The Be Seen Fully block previously retained a viewport-sized
+ * minimum height after its visible content had left the screen.
+ * Let its content define the section height instead.
+ */
+
+.nh-create-band {
+  min-height: 0 !important;
+  height: auto !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 24px !important;
+}
+
+.nh-create-band > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.nh-create-band + .nh-restored-discovery {
+  margin-top: 0 !important;
+}
+
+/*
+ * Remove any additional spacing previously added between
+ * the cinematic content and Built for All.
+ */
+
+.nh-restored-discovery {
+  margin-top: 0 !important;
+}
+
+/* =========================================================
+   RESTORED DARK SECTIONS
+   ========================================================= */
+
+.nh-restored-discovery,
+.nh-restored-why {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 18% 18%,
+      rgba(240, 25, 154, 0.12),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 82% 52%,
+      rgba(113, 50, 200, 0.14),
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      #0a0118 0%,
+      #100220 52%,
+      #0a0118 100%
+    );
+}
+
+.nh-restored-discovery::before,
+.nh-restored-why::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10, 1, 24, 0.08),
+      transparent 22%,
+      transparent 78%,
+      rgba(10, 1, 24, 0.28)
+    );
+  content: "";
+  pointer-events: none;
+}
+
+.nh-restored-flow__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
+   BUILT FOR ALL
+   ========================================================= */
+
+.nh-restored-discovery #built-for-all {
+  position: relative;
+  z-index: 2;
+  margin-top: 0 !important;
+  padding-top: 80px;
+  background: transparent;
+}
+
+/*
+ * Reveal the ScrollFloat heading when this component is mounted
+ * inside the new GetLayers page after Lenis has initialised.
+ */
+
+.nh-restored-discovery
+#built-for-all
+[class*="scroll-float"] {
+  overflow: visible;
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
+}
+
+.nh-restored-discovery
+#built-for-all
+[class*="scroll-float"] * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.nh-restored-discovery
+#built-for-all
+.char {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.nh-restored-discovery
+#built-for-all
+h2 {
+  position: relative;
+  z-index: 20;
+  display: block;
+  margin-inline: auto;
+  color: #ffffff;
+  font-size: clamp(42px, 4.5vw, 66px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  text-align: center;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.nh-restored-discovery
+#built-for-all
+h2 span {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.nh-restored-discovery
+#built-for-all
+h2
+.text-transparent,
+.nh-restored-discovery
+#built-for-all
+h2
+[class*="gradient"] {
+  background:
+    linear-gradient(
+      105deg,
+      #f0199a 0%,
+      #d72fc9 48%,
+      #8f48ff 100%
+    );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/*
+ * Do not override the position property of OrbitImages.
+ *
+ * The previous file used:
+ * [class*="orbit"] { position: relative; }
+ *
+ * That rule separated the images from their orbital path.
+ * This replacement intentionally leaves all original orbit
+ * positioning untouched.
+ */
+
+/* Keep the Image Trail above the section content. */
+
+.nh-restored-discovery
+#built-for-all
+[class*="image-trail"],
+.nh-restored-discovery
+#built-for-all
+[class*="ImageTrail"] {
+  z-index: 50;
+}
+
+/* =========================================================
+   WHAT IS NEWHUB
+   ========================================================= */
+
+.nh-restored-discovery
+#what-is-newhub {
+  position: relative;
+  z-index: 3;
+  background: transparent;
+}
+
+.nh-restored-discovery
+#what-is-newhub
+[class*="scroll-float"],
+.nh-restored-discovery
+#what-is-newhub
+[class*="scroll-float"] * {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nh-restored-discovery
+#what-is-newhub
+button {
+  position: relative;
+  z-index: 20;
+}
+
+/* =========================================================
+   DARK SECTION TYPOGRAPHY
+   ========================================================= */
+
+.nh-restored-discovery
+#built-for-all
+h1,
+.nh-restored-discovery
+#built-for-all
+h2,
+.nh-restored-discovery
+#built-for-all
+h3,
+.nh-restored-discovery
+#what-is-newhub
+h1,
+.nh-restored-discovery
+#what-is-newhub
+h2,
+.nh-restored-discovery
+#what-is-newhub
+h3,
+.nh-restored-why
+#why-newhub
+h1,
+.nh-restored-why
+#why-newhub
+h2,
+.nh-restored-why
+#why-newhub
+h3 {
+  color: #ffffff;
+}
+
+.nh-restored-discovery
+#built-for-all
+p,
+.nh-restored-discovery
+#what-is-newhub
+p,
+.nh-restored-why
+#why-newhub
+p {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* =========================================================
+   BUILT AROUND YOU
+   ========================================================= */
+
+.nh-services {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fcfaff 48%,
+      #ffffff 100%
+    );
+}
+
+.nh-services::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 18% 30%,
+      rgba(240, 25, 154, 0.05),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 82% 68%,
+      rgba(113, 50, 200, 0.06),
+      transparent 38%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.72),
+      rgba(255, 255, 255, 0.42),
+      rgba(255, 255, 255, 0.72)
+    );
+  content: "";
+  pointer-events: none;
+}
+
+.nh-services > .nh-molecular-background {
+  z-index: 0;
+  opacity: 0.72;
+}
+
+.nh-services__inner {
+  position: relative;
+  z-index: 2;
+}
+
+.nh-services .nh-service-row {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.nh-services .nh-service-row:hover {
+  background: rgba(241, 240, 238, 0.92);
+}
+
+/* =========================================================
+   TILTED CARDS
+   ========================================================= */
+
+.nh-restored-why {
+  border-radius: 32px 32px 0 0;
+}
+
+.nh-restored-why #why-newhub {
+  position: relative;
+  z-index: 2;
+  padding-top: 80px;
+  background: transparent;
+}
+
+.nh-restored-why
+#why-newhub
+[class*="scroll-float"],
+.nh-restored-why
+#why-newhub
+[class*="scroll-float"] * {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .nh-restored-discovery
+  #built-for-all
+  h2 {
+    font-size: clamp(40px, 6vw, 58px);
+  }
+}
+
+@media (max-width: 767px) {
+  .nh-create-band {
+    padding-bottom: 16px !important;
+  }
+
+  .nh-restored-discovery,
+  .nh-restored-why {
+    background:
+      radial-gradient(
+        circle at 20% 18%,
+        rgba(240, 25, 154, 0.1),
+        transparent 38%
+      ),
+      linear-gradient(
+        160deg,
+        #0a0118,
+        #100220 55%,
+        #0a0118
+      );
+  }
+
+  .nh-restored-discovery
+  #built-for-all {
+    padding-top: 64px;
+  }
+
+  .nh-restored-discovery
+  #built-for-all
+  h2 {
+    max-width: 680px;
+    padding-inline: 8px;
+    font-size: clamp(34px, 10vw, 48px);
+    line-height: 1.05;
+  }
+
+  .nh-services > .nh-molecular-background {
+    opacity: 0.48;
+  }
+
+  .nh-restored-why {
+    border-radius: 24px 24px 0 0;
+  }
+
+  .nh-restored-why #why-newhub {
+    padding-top: 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nh-molecular-background {
+    opacity: 0.45;
+  }
+
+  .nh-restored-discovery
+  #built-for-all
+  [class*="scroll-float"],
+  .nh-restored-discovery
+  #built-for-all
+  [class*="scroll-float"] *,
+  .nh-restored-discovery
+  #built-for-all
+  .char {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

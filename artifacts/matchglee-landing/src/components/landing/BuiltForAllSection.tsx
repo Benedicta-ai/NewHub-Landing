@@ -448,20 +448,7 @@ export default function BuiltForAllSection() {
             ]}
           />
 
-          <p
-            className="
-              mx-auto
-              mt-5
-              max-w-2xl
-              text-sm
-              leading-7
-              text-[#6d6a80]
-              dark:text-white/48
-              sm:text-base
-            "
-          >
-            Personal. Professional. Social.
-          </p>
+          
         </motion.div>
 
         {/* Free-floating orbit */}
@@ -817,7 +804,7 @@ export default function BuiltForAllSection() {
             sm:text-sm
           "
         >
-          Select an image to explore.
+          
         </motion.p>
       </div>
     </section>
