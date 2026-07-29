@@ -7,10 +7,11 @@ interface FooterProfileLoginRedirectProps {
   onLogin: () => void;
 }
 
-const profileLinks = [
-  "Personal Profile",
-  "Professional Profile",
-];
+const INSTAGRAM_URL =
+  "https://www.instagram.com/matchglee?igsh=OWN5ZXF3YjE3eXAy";
+
+const LINKEDIN_URL =
+  "https://www.linkedin.com/company/matchglee/";
 
 function normaliseText(
   value: string | null,
@@ -18,8 +19,40 @@ function normaliseText(
   return (
     value
       ?.replace(/\s+/g, " ")
-      .trim() ?? ""
+      .trim()
+      .toLowerCase() ?? ""
   );
+}
+
+function scrollToSection(
+  sectionIds: string[],
+) {
+  const section =
+    sectionIds
+      .map((id) =>
+        document.getElementById(id),
+      )
+      .find(Boolean);
+
+  if (!section) {
+    return;
+  }
+
+  section.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+
+  const sectionId =
+    section.getAttribute("id");
+
+  if (sectionId) {
+    window.history.replaceState(
+      null,
+      "",
+      `#${sectionId}`,
+    );
+  }
 }
 
 export default function FooterProfileLoginRedirect({
@@ -34,24 +67,11 @@ export default function FooterProfileLoginRedirect({
   }, [onLogin]);
 
   useEffect(() => {
-    const registeredElements =
-      new Map<
-        HTMLElement,
-        {
-          click: (
-            event: MouseEvent,
-          ) => void;
-          keydown: (
-            event: KeyboardEvent,
-          ) => void;
-          role: string | null;
-          tabIndex: string | null;
-          ariaLabel: string | null;
-          href: string | null;
-        }
-      >();
+    const cleanups: Array<
+      () => void
+    > = [];
 
-    const registerFooterLinks =
+    const initialiseFooter =
       () => {
         const footer =
           document.querySelector(
@@ -62,63 +82,168 @@ export default function FooterProfileLoginRedirect({
           return;
         }
 
-        const elements =
-          footer.querySelectorAll<HTMLElement>(
+        /*
+         * Remove Early Access from the
+         * Platform footer column.
+         */
+        footer
+          .querySelectorAll<HTMLElement>(
             "a, button, span, p, li, div",
-          );
-
-        elements.forEach(
-          (element) => {
+          )
+          .forEach((element) => {
             const text =
               normaliseText(
                 element.textContent,
               );
 
             if (
-              !profileLinks.includes(
-                text,
-              )
+              text !==
+              "early access"
             ) {
+              return;
+            }
+
+            const removable =
+              element.closest("li") ??
+              element.closest("a") ??
+              element.closest(
+                "button",
+              ) ??
+              element;
+
+            removable.remove();
+          });
+
+        const linkActions: Record<
+          string,
+          () => void
+        > = {
+          about: () =>
+            scrollToSection([
+              "about",
+            ]),
+
+          features: () =>
+            scrollToSection([
+              "services",
+              "built-around-you",
+              "why-newhub",
+            ]),
+
+          community: () =>
+            scrollToSection([
+              "built-for-all",
+              "works",
+            ]),
+
+          "personal profile":
+            () =>
+              loginCallbackRef.current(),
+
+          "professional profile":
+            () =>
+              loginCallbackRef.current(),
+
+          privacy: () =>
+            loginCallbackRef.current(),
+
+          discovery: () =>
+            scrollToSection([
+              "built-for-all",
+              "works",
+            ]),
+
+          instagram: () => {
+            window.open(
+              INSTAGRAM_URL,
+              "_blank",
+              "noopener,noreferrer",
+            );
+          },
+
+          linkedin: () => {
+            window.open(
+              LINKEDIN_URL,
+              "_blank",
+              "noopener,noreferrer",
+            );
+          },
+        };
+
+        const candidates =
+          footer.querySelectorAll<HTMLElement>(
+            "a, button, li, span, p",
+          );
+
+        const registered =
+          new Set<HTMLElement>();
+
+        candidates.forEach(
+          (candidate) => {
+            const text =
+              normaliseText(
+                candidate.textContent,
+              );
+
+            const action =
+              linkActions[text];
+
+            if (!action) {
               return;
             }
 
             const interactiveElement =
-              element.closest<HTMLElement>(
+              candidate.closest<HTMLElement>(
                 "a, button",
-              ) ?? element;
+              ) ?? candidate;
 
             if (
-              !footer.contains(
-                interactiveElement,
-              ) ||
-              registeredElements.has(
+              registered.has(
                 interactiveElement,
               )
             ) {
               return;
             }
 
-            const profileName =
-              profileLinks.find(
-                (name) =>
-                  normaliseText(
-                    interactiveElement.textContent,
-                  ) === name ||
-                  normaliseText(
-                    element.textContent,
-                  ) === name,
-              ) ?? "profile";
+            registered.add(
+              interactiveElement,
+            );
 
-            const click = (
+            const originalRole =
+              interactiveElement.getAttribute(
+                "role",
+              );
+
+            const originalTabIndex =
+              interactiveElement.getAttribute(
+                "tabindex",
+              );
+
+            const originalHref =
+              interactiveElement.getAttribute(
+                "href",
+              );
+
+            const originalTarget =
+              interactiveElement.getAttribute(
+                "target",
+              );
+
+            const originalRel =
+              interactiveElement.getAttribute(
+                "rel",
+              );
+
+            const handleClick = (
               event: MouseEvent,
             ) => {
               event.preventDefault();
               event.stopPropagation();
 
-              loginCallbackRef.current();
+              action();
             };
 
-            const keydown = (
+            const handleKeyDown = (
               event: KeyboardEvent,
             ) => {
               if (
@@ -132,35 +257,11 @@ export default function FooterProfileLoginRedirect({
               event.preventDefault();
               event.stopPropagation();
 
-              loginCallbackRef.current();
+              action();
             };
 
-            registeredElements.set(
-              interactiveElement,
-              {
-                click,
-                keydown,
-                role:
-                  interactiveElement.getAttribute(
-                    "role",
-                  ),
-                tabIndex:
-                  interactiveElement.getAttribute(
-                    "tabindex",
-                  ),
-                ariaLabel:
-                  interactiveElement.getAttribute(
-                    "aria-label",
-                  ),
-                href:
-                  interactiveElement.getAttribute(
-                    "href",
-                  ),
-              },
-            );
-
             interactiveElement.classList.add(
-              "nh-footer-profile-login-link",
+              "nh-footer-action-link",
             );
 
             interactiveElement.setAttribute(
@@ -175,112 +276,116 @@ export default function FooterProfileLoginRedirect({
 
             interactiveElement.setAttribute(
               "aria-label",
-              `Sign in to access ${profileName}`,
+              text,
             );
 
             interactiveElement.addEventListener(
               "click",
-              click,
+              handleClick,
             );
 
             interactiveElement.addEventListener(
               "keydown",
-              keydown,
+              handleKeyDown,
             );
+
+            cleanups.push(() => {
+              interactiveElement.removeEventListener(
+                "click",
+                handleClick,
+              );
+
+              interactiveElement.removeEventListener(
+                "keydown",
+                handleKeyDown,
+              );
+
+              interactiveElement.classList.remove(
+                "nh-footer-action-link",
+              );
+
+              if (
+                originalRole === null
+              ) {
+                interactiveElement.removeAttribute(
+                  "role",
+                );
+              } else {
+                interactiveElement.setAttribute(
+                  "role",
+                  originalRole,
+                );
+              }
+
+              if (
+                originalTabIndex ===
+                null
+              ) {
+                interactiveElement.removeAttribute(
+                  "tabindex",
+                );
+              } else {
+                interactiveElement.setAttribute(
+                  "tabindex",
+                  originalTabIndex,
+                );
+              }
+
+              if (
+                originalHref === null
+              ) {
+                interactiveElement.removeAttribute(
+                  "href",
+                );
+              } else {
+                interactiveElement.setAttribute(
+                  "href",
+                  originalHref,
+                );
+              }
+
+              if (
+                originalTarget === null
+              ) {
+                interactiveElement.removeAttribute(
+                  "target",
+                );
+              } else {
+                interactiveElement.setAttribute(
+                  "target",
+                  originalTarget,
+                );
+              }
+
+              if (
+                originalRel === null
+              ) {
+                interactiveElement.removeAttribute(
+                  "rel",
+                );
+              } else {
+                interactiveElement.setAttribute(
+                  "rel",
+                  originalRel,
+                );
+              }
+            });
           },
         );
       };
 
-    registerFooterLinks();
-
-    const observer =
-      new MutationObserver(
-        registerFooterLinks,
+    const timeout =
+      window.setTimeout(
+        initialiseFooter,
+        100,
       );
-
-    observer.observe(
-      document.body,
-      {
-        childList: true,
-        subtree: true,
-      },
-    );
 
     return () => {
-      observer.disconnect();
+      window.clearTimeout(timeout);
 
-      registeredElements.forEach(
-        (
-          settings,
-          element,
-        ) => {
-          element.removeEventListener(
-            "click",
-            settings.click,
-          );
-
-          element.removeEventListener(
-            "keydown",
-            settings.keydown,
-          );
-
-          element.classList.remove(
-            "nh-footer-profile-login-link",
-          );
-
-          if (
-            settings.role === null
-          ) {
-            element.removeAttribute(
-              "role",
-            );
-          } else {
-            element.setAttribute(
-              "role",
-              settings.role,
-            );
-          }
-
-          if (
-            settings.tabIndex ===
-            null
-          ) {
-            element.removeAttribute(
-              "tabindex",
-            );
-          } else {
-            element.setAttribute(
-              "tabindex",
-              settings.tabIndex,
-            );
-          }
-
-          if (
-            settings.ariaLabel ===
-            null
-          ) {
-            element.removeAttribute(
-              "aria-label",
-            );
-          } else {
-            element.setAttribute(
-              "aria-label",
-              settings.ariaLabel,
-            );
-          }
-
-          if (
-            settings.href !== null
-          ) {
-            element.setAttribute(
-              "href",
-              settings.href,
-            );
-          }
-        },
+      cleanups.forEach(
+        (cleanup) => cleanup(),
       );
-
-      registeredElements.clear();
     };
   }, []);
 

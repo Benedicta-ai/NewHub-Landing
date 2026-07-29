@@ -50,3 +50,21 @@ footer .nh-footer-profile-login-link:focus-visible {
   outline-offset: 5px;
   border-radius: 4px;
 }
+
+footer .nh-footer-action-link {
+  cursor: pointer;
+  transition:
+    color 220ms ease,
+    opacity 220ms ease;
+}
+
+footer .nh-footer-action-link:hover {
+  color: #ffffff;
+  opacity: 1;
+}
+
+footer .nh-footer-action-link:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid rgba(240, 25, 154, 0.8);
+  outline-offset: 5px;
+}
